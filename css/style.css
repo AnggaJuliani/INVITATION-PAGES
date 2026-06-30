@@ -1,0 +1,371 @@
+/* ===============================
+   RESET
+================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* ===============================
+   BACKGROUND
+================================== */
+
+.background{
+    position:fixed;
+    inset:0;
+
+    background-image:
+        linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35)),
+        url("../images/bg-cover.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-3;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.65));
+
+    z-index:-2;
+}
+
+/* ===============================
+   COVER
+================================== */
+
+.cover{
+
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:30px;
+
+}
+
+.cover-content{
+
+    max-width:700px;
+
+    width:100%;
+
+}
+
+/* ===============================
+   TYPOGRAPHY
+================================== */
+
+.subtitle{
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
+    color:#f3e5c6;
+
+    margin-bottom:18px;
+
+}
+
+.title{
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:72px;
+
+    color:#fff;
+
+    line-height:1.2;
+
+    text-shadow:
+    0 2px 10px rgba(0,0,0,.35);
+
+}
+
+.and{
+
+    font-size:34px;
+
+    margin:18px 0;
+
+    color:#d9b76d;
+
+    font-family:"Playfair Display",serif;
+
+}
+
+.divider{
+
+    width:130px;
+
+    height:2px;
+
+    margin:30px auto;
+
+    background:#d8b66c;
+
+}
+
+.date{
+
+    font-size:20px;
+
+    letter-spacing:1px;
+
+    margin-bottom:45px;
+
+}
+
+/* ===============================
+   GUEST BOX
+================================== */
+
+.guest-box{
+
+    width:100%;
+
+    max-width:420px;
+
+    margin:auto;
+
+    padding:20px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:18px;
+
+}
+
+.guest-box small{
+
+    display:block;
+
+    color:#ddd;
+
+    margin-bottom:10px;
+
+}
+
+#guestName{
+
+    font-size:28px;
+
+    color:#fff;
+
+    font-weight:600;
+
+}
+
+/* ===============================
+   BUTTON
+================================== */
+
+.btn-open{
+
+    margin-top:40px;
+
+    padding:16px 38px;
+
+    border:none;
+
+    border-radius:40px;
+
+    cursor:pointer;
+
+    background:#b58b5a;
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:
+    0 8px 25px rgba(181,139,90,.45);
+
+}
+
+.btn-open:hover{
+
+    background:#c79b65;
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 14px 28px rgba(181,139,90,.5);
+
+}
+
+/* ===============================
+   NOTE
+================================== */
+
+.note{
+
+    margin-top:35px;
+
+    color:#ddd;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+/* ===============================
+   FLOWERS
+================================== */
+
+.flowers{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+.flowers span{
+
+    position:absolute;
+
+    display:block;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,#fff,#d7b26d);
+
+    opacity:.55;
+
+    animation:fall linear infinite;
+
+}
+
+.flowers span:nth-child(1){
+
+    left:5%;
+    animation-duration:10s;
+    animation-delay:0s;
+
+}
+
+.flowers span:nth-child(2){
+
+    left:18%;
+    animation-duration:14s;
+    animation-delay:2s;
+
+}
+
+.flowers span:nth-child(3){
+
+    left:33%;
+    animation-duration:12s;
+    animation-delay:5s;
+
+}
+
+.flowers span:nth-child(4){
+
+    left:48%;
+    animation-duration:16s;
+    animation-delay:3s;
+
+}
+
+.flowers span:nth-child(5){
+
+    left:62%;
+    animation-duration:13s;
+    animation-delay:1s;
+
+}
+
+.flowers span:nth-child(6){
+
+    left:77%;
+    animation-duration:15s;
+    animation-delay:4s;
+
+}
+
+.flowers span:nth-child(7){
+
+    left:90%;
+    animation-duration:11s;
+    animation-delay:2s;
+
+}
+
+.flowers span:nth-child(8){
+
+    left:98%;
+    animation-duration:18s;
+    animation-delay:6s;
+
+}
+
+/* ===============================
+   KEYFRAME
+================================== */
+
+@keyframes fall{
+
+    from{
+
+        transform:
+        translateY(-120px)
+        rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+        translateY(110vh)
+        rotate(360deg);
+
+    }
+
+}
