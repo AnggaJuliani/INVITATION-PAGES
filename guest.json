@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nama": "Budi Santoso",
+    "kode": "budi01",
+    "hadir": false
+  },
+  {
+    "id": 2,
+    "nama": "Siti Aminah",
+    "kode": "siti02",
+    "hadir": false
+  },
+  {
+    "id": 3,
+    "nama": "Agus Wijaya",
+    "kode": "agus03",
+    "hadir": false
+  }
+]
