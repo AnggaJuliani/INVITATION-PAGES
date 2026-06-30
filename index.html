@@ -4,97 +4,294 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Wedding Invitation | Anggara & Tsamara</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Wedding Invitation | Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani
+    </title>
 
     <meta name="description"
-        content="Undangan Pernikahan Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani">
+          content="Undangan Pernikahan Anggara Wisnu Wardhana dan Tsamara Alifia Ramadhani.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="keywords"
+          content="Wedding Invitation, Pernikahan, Anggara Wisnu Wardhana, Tsamara Alifia Ramadhani">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="author"
+          content="Anggara Wisnu Wardhana">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <meta name="theme-color"
+          content="#C8A867">
 
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="robots"
+          content="index,follow">
+
+    <!-- Open Graph -->
+
+    <meta property="og:title"
+          content="Wedding Invitation | Anggara & Tsamara">
+
+    <meta property="og:description"
+          content="Undangan Pernikahan Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani">
+
+    <meta property="og:type"
+          content="website">
+
+    <meta property="og:image"
+          content="images/cover.jpg">
+
+    <meta property="og:locale"
+          content="id_ID">
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Wedding Invitation | Anggara & Tsamara">
+
+    <meta name="twitter:description"
+          content="Undangan Pernikahan Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani">
+
+    <meta name="twitter:image"
+          content="images/cover.jpg">
+
+    <!-- Favicon -->
+
+    <link rel="icon"
+          type="image/png"
+          href="images/favicon.png">
+
+    <!-- Preload -->
+
+    <link rel="preload"
+          href="images/hero.jpg"
+          as="image">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link rel="stylesheet" href="css/variables.css">
+
+    <link rel="stylesheet" href="css/layout.css">
+
+    <link rel="stylesheet" href="css/hero.css">
+
+    <link rel="stylesheet" href="css/animation.css">
+
+    <link rel="stylesheet" href="css/responsive.css">
 
 </head>
 
 <body>
 
-    <!-- Loading -->
+    <!-- ===========================
+         Loading Screen
+    ============================ -->
 
-    <div id="loading">
+    <div id="loading"
+         class="flex-center">
 
         <div class="loader"></div>
 
     </div>
 
-    <!-- Hero -->
+    <!-- ===========================
+         Hero Section
+    ============================ -->
 
-    <section class="hero">
+    <header class="hero">
 
-        <div class="overlay"></div>
+        <!-- Glow -->
 
-        <div class="hero-content">
+        <div class="hero-glow"></div>
 
-            <p class="small-text">
-                THE WEDDING OF
-            </p>
+        <!-- Decorative Flower -->
 
-            <h1>
-                Anggara Wisnu Wardhana
-                <span>&</span>
-                Tsamara Alifia Ramadhani
-            </h1>
+        <img src="images/flower-left.png"
+             class="flower-left"
+             alt="Flower Decoration">
 
-            <p class="date">
-                Minggu, 20 September 2026
-            </p>
+        <img src="images/flower-right.png"
+             class="flower-right"
+             alt="Flower Decoration">
 
-            <div class="guest-box">
+        <!-- Floating Particles -->
 
-                <small>Kepada Yth.</small>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
 
-                <h2 id="guestName">
-                    Memuat Nama Tamu...
-                </h2>
+        <div class="container">
+
+            <div class="hero-content">
+
+                <p class="small-text">
+
+                    THE WEDDING OF
+
+                </p>
+
+                <h1>
+
+                    Anggara Wisnu Wardhana
+
+                    <span>&</span>
+
+                    Tsamara Alifia Ramadhani
+
+                </h1>
+
+                <p class="date">
+
+                    Minggu, 20 September 2026
+
+                </p>
+
+                <div class="hero-divider"></div>
+
+                <div class="guest-box">
+
+                    <small>
+
+                        Kepada Yth.
+
+                    </small>
+
+                    <h2 id="guestName">
+
+                        Memuat Nama Tamu...
+
+                    </h2>
+
+                </div>
+
+                <p class="hero-description">
+
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                    Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu
+                    pada hari bahagia kami.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        id="openInvitation"
+                        class="btn"
+                        aria-label="Buka Undangan">
+
+                        💌 Buka Undangan
+
+                    </button>
+
+                </div>
 
             </div>
 
-            <button id="openInvitation" class="btn-primary">
-
-                Buka Undangan
-
-            </button>
-
         </div>
 
-    </section>
+        <!-- Scroll Indicator -->
 
-    <!-- Music -->
+        <a href="#nextSection"
+           class="scroll-indicator">
 
-    <audio id="bgMusic" loop>
+            <span>
 
-        <source src="music/wedding.mp3" type="audio/mp3">
+                Scroll
+
+            </span>
+
+            <div class="scroll-mouse"></div>
+
+        </a>
+
+    </header>
+
+    <!-- ===========================
+         Background Music
+    ============================ -->
+
+    <audio id="bgMusic"
+           preload="auto"
+           loop>
+
+        <source src="music/wedding.mp3"
+                type="audio/mpeg">
+
+        Browser Anda tidak mendukung audio.
 
     </audio>
 
+    <!-- Floating Music Button -->
+
+    <button
+        id="musicButton"
+        class="music-button"
+        aria-label="Music">
+
+        🎵
+
+    </button>
+
+    <!-- Javascript akan dilanjutkan
+         pada INDEX FINAL PART 2 -->
+
+        <!-- ===========================
+         Main Javascript
+    ============================ -->
+
     <script>
+
+        /* ============================================
+           CONFIGURATION
+        ============================================ */
 
         const API = "https://your-backend-url.up.railway.app";
 
         const params = new URLSearchParams(window.location.search);
 
-        const id = params.get("id");
+        const guestId = params.get("id");
+
+        const guestName = document.getElementById("guestName");
+
+        const loading = document.getElementById("loading");
+
+        const music = document.getElementById("bgMusic");
+
+        const musicButton = document.getElementById("musicButton");
+
+        const openInvitation = document.getElementById("openInvitation");
+
+
+        /* ============================================
+           LOAD GUEST
+        ============================================ */
 
         async function loadGuest() {
 
-            if (!id) {
+            if (!guestId) {
 
-                document.getElementById("guestName").innerHTML = "Tamu Undangan";
+                guestName.innerHTML = "Tamu Undangan";
 
                 return;
 
@@ -102,17 +299,24 @@
 
             try {
 
-                const response = await fetch(`${API}/guest/${id}`);
+                const response = await fetch(`${API}/guest/${guestId}`);
+
+                if (!response.ok)
+                    throw new Error("Network Error");
 
                 const data = await response.json();
 
                 if (data.success) {
 
-                    document.getElementById("guestName").innerHTML = data.name;
+                    guestName.textContent = data.name;
 
-                } else {
+                    document.title =
+                        `Undangan Untuk ${data.name} | Anggara & Tsamara`;
 
-                    document.getElementById("guestName").innerHTML = "Nama Tidak Ditemukan";
+                }
+                else {
+
+                    guestName.textContent = "Nama Tidak Ditemukan";
 
                 }
 
@@ -120,33 +324,148 @@
 
             catch (err) {
 
-                document.getElementById("guestName").innerHTML = "Server Tidak Terhubung";
+                console.error(err);
+
+                guestName.textContent = "Server Tidak Terhubung";
 
             }
 
         }
 
-        loadGuest();
 
-        document.getElementById("openInvitation").onclick = function () {
+        /* ============================================
+           OPEN INVITATION
+        ============================================ */
 
-            if (id) {
+        openInvitation.addEventListener("click", async () => {
 
-                location.href = `invitation.html?id=${id}`;
+            try {
 
-            } else {
+                await music.play();
 
-                location.href = "invitation.html";
+                musicButton.classList.add("playing");
+
+            } catch (e) {
+
+                console.log("Autoplay diblokir browser.");
 
             }
 
-        }
+            setTimeout(() => {
 
-        window.onload = () => {
+                if (guestId) {
 
-            document.getElementById("loading").style.display = "none";
+                    location.href = `invitation.html?id=${guestId}`;
 
-        }
+                }
+                else {
+
+                    location.href = "invitation.html";
+
+                }
+
+            }, 600);
+
+        });
+
+
+        /* ============================================
+           MUSIC BUTTON
+        ============================================ */
+
+        musicButton.addEventListener("click", async () => {
+
+            if (music.paused) {
+
+                try {
+
+                    await music.play();
+
+                    musicButton.classList.add("playing");
+
+                    musicButton.innerHTML = "🔊";
+
+                } catch (err) {
+
+                    console.log(err);
+
+                }
+
+            }
+            else {
+
+                music.pause();
+
+                musicButton.classList.remove("playing");
+
+                musicButton.innerHTML = "🎵";
+
+            }
+
+        });
+
+
+        /* ============================================
+           LOADING SCREEN
+        ============================================ */
+
+        window.addEventListener("load", () => {
+
+            loadGuest();
+
+            setTimeout(() => {
+
+                loading.style.opacity = "0";
+
+                setTimeout(() => {
+
+                    loading.style.display = "none";
+
+                }, 500);
+
+            }, 500);
+
+        });
+
+
+        /* ============================================
+           DISABLE RIGHT CLICK (OPTIONAL)
+        ============================================ */
+
+        /*
+        document.addEventListener("contextmenu", e => {
+
+            e.preventDefault();
+
+        });
+        */
+
+
+        /* ============================================
+           PRELOAD NEXT PAGE
+        ============================================ */
+
+        const preload = document.createElement("link");
+
+        preload.rel = "prefetch";
+
+        preload.href = "invitation.html";
+
+        document.head.appendChild(preload);
+
+
+        /* ============================================
+           SCROLL ANIMATION
+        ============================================ */
+
+        document.querySelector(".scroll-indicator")
+            .addEventListener("click", function (e) {
+
+                e.preventDefault();
+
+                openInvitation.click();
+
+            });
 
     </script>
 
