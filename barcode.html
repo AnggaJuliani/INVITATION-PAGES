@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>E-Ticket Pernikahan</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="ticket">
+
+    <h1>E-Invitation</h1>
+
+    <h2 id="guestName">
+
+        Memuat...
+
+    </h2>
+
+    <p>
+
+        Tunjukkan QR Code berikut
+        kepada petugas saat memasuki acara.
+
+    </p>
+
+    <div id="qrcode"></div>
+
+    <div class="ticket-info">
+
+        <p>
+
+            <strong>User ID</strong>
+
+        </p>
+
+        <p id="guestID"></p>
+
+    </div>
+
+    <div class="status">
+
+        Status RSVP :
+        <span id="rsvpStatus">
+
+            -
+
+        </span>
+
+    </div>
+
+    <button id="downloadQR">
+
+        Download QR
+
+    </button>
+
+</div>
+
+<script>
+
+const API="https://your-backend-url.up.railway.app";
+
+const params=new URLSearchParams(window.location.search);
+
+const id=params.get("id");
+
+let qrToken="";
+
+async function loadTicket(){
+
+    if(!id){
+
+        alert("User tidak ditemukan");
+
+        location.href="index.html";
+
+        return;
+
+    }
+
+    try{
+
+        const res=await fetch(`${API}/ticket/${id}`);
+
+        const data=await res.json();
+
+        if(!data.success){
+
+            alert(data.message);
+
+            return;
+
+        }
+
+        document
+        .getElementById("guestName")
+        .innerHTML=data.name;
+
+        document
+        .getElementById("guestID")
+        .innerHTML=data.id;
+
+        document
+        .getElementById("rsvpStatus")
+        .innerHTML=data.attendance;
+
+        qrToken=data.token;
+
+        new QRCode(document.getElementById("qrcode"),{
+
+            text:data.token,
+
+            width:260,
+
+            height:260
+
+        });
+
+    }
+
+    catch(e){
+
+        alert("Server Error");
+
+    }
+
+}
+
+loadTicket();
+
+document
+.getElementById("downloadQR")
+.onclick=function(){
+
+    const img=document
+    .querySelector("#qrcode img");
+
+    if(!img){
+
+        alert("QR belum siap.");
+
+        return;
+
+    }
+
+    const a=document.createElement("a");
+
+    a.href=img.src;
+
+    a.download="QRCode.png";
+
+    a.click();
+
+}
+
+</script>
+
+</body>
+
+</html>
