@@ -1239,10 +1239,10 @@ body{
     }
 
     .title{
-        font-size: clamp(24px, 5.5vw, 40px);
+        font-size: clamp(25px, 5.6vw, 41px);
         white-space: nowrap;
         display: inline-block;
-        transform: scale(0.85);
+        transform: scale(0.90);
         letter-spacing: 0.3px;
     }
 
