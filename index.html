@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wedding Invitation | Anggara & Tsamara</title>
+
+    <meta name="description"
+        content="Undangan Pernikahan Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Loading -->
+
+    <div id="loading">
+
+        <div class="loader"></div>
+
+    </div>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+
+            <p class="small-text">
+                THE WEDDING OF
+            </p>
+
+            <h1>
+                Anggara Wisnu Wardhana
+                <span>&</span>
+                Tsamara Alifia Ramadhani
+            </h1>
+
+            <p class="date">
+                Minggu, 20 September 2026
+            </p>
+
+            <div class="guest-box">
+
+                <small>Kepada Yth.</small>
+
+                <h2 id="guestName">
+                    Memuat Nama Tamu...
+                </h2>
+
+            </div>
+
+            <button id="openInvitation" class="btn-primary">
+
+                Buka Undangan
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Music -->
+
+    <audio id="bgMusic" loop>
+
+        <source src="music/wedding.mp3" type="audio/mp3">
+
+    </audio>
+
+    <script>
+
+        const API = "https://your-backend-url.up.railway.app";
+
+        const params = new URLSearchParams(window.location.search);
+
+        const id = params.get("id");
+
+        async function loadGuest() {
+
+            if (!id) {
+
+                document.getElementById("guestName").innerHTML = "Tamu Undangan";
+
+                return;
+
+            }
+
+            try {
+
+                const response = await fetch(`${API}/guest/${id}`);
+
+                const data = await response.json();
+
+                if (data.success) {
+
+                    document.getElementById("guestName").innerHTML = data.name;
+
+                } else {
+
+                    document.getElementById("guestName").innerHTML = "Nama Tidak Ditemukan";
+
+                }
+
+            }
+
+            catch (err) {
+
+                document.getElementById("guestName").innerHTML = "Server Tidak Terhubung";
+
+            }
+
+        }
+
+        loadGuest();
+
+        document.getElementById("openInvitation").onclick = function () {
+
+            if (id) {
+
+                location.href = `invitation.html?id=${id}`;
+
+            } else {
+
+                location.href = "invitation.html";
+
+            }
+
+        }
+
+        window.onload = () => {
+
+            document.getElementById("loading").style.display = "none";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
