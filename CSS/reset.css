@@ -1,0 +1,299 @@
+/* ==========================================================
+   RESET.CSS
+   Wedding Invitation
+   Author : Anggara Wisnu Project
+   ========================================================== */
+
+/* ---------- Box Model ---------- */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* ---------- HTML ---------- */
+
+html{
+
+    scroll-behavior:smooth;
+
+    -webkit-text-size-adjust:100%;
+
+    text-size-adjust:100%;
+
+}
+
+
+/* ---------- Body ---------- */
+
+body{
+
+    min-height:100vh;
+
+    text-rendering:optimizeLegibility;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+    overflow-x:hidden;
+
+}
+
+
+/* ---------- Images ---------- */
+
+img,
+picture{
+
+    display:block;
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+
+/* ---------- SVG ---------- */
+
+svg{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/* ---------- Video ---------- */
+
+video{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/* ---------- Form ---------- */
+
+input,
+button,
+textarea,
+select{
+
+    font:inherit;
+
+}
+
+
+/* ---------- Button ---------- */
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
+
+/* ---------- Input ---------- */
+
+input,
+textarea,
+select{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+}
+
+
+/* ---------- Anchor ---------- */
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+/* ---------- List ---------- */
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+
+/* ---------- Table ---------- */
+
+table{
+
+    border-collapse:collapse;
+
+    border-spacing:0;
+
+}
+
+
+/* ---------- Heading ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-weight:inherit;
+
+}
+
+
+/* ---------- Paragraph ---------- */
+
+p{
+
+    line-height:inherit;
+
+}
+
+
+/* ---------- HR ---------- */
+
+hr{
+
+    border:none;
+
+}
+
+
+/* ---------- Iframe ---------- */
+
+iframe{
+
+    border:none;
+
+}
+
+
+/* ---------- Hidden ---------- */
+
+[hidden]{
+
+    display:none !important;
+
+}
+
+
+/* ---------- Disabled ---------- */
+
+:disabled{
+
+    cursor:not-allowed;
+
+}
+
+
+/* ---------- Selection ---------- */
+
+::selection{
+
+    background:#d4b06a;
+
+    color:#fff;
+
+}
+
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f3f3f3;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c8a867;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#b38f4d;
+
+}
+
+
+/* ---------- Autofill ---------- */
+
+input:-webkit-autofill{
+
+    -webkit-box-shadow:0 0 0 1000px white inset;
+
+}
+
+
+/* ---------- Focus ---------- */
+
+:focus-visible{
+
+    outline:2px solid #c8a867;
+
+    outline-offset:3px;
+
+}
+
+
+/* ---------- Reduce Motion ---------- */
+
+@media (prefers-reduced-motion:reduce){
+
+    html{
+
+        scroll-behavior:auto;
+
+    }
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
+
+    }
+
+}
