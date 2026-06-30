@@ -481,9 +481,11 @@ body{
 
     font-family:'Great Vibes',serif;
 
-    font-size: clamp(28px, 5vw, 64px);
+    font-size: clamp(24px, 4vw, 58px);
     white-space: nowrap;
     display: inline-block;
+    transform: scaleX(0.95);
+    letter-spacing: 0.3px;
 
     line-height:1.15;
 
