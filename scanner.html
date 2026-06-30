@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Wedding Check-In Scanner</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+body{
+
+    margin:0;
+    background:#f5f5f5;
+    font-family:Poppins,sans-serif;
+
+}
+
+.container{
+
+    max-width:650px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+h1{
+
+    text-align:center;
+
+}
+
+#reader{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.result{
+
+    margin-top:20px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.success{
+
+    color:green;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.error{
+
+    color:red;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.info{
+
+    margin-top:15px;
+
+    line-height:30px;
+
+}
+
+button{
+
+    margin-top:20px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Wedding Check-In</h1>
+
+<div id="reader"></div>
+
+<div class="result">
+
+<div id="status">
+
+Silakan arahkan QR ke kamera.
+
+</div>
+
+<div class="info">
+
+<p><strong>Nama :</strong>
+
+<span id="guestName">-</span>
+
+</p>
+
+<p>
+
+<strong>User ID :</strong>
+
+<span id="guestID">-</span>
+
+</p>
+
+<p>
+
+<strong>Check In :</strong>
+
+<span id="checkTime">-</span>
+
+</p>
+
+</div>
+
+</div>
+
+<button onclick="restartScanner()">
+
+Scan Berikutnya
+
+</button>
+
+</div>
+
+<audio id="beep">
+
+<source src="sound/beep.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<script>
+
+const API="https://your-backend-url.up.railway.app";
+
+let scanner;
+
+function startScanner(){
+
+scanner=new Html5Qrcode("reader");
+
+scanner.start(
+
+{
+
+facingMode:"environment"
+
+},
+
+{
+
+fps:10,
+
+qrbox:250
+
+},
+
+onScanSuccess
+
+);
+
+}
+
+async function onScanSuccess(decodedText){
+
+await scanner.stop();
+
+document.getElementById("status").innerHTML="Memverifikasi...";
+
+try{
+
+const res=await fetch(`${API}/scan`,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+token:decodedText
+
+})
+
+});
+
+const data=await res.json();
+
+if(data.success){
+
+document.getElementById("status").innerHTML=
+
+'<div class="success">✔ CHECK-IN BERHASIL</div>';
+
+document.getElementById("guestName").innerHTML=data.name;
+
+document.getElementById("guestID").innerHTML=data.id;
+
+document.getElementById("checkTime").innerHTML=data.time;
+
+document.getElementById("beep").play();
+
+}
+
+else{
+
+document.getElementById("status").innerHTML=
+
+'<div class="error">'+data.message+'</div>';
+
+}
+
+}
+
+catch(e){
+
+document.getElementById("status").innerHTML=
+
+'<div class="error">Server Error</div>';
+
+}
+
+}
+
+function restartScanner(){
+
+document.getElementById("guestName").innerHTML="-";
+
+document.getElementById("guestID").innerHTML="-";
+
+document.getElementById("checkTime").innerHTML="-";
+
+document.getElementById("status").innerHTML="Silakan arahkan QR ke kamera.";
+
+startScanner();
+
+}
+
+startScanner();
+
+</script>
+
+</body>
+
+</html>
