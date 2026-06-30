@@ -1,0 +1,294 @@
+/* ==========================================
+   RESPONSIVE.CSS
+   Wedding Invitation
+========================================== */
+
+/* ===============================
+   Laptop (≤1200px)
+================================== */
+
+@media (max-width:1200px){
+
+    .cover-content{
+        max-width:650px;
+    }
+
+    .title{
+        font-size:64px;
+    }
+
+}
+
+/* ===============================
+   Tablet (≤992px)
+================================== */
+
+@media (max-width:992px){
+
+    .cover{
+        padding:40px 25px;
+    }
+
+    .title{
+        font-size:56px;
+    }
+
+    .and{
+        font-size:30px;
+    }
+
+    .date{
+        font-size:18px;
+    }
+
+    .guest-box{
+        max-width:380px;
+    }
+
+    #guestName{
+        font-size:24px;
+    }
+
+}
+
+/* ===============================
+   Mobile (≤768px)
+================================== */
+
+@media (max-width:768px){
+
+    .cover{
+
+        padding:30px 20px;
+
+    }
+
+    .subtitle{
+
+        font-size:13px;
+
+        letter-spacing:3px;
+
+    }
+
+    .title{
+
+        font-size:48px;
+
+        line-height:1.25;
+
+    }
+
+    .and{
+
+        font-size:28px;
+
+        margin:15px 0;
+
+    }
+
+    .divider{
+
+        width:90px;
+
+        margin:22px auto;
+
+    }
+
+    .date{
+
+        font-size:16px;
+
+        margin-bottom:35px;
+
+    }
+
+    .guest-box{
+
+        max-width:100%;
+
+        padding:18px;
+
+        border-radius:16px;
+
+    }
+
+    #guestName{
+
+        font-size:22px;
+
+    }
+
+    .btn-open{
+
+        width:100%;
+
+        padding:15px;
+
+        font-size:16px;
+
+        margin-top:30px;
+
+    }
+
+    .note{
+
+        font-size:13px;
+
+        line-height:1.7;
+
+    }
+
+}
+
+/* ===============================
+   Small Mobile (≤480px)
+================================== */
+
+@media (max-width:480px){
+
+    .cover{
+
+        padding:25px 18px;
+
+    }
+
+    .title{
+
+        font-size:38px;
+
+    }
+
+    .subtitle{
+
+        font-size:12px;
+
+        letter-spacing:2px;
+
+    }
+
+    .and{
+
+        font-size:24px;
+
+    }
+
+    .date{
+
+        font-size:15px;
+
+    }
+
+    .guest-box{
+
+        padding:16px;
+
+    }
+
+    #guestName{
+
+        font-size:20px;
+
+    }
+
+    .btn-open{
+
+        font-size:15px;
+
+        border-radius:50px;
+
+    }
+
+    .note{
+
+        font-size:12px;
+
+    }
+
+}
+
+/* ===============================
+   Very Small Devices (≤360px)
+================================== */
+
+@media (max-width:360px){
+
+    .title{
+
+        font-size:32px;
+
+    }
+
+    .subtitle{
+
+        font-size:11px;
+
+    }
+
+    .and{
+
+        font-size:22px;
+
+    }
+
+    .date{
+
+        font-size:14px;
+
+    }
+
+    #guestName{
+
+        font-size:18px;
+
+    }
+
+    .btn-open{
+
+        padding:14px;
+
+        font-size:14px;
+
+    }
+
+    .note{
+
+        font-size:11px;
+
+    }
+
+}
+
+/* ===============================
+   Landscape Mobile
+================================== */
+
+@media (max-height:500px) and (orientation:landscape){
+
+    .cover{
+
+        min-height:auto;
+
+        padding:35px 20px;
+
+    }
+
+    .title{
+
+        font-size:40px;
+
+    }
+
+    .guest-box{
+
+        margin-top:20px;
+
+    }
+
+    .btn-open{
+
+        margin-top:20px;
+
+    }
+
+}
