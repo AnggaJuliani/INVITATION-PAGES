@@ -94,17 +94,35 @@
         // Ambil nama tamu dari URL
         // contoh:
         // index.html?to=Bapak%20Andi
-
+        https://raw.githubusercontent.com/AnggaJuliani/INVITATION-PAGES/refs/heads/main/guest.json
         const params = new URLSearchParams(window.location.search);
+const guestCode = params.get("to");
 
-        const guest = params.get("to");
+const GUEST_API =
+  "https://raw.githubusercontent.com/USERNAME/REPO/main/data/guests.json";
 
-        if (guest) {
+async function loadGuest() {
+    try {
+        const res = await fetch(GUEST_API);
+        const guests = await res.json();
 
-            document.getElementById("guestName").innerHTML =
-                decodeURIComponent(guest.replace(/\+/g, " "));
+        if (!guestCode) return;
 
+        const foundGuest = guests.find(g => g.kode === guestCode);
+
+        if (foundGuest) {
+            document.getElementById("guestName").innerText = foundGuest.nama;
+        } else {
+            document.getElementById("guestName").innerText = "Tamu Undangan";
         }
+
+    } catch (error) {
+        console.error("Gagal load guest.json:", error);
+        document.getElementById("guestName").innerText = "Tamu Undangan";
+    }
+}
+
+loadGuest();
 
         const button = document.getElementById("openInvitation");
 
