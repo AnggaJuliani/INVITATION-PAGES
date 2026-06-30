@@ -91,15 +91,12 @@
 
     <script>
 
-        // Ambil nama tamu dari URL
-        // contoh:
-        // index.html?to=Bapak%20Andi
-        https://raw.githubusercontent.com/AnggaJuliani/INVITATION-PAGES/refs/heads/main/guest.json
-        const params = new URLSearchParams(window.location.search);
-const guestCode = params.get("to");
+        // Ambil kode tamu dari URL
+const params = new URLSearchParams(window.location.search);
+const guestCode = (params.get("to") || "").trim().toLowerCase();
 
 const GUEST_API =
-  "https://raw.githubusercontent.com/USERNAME/REPO/main/data/guests.json";
+  "https://raw.githubusercontent.com/AnggaJuliani/INVITATION-PAGES/main/guest.json";
 
 async function loadGuest() {
     try {
@@ -108,13 +105,12 @@ async function loadGuest() {
 
         if (!guestCode) return;
 
-        const foundGuest = guests.find(g => g.kode === guestCode);
+        const foundGuest = guests.find(g =>
+            (g.kode || "").toLowerCase() === guestCode
+        );
 
-        if (foundGuest) {
-            document.getElementById("guestName").innerText = foundGuest.nama;
-        } else {
-            document.getElementById("guestName").innerText = "Tamu Undangan";
-        }
+        document.getElementById("guestName").innerText =
+            foundGuest ? foundGuest.nama : "Tamu Undangan";
 
     } catch (error) {
         console.error("Gagal load guest.json:", error);
@@ -123,7 +119,7 @@ async function loadGuest() {
 }
 
 loadGuest();
-
+        
         const button = document.getElementById("openInvitation");
 
         const music = document.getElementById("bgMusic");
