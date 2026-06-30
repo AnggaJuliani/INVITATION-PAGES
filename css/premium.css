@@ -1,96 +1,114 @@
 /*==================================================
-  PREMIUM.CSS
-  Part 1A-1
-  Luxury Foundation
-  Author : ChatGPT
-==================================================*/
+    PREMIUM.CSS
+    PART 1
+    Elegant Luxury Theme
+====================================================*/
+
 
 /*=========================================
-=            LUXURY COLOR PALETTE
+=              ROOT VARIABLES
 =========================================*/
 
 :root{
 
-    --gold:#d6b36a;
-    --gold-light:#f7e7b0;
-    --gold-dark:#9b6f2f;
+    --gold:#C7A86F;
+    --gold-light:#E9D4A4;
+    --gold-dark:#9C7A46;
 
-    --champagne:#f7f2eb;
-    --ivory:#fffdf9;
-    --cream:#faf7f2;
+    --white:#FFFFFF;
+    --cream:#FDFBF8;
+    --ivory:#F7F3EE;
 
-    --rose-gold:#d9a58c;
-    --rose:#f3d8cf;
+    --text:#F5F5F5;
+    --text-soft:#DDDDDD;
 
-    --white:#ffffff;
+    --glass:rgba(255,255,255,.10);
+    --glass-border:rgba(255,255,255,.18);
+
+    --overlay:rgba(10,10,10,.45);
 
     --shadow:
-        0 10px 35px rgba(0,0,0,.18);
 
-    --shadow-soft:
-        0 0 35px rgba(214,179,106,.20);
+        0 20px 60px rgba(0,0,0,.25);
 
-    --glass:
-        rgba(255,255,255,.12);
+    --radius:28px;
 
-    --glass-border:
-        rgba(255,255,255,.25);
-
-    --transition:
-        .45s cubic-bezier(.22,.61,.36,1);
-
-    --radius:30px;
-
-    --blur:18px;
+    --transition:.35s ease;
 
 }
 
 
+
 /*=========================================
-=            GLOBAL QUALITY
+=               RESET
 =========================================*/
 
 *,
 *::before,
 *::after{
 
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 
 }
+
 
 html{
 
     scroll-behavior:smooth;
 
-    text-size-adjust:100%;
-
-    -webkit-font-smoothing:antialiased;
-
-    -moz-osx-font-smoothing:grayscale;
-
-    text-rendering:optimizeLegibility;
-
 }
+
 
 body{
 
-    overflow-x:hidden;
-
-    background:var(--cream);
-
-    color:#fff;
-
     font-family:'Poppins',sans-serif;
 
-    position:relative;
+    color:var(--text);
 
-    min-height:100vh;
+    background:#111;
+
+    overflow-x:hidden;
 
 }
 
 
+
 /*=========================================
-=            SELECTION
+=            SCROLLBAR
+=========================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#181818;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+
+        var(--gold),
+
+        var(--gold-dark)
+
+    );
+
+    border-radius:50px;
+
+}
+
+
+
+/*=========================================
+=              SELECTION
 =========================================*/
 
 ::selection{
@@ -101,17 +119,10 @@ body{
 
 }
 
-::-moz-selection{
-
-    background:var(--gold);
-
-    color:#fff;
-
-}
 
 
 /*=========================================
-=            BACKGROUND BASE
+=            BACKGROUND
 =========================================*/
 
 .background{
@@ -120,20 +131,24 @@ body{
 
     inset:0;
 
-    overflow:hidden;
+    z-index:-3;
 
-    z-index:-20;
+    background:
 
-    transform-origin:center;
+        url("../images/background.jpg")
 
-    animation:
-        premiumBackgroundZoom 40s ease-in-out infinite alternate;
+        center center/cover
+
+        no-repeat;
+
+    transform:scale(1.08);
 
 }
 
 
+
 /*=========================================
-=            GLASS OVERLAY
+=            OVERLAY
 =========================================*/
 
 .overlay{
@@ -142,499 +157,31 @@ body{
 
     inset:0;
 
-    pointer-events:none;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.22),
-            rgba(0,0,0,.36)
-        );
-
-    backdrop-filter:blur(2px);
-
-    -webkit-backdrop-filter:blur(2px);
-
-    z-index:-10;
-
-}
-
-
-/*=========================================
-=            COVER
-=========================================*/
-
-.cover{
-
-    position:relative;
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:60px 25px;
-
-}
-
-
-/*=========================================
-=            PREMIUM GLASS CARD
-=========================================*/
-
-.cover-content{
-
-    position:relative;
-
-    overflow:hidden;
-
-    max-width:760px;
-
-    width:100%;
-
-    padding:65px 55px;
-
-    border-radius:var(--radius);
-
-    background:var(--glass);
-
-    backdrop-filter:blur(var(--blur));
-
-    -webkit-backdrop-filter:blur(var(--blur));
-
-    border:1px solid var(--glass-border);
-
-    box-shadow:
-
-        var(--shadow),
-
-        inset 0 0 0 1px rgba(255,255,255,.08),
-
-        0 0 70px rgba(214,179,106,.10);
-
-    transition:var(--transition);
-
-}
-
-.cover-content:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-
-        0 20px 60px rgba(0,0,0,.30),
-
-        0 0 80px rgba(214,179,106,.22);
-
-}
-
-
-/*=========================================
-=      GOLD BORDER GLOW
-=========================================*/
-
-.cover-content::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:inherit;
-
-    padding:1px;
+    z-index:-2;
 
     background:
 
         linear-gradient(
 
-            135deg,
+            to bottom,
 
-            rgba(255,255,255,.75),
+            rgba(0,0,0,.55),
 
-            rgba(214,179,106,.85),
+            rgba(0,0,0,.45),
 
-            rgba(255,255,255,.25),
-
-            rgba(214,179,106,.95)
+            rgba(0,0,0,.60)
 
         );
 
-    mask:
-
-        linear-gradient(#fff 0 0) content-box,
-
-        linear-gradient(#fff 0 0);
-
-    mask-composite:exclude;
-
-    -webkit-mask:
-
-        linear-gradient(#fff 0 0) content-box,
-
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite:xor;
-
-    pointer-events:none;
-
-    opacity:.85;
-
 }
+
 
 
 /*=========================================
-=      INNER LIGHT
-=========================================*/
-
-.cover-content::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:-30%;
-
-    top:-35%;
-
-    width:160%;
-
-    height:160%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(255,255,255,.18),
-
-            transparent 65%
-
-        );
-
-    pointer-events:none;
-
-}
-
-
-/*=========================================
-=         PREMIUM TYPOGRAPHY
-=========================================*/
-
-.subtitle{
-
-    letter-spacing:7px;
-
-    text-transform:uppercase;
-
-    font-size:.82rem;
-
-    color:var(--gold-light);
-
-    text-shadow:
-
-        0 0 10px rgba(214,179,106,.35);
-
-}
-
-.title{
-
-    position:relative;
-
-    display:inline-block;
-
-    margin:12px 0;
-
-    font-family:'Playfair Display',serif;
-
-    font-size:4rem;
-
-    line-height:1.15;
-
-    font-weight:700;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #fff,
-
-            #f8e8b7,
-
-            #d8aa55
-
-        );
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-    background-clip:text;
-
-    transition:var(--transition);
-
-    text-shadow:
-
-        0 0 40px rgba(214,179,106,.18);
-
-}
-
-.title:hover{
-
-    transform:scale(1.02);
-
-    letter-spacing:1px;
-
-}
-
-
-/*=========================================
-=            AMPERSAND
-=========================================*/
-
-.and{
-
-    font-family:'Great Vibes',cursive;
-
-    font-size:4rem;
-
-    margin:10px 0;
-
-    color:var(--gold-light);
-
-    text-shadow:
-
-        0 0 25px rgba(214,179,106,.45);
-
-}
-
-
-/*=========================================
-=            DATE
-=========================================*/
-
-.date{
-
-    font-size:1rem;
-
-    letter-spacing:3px;
-
-    color:#fff;
-
-    margin-top:20px;
-
-    text-shadow:
-
-        0 0 15px rgba(255,255,255,.25);
-
-}
-
-
-/*=========================================
-=            NOTE
-=========================================*/
-
-.note{
-
-    margin-top:30px;
-
-    opacity:.85;
-
-    font-size:.9rem;
-
-    line-height:1.8;
-
-}
-
-
-/*=========================================
-=        PREMIUM TRANSITIONS
-=========================================*/
-
-.subtitle,
-.title,
-.and,
-.date,
-.note,
-.cover-content,
-.guest-box,
-.btn-open{
-
-    transition:var(--transition);
-
-}
-
-
-/*=========================================
-=          IMAGE QUALITY
-=========================================*/
-
-img{
-
-    max-width:100%;
-
-    display:block;
-
-    image-rendering:auto;
-
-}
-
-
-/*=========================================
-=            KEYFRAME PLACEHOLDER
-=========================================*/
-
-@keyframes premiumBackgroundZoom{
-
-    from{
-
-        transform:scale(1);
-
-    }
-
-    to{
-
-        transform:scale(1.12);
-
-    }
-
-}
-/*==================================================
-  PREMIUM.CSS
-  Part 1A-2
-  Segment 1
-  Aurora Background
-==================================================*/
-
-
-/*=========================================
-=          PREMIUM AURORA
+=          AMBIENT LIGHT
 =========================================*/
 
 .background::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-25%;
-
-    pointer-events:none;
-
-    background:
-
-        radial-gradient(circle at 15% 25%,
-            rgba(255,236,188,.22) 0%,
-            transparent 35%
-        ),
-
-        radial-gradient(circle at 82% 18%,
-            rgba(214,179,106,.18) 0%,
-            transparent 40%
-        ),
-
-        radial-gradient(circle at 72% 78%,
-            rgba(255,255,255,.15) 0%,
-            transparent 38%
-        ),
-
-        radial-gradient(circle at 28% 82%,
-            rgba(255,214,170,.20) 0%,
-            transparent 42%
-        );
-
-    animation:
-
-        auroraMove 26s ease-in-out infinite alternate;
-
-    filter:blur(45px);
-
-    opacity:.9;
-
-}
-
-
-/*=========================================
-=      SECOND AURORA LAYER
-=========================================*/
-
-.background::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-35%;
-
-    pointer-events:none;
-
-    background:
-
-        radial-gradient(circle at 50% 20%,
-            rgba(255,255,255,.10),
-            transparent 45%
-        ),
-
-        radial-gradient(circle at 20% 60%,
-            rgba(214,179,106,.16),
-            transparent 45%
-        ),
-
-        radial-gradient(circle at 80% 65%,
-            rgba(255,240,210,.16),
-            transparent 45%
-        );
-
-    filter:blur(80px);
-
-    opacity:.7;
-
-    animation:
-
-        auroraFloat 34s linear infinite;
-
-}
-
-
-/*=========================================
-=      LUXURY OVERLAY
-=========================================*/
-
-.overlay{
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(0,0,0,.12),
-
-            rgba(0,0,0,.30),
-
-            rgba(0,0,0,.42)
-
-        );
-
-    animation:
-
-        overlayBreath 12s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=      AMBIENT GOLD LIGHT
-=========================================*/
-
-.cover::before{
 
     content:"";
 
@@ -644,496 +191,139 @@ img{
 
     height:650px;
 
-    left:50%;
-
-    top:45%;
-
-    transform:translate(-50%,-50%);
-
     border-radius:50%;
+
+    top:-220px;
+
+    left:-180px;
 
     background:
 
-        radial-gradient(circle,
+        radial-gradient(
 
-            rgba(214,179,106,.16),
+            circle,
 
-            rgba(214,179,106,.08),
+            rgba(199,168,111,.28),
 
             transparent 72%
 
         );
 
-    filter:blur(35px);
-
-    pointer-events:none;
+    filter:blur(45px);
 
     animation:
 
-        ambientPulse 9s ease-in-out infinite;
+        ambientMove 14s ease-in-out infinite;
 
 }
+
 
 
 /*=========================================
-=        LIGHT CENTER
+=         SECOND LIGHT
 =========================================*/
 
-.cover-content{
-
-    isolation:isolate;
-
-}
-
-.cover-content::before{
-
-    animation:
-
-        borderGlow 8s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=         GOLD REFLECTION
-=========================================*/
-
-.cover-content::after{
-
-    animation:
-
-        reflectionFloat 12s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=        KEYFRAMES
-=========================================*/
-
-@keyframes auroraMove{
-
-    0%{
-
-        transform:
-
-            translate(-2%,-1%)
-
-            rotate(0deg)
-
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-
-            translate(3%,2%)
-
-            rotate(6deg)
-
-            scale(1.08);
-
-    }
-
-    100%{
-
-        transform:
-
-            translate(-3%,4%)
-
-            rotate(-5deg)
-
-            scale(1.12);
-
-    }
-
-}
-
-
-@keyframes auroraFloat{
-
-    0%{
-
-        transform:
-
-            rotate(0deg)
-
-            scale(1);
-
-    }
-
-    100%{
-
-        transform:
-
-            rotate(360deg)
-
-            scale(1.08);
-
-    }
-
-}
-
-
-@keyframes overlayBreath{
-
-    0%{
-
-        opacity:.88;
-
-    }
-
-    50%{
-
-        opacity:1;
-
-    }
-
-    100%{
-
-        opacity:.88;
-
-    }
-
-}
-
-
-@keyframes ambientPulse{
-
-    0%{
-
-        opacity:.45;
-
-        transform:
-
-            translate(-50%,-50%)
-
-            scale(1);
-
-    }
-
-    50%{
-
-        opacity:.75;
-
-        transform:
-
-            translate(-50%,-50%)
-
-            scale(1.08);
-
-    }
-
-    100%{
-
-        opacity:.45;
-
-        transform:
-
-            translate(-50%,-50%)
-
-            scale(1);
-
-    }
-
-}
-
-
-@keyframes borderGlow{
-
-    0%{
-
-        opacity:.65;
-
-        filter:brightness(1);
-
-    }
-
-    50%{
-
-        opacity:1;
-
-        filter:brightness(1.25);
-
-    }
-
-    100%{
-
-        opacity:.65;
-
-        filter:brightness(1);
-
-    }
-
-}
-
-
-@keyframes reflectionFloat{
-
-    0%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-
-            translateY(-18px);
-
-    }
-
-    100%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  Part 1A-3
-  Luxury Decorative Layer
-==================================================*/
-
-
-/*=========================================
-=        GOLD SHIMMER BORDER
-=========================================*/
-
-.cover-content .gold-shimmer{
-
-    display:none;
-
-}
-
-.cover-content{
-
-    overflow:hidden;
-
-}
-
-.cover-content::selection{
-
-    background:transparent;
-
-}
-
-
-/*=========================================
-=      MOVING SHINE
-=========================================*/
-
-.cover-content span.shine{
-
-    display:none;
-
-}
-
-.cover-content::marker{
-
-    content:"";
-
-}
-
-.cover-content::before{
-
-    animation:
-
-        borderGlow 8s ease-in-out infinite,
-
-        shimmerBorder 6s linear infinite;
-
-}
-
-
-/*=========================================
-=      LUXURY GLOW
-=========================================*/
-
-.title{
-
-    position:relative;
-
-}
-
-.title::after{
+.background::after{
 
     content:"";
 
     position:absolute;
 
-    left:50%;
+    width:550px;
 
-    bottom:-12px;
+    height:550px;
 
-    transform:translateX(-50%);
+    border-radius:50%;
 
-    width:65%;
+    bottom:-180px;
 
-    height:18px;
+    right:-120px;
 
     background:
 
         radial-gradient(
 
-            ellipse,
+            circle,
 
-            rgba(214,179,106,.35),
+            rgba(255,255,255,.08),
 
-            transparent 70%
-
-        );
-
-    filter:blur(12px);
-
-    opacity:.7;
-
-    z-index:-1;
-
-}
-
-
-/*=========================================
-=      SUBTITLE LINE
-=========================================*/
-
-.subtitle{
-
-    position:relative;
-
-    display:inline-block;
-
-    padding-bottom:18px;
-
-}
-
-.subtitle::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:0;
-
-    width:70px;
-
-    height:1px;
-
-    transform:translateX(-50%);
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(255,255,255,.8),
-
-            var(--gold),
-
-            rgba(255,255,255,.8),
-
-            transparent
+            transparent 72%
 
         );
 
+    filter:blur(55px);
+
+    animation:
+
+        ambientMove2 18s ease-in-out infinite;
+
 }
 
 
+
 /*=========================================
-=        DATE GLOW
+=           COVER SECTION
 =========================================*/
 
-.date{
+.cover{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
 
     position:relative;
 
 }
 
-.date::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:-10px;
-
-    width:140px;
-
-    height:16px;
-
-    transform:translateX(-50%);
-
-    background:
-
-        radial-gradient(
-
-            ellipse,
-
-            rgba(214,179,106,.25),
-
-            transparent 70%
-
-        );
-
-    filter:blur(12px);
-
-}
 
 
 /*=========================================
-=      GUEST BOX PREMIUM
+=           COVER CONTENT
 =========================================*/
 
-.guest-box{
+.cover-content{
+
+    width:100%;
+
+    max-width:760px;
+
+    padding:70px 60px;
+
+    border-radius:var(--radius);
+
+    text-align:center;
 
     position:relative;
+
+    background:var(--glass);
+
+    border:1px solid var(--glass-border);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:var(--shadow);
 
     overflow:hidden;
 
-    background:
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(255,255,255,.12),
-
-            rgba(255,255,255,.05)
-
-        );
-
-    backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,.18);
-
-    border-radius:22px;
-
-    box-shadow:
-
-        0 10px 35px rgba(0,0,0,.20),
-
-        inset 0 0 18px rgba(255,255,255,.05);
+    transition:var(--transition);
 
 }
 
 
-.guest-box::before{
+
+/*=========================================
+=         GLASS REFLECTION
+=========================================*/
+
+.cover-content::before{
 
     content:"";
 
@@ -1145,27 +335,492 @@ img{
 
         linear-gradient(
 
-            120deg,
+            135deg,
 
-            transparent,
+            rgba(255,255,255,.15),
 
-            rgba(255,255,255,.18),
-
-            transparent
+            transparent 35%
 
         );
 
-    transform:translateX(-180%);
+    pointer-events:none;
 
-    animation:
+}
 
-        guestShine 8s linear infinite;
+
+
+/*=========================================
+=            HOVER
+=========================================*/
+
+.cover-content:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+        0 30px 70px rgba(0,0,0,.35);
+
+}
+
+
+
+/*=========================================
+=             KEYFRAMES
+=========================================*/
+
+@keyframes ambientMove{
+
+    0%{
+
+        transform:
+
+            translate(0,0)
+
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+
+            translate(50px,40px)
+
+            scale(1.08);
+
+    }
+
+    100%{
+
+        transform:
+
+            translate(0,0)
+
+            scale(1);
+
+    }
+
+}
+
+
+
+@keyframes ambientMove2{
+
+    0%{
+
+        transform:
+
+            translate(0,0)
+
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+
+            translate(-60px,-40px)
+
+            scale(1.12);
+
+    }
+
+    100%{
+
+        transform:
+
+            translate(0,0)
+
+            scale(1);
+
+    }
+
+}
+
+/*==================================================
+    PREMIUM.CSS
+    PART 2
+    Typography & Luxury Components
+====================================================*/
+
+
+/*=========================================
+=            SUBTITLE
+=========================================*/
+
+.subtitle{
+
+    display:inline-block;
+
+    margin-bottom:18px;
+
+    color:var(--gold-light);
+
+    font-size:.85rem;
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-weight:500;
+
+    opacity:.95;
 
 }
 
 
 /*=========================================
-=        BUTTON PREMIUM
+=          GROOM & BRIDE NAME
+=========================================*/
+
+.title{
+
+    margin:12px 0;
+
+    font-family:'Playfair Display',serif;
+
+    font-size:clamp(2.8rem,6vw,4.8rem);
+
+    line-height:1.15;
+
+    font-weight:700;
+
+    color:#F8E8C8;
+
+    text-shadow:
+
+        0 2px 10px rgba(0,0,0,.35),
+
+        0 0 20px rgba(199,168,111,.18);
+
+    transition:var(--transition);
+
+}
+
+
+.title:hover{
+
+    color:#FFF4D8;
+
+    text-shadow:
+
+        0 0 28px rgba(199,168,111,.35),
+
+        0 2px 18px rgba(0,0,0,.35);
+
+}
+
+
+/*=========================================
+=             AMPERSAND
+=========================================*/
+
+.and{
+
+    margin:10px 0;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:3rem;
+
+    color:var(--gold);
+
+    text-shadow:
+
+        0 0 15px rgba(199,168,111,.30);
+
+}
+
+
+/*=========================================
+=             DIVIDER
+=========================================*/
+
+.divider{
+
+    width:130px;
+
+    height:2px;
+
+    margin:35px auto;
+
+    border-radius:30px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--gold),
+
+            var(--gold-light),
+
+            var(--gold),
+
+            transparent
+
+        );
+
+    position:relative;
+
+}
+
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:var(--gold-light);
+
+    box-shadow:
+
+        0 0 12px rgba(199,168,111,.35);
+
+}
+
+
+/*=========================================
+=               DATE
+=========================================*/
+
+.date{
+
+    margin-top:15px;
+
+    font-size:1.1rem;
+
+    color:var(--cream);
+
+    letter-spacing:2px;
+
+    font-weight:400;
+
+}
+
+
+/*=========================================
+=            GUEST BOX
+=========================================*/
+
+.guest-box{
+
+    margin:45px auto;
+
+    padding:22px 28px;
+
+    max-width:430px;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    border:
+
+        1px solid rgba(255,255,255,.16);
+
+    backdrop-filter:blur(10px);
+
+    transition:var(--transition);
+
+}
+
+
+.guest-box:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+
+        rgba(199,168,111,.35);
+
+}
+
+
+.guest-box small{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:var(--gold-light);
+
+    font-size:.85rem;
+
+    letter-spacing:2px;
+
+}
+
+
+#guestName{
+
+    color:#FFF;
+
+    font-size:1.45rem;
+
+    font-weight:600;
+
+}
+
+
+/*=========================================
+=            BUTTON
+=========================================*/
+
+.btn-open{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin-top:18px;
+
+    padding:16px 38px;
+
+    border:none;
+
+    border-radius:60px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:#FFF;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--gold-dark),
+
+            var(--gold),
+
+            var(--gold-light)
+
+        );
+
+    box-shadow:
+
+        0 12px 30px rgba(199,168,111,.30);
+
+    transition:var(--transition);
+
+}
+
+
+.btn-open:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        0 18px 42px rgba(199,168,111,.42);
+
+}
+
+
+.btn-open:active{
+
+    transform:
+
+        scale(.98);
+
+}
+
+
+/*=========================================
+=              NOTE
+=========================================*/
+
+.note{
+
+    margin-top:28px;
+
+    color:rgba(255,255,255,.75);
+
+    font-size:.85rem;
+
+    line-height:1.7;
+
+}
+
+
+/*=========================================
+=          FADE ANIMATION
+=========================================*/
+
+.fade-up{
+
+    animation:
+
+        fadeUp .9s ease both;
+
+}
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+/*==================================================
+    PREMIUM.CSS
+    PART 3
+    Elegant Finishing
+====================================================*/
+
+
+/*=========================================
+=          BUTTON SHINE
 =========================================*/
 
 .btn-open{
@@ -1175,34 +830,6 @@ img{
     overflow:hidden;
 
     isolation:isolate;
-
-    border:none;
-
-    border-radius:60px;
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #b8863b,
-
-            #d8b36c,
-
-            #f6e6a9
-
-        );
-
-    color:#fff;
-
-    font-weight:600;
-
-    letter-spacing:1px;
-
-    box-shadow:
-
-        0 12px 30px rgba(184,134,59,.35);
 
 }
 
@@ -1213,7 +840,13 @@ img{
 
     position:absolute;
 
-    inset:0;
+    top:0;
+
+    left:-130%;
+
+    width:60%;
+
+    height:100%;
 
     background:
 
@@ -1223,1002 +856,32 @@ img{
 
             transparent,
 
-            rgba(255,255,255,.65),
+            rgba(255,255,255,.55),
 
             transparent
 
         );
 
-    transform:translateX(-220%);
+    transform:skewX(-25deg);
 
-    animation:
-
-        buttonShine 4.5s linear infinite;
+    transition:left .8s ease;
 
 }
 
 
-.btn-open:hover{
+.btn-open:hover::before{
 
-    transform:
-
-        translateY(-4px)
-
-        scale(1.03);
-
-    box-shadow:
-
-        0 20px 45px rgba(184,134,59,.45);
+    left:150%;
 
 }
+
 
 
 /*=========================================
-=        KEYFRAMES
+=          CARD GLOW
 =========================================*/
 
-@keyframes shimmerBorder{
-
-    0%{
-
-        filter:brightness(1);
-
-    }
-
-    50%{
-
-        filter:brightness(1.35);
-
-    }
-
-    100%{
-
-        filter:brightness(1);
-
-    }
-
-}
-
-@keyframes guestShine{
-
-    from{
-
-        transform:translateX(-180%);
-
-    }
-
-    to{
-
-        transform:translateX(180%);
-
-    }
-
-}
-
-@keyframes buttonShine{
-
-    from{
-
-        transform:translateX(-220%);
-
-    }
-
-    to{
-
-        transform:translateX(220%);
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  PART 2A
-  CINEMATIC BACKGROUND LAYERS
-==================================================*/
-
-
-/*=========================================
-=          Z INDEX SYSTEM
-=========================================*/
-
-.background{
-
-    z-index:-100;
-
-}
-
-.aurora-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-95;
-
-}
-
-.mesh-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-94;
-
-}
-
-.light-rays{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-93;
-
-}
-
-.ambient-glow{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-92;
-
-}
-
-.bokeh-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:-91;
-
-}
-
-.noise-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-90;
-
-}
-
-.vignette-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-89;
-
-}
-
-
-/*=========================================
-=        MESH BACKGROUND
-=========================================*/
-
-.mesh-layer{
-
-    background:
-
-        radial-gradient(circle at 20% 30%,
-            rgba(214,179,106,.12),
-            transparent 45%
-        ),
-
-        radial-gradient(circle at 80% 25%,
-            rgba(255,255,255,.10),
-            transparent 40%
-        ),
-
-        radial-gradient(circle at 70% 75%,
-            rgba(255,214,180,.10),
-            transparent 45%
-        ),
-
-        radial-gradient(circle at 25% 80%,
-            rgba(214,179,106,.08),
-            transparent 40%
-        );
-
-    filter:blur(90px);
-
-    animation:
-
-        meshMove 45s linear infinite alternate;
-
-}
-
-
-/*=========================================
-=      AMBIENT GOLD LIGHT
-=========================================*/
-
-.ambient-glow{
-
-    background:
-
-        radial-gradient(circle at center,
-
-            rgba(214,179,106,.18),
-
-            rgba(214,179,106,.08),
-
-            transparent 72%
-
-        );
-
-    animation:
-
-        ambientGlow 12s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=      LIGHT RAYS
-=========================================*/
-
-.light-rays{
-
-    overflow:hidden;
-
-}
-
-.light-rays::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-40%;
-
-    left:-15%;
-
-    width:60%;
-
-    height:220%;
-
-    transform:rotate(-20deg);
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(255,255,255,.08),
-
-            rgba(255,245,220,.15),
-
-            transparent
-
-        );
-
-    filter:blur(40px);
-
-    animation:
-
-        lightRayMove 18s ease-in-out infinite alternate;
-
-}
-
-.light-rays::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:-35%;
-
-    right:-20%;
-
-    width:45%;
-
-    height:220%;
-
-    transform:rotate(18deg);
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(255,255,255,.05),
-
-            rgba(214,179,106,.10),
-
-            transparent
-
-        );
-
-    filter:blur(35px);
-
-    animation:
-
-        lightRayMove2 22s ease-in-out infinite alternate;
-
-}
-
-
-/*=========================================
-=      VIGNETTE
-=========================================*/
-
-.vignette-layer{
-
-    box-shadow:
-
-        inset 0 0 180px rgba(0,0,0,.28),
-
-        inset 0 0 320px rgba(0,0,0,.18);
-
-}
-
-
-/*=========================================
-=      KEYFRAMES
-=========================================*/
-
-@keyframes meshMove{
-
-    0%{
-
-        transform:
-
-            scale(1)
-
-            rotate(0deg);
-
-    }
-
-    100%{
-
-        transform:
-
-            scale(1.12)
-
-            rotate(6deg);
-
-    }
-
-}
-
-
-@keyframes ambientGlow{
-
-    0%{
-
-        opacity:.45;
-
-        transform:scale(1);
-
-    }
-
-    50%{
-
-        opacity:.75;
-
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        opacity:.45;
-
-        transform:scale(1);
-
-    }
-
-}
-
-
-@keyframes lightRayMove{
-
-    0%{
-
-        transform:
-
-            rotate(-20deg)
-
-            translateX(-40px);
-
-    }
-
-    100%{
-
-        transform:
-
-            rotate(-16deg)
-
-            translateX(50px);
-
-    }
-
-}
-
-
-@keyframes lightRayMove2{
-
-    0%{
-
-        transform:
-
-            rotate(18deg)
-
-            translateX(20px);
-
-    }
-
-    100%{
-
-        transform:
-
-            rotate(24deg)
-
-            translateX(-40px);
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  PART 2B
-  CINEMATIC BOKEH
-==================================================*/
-
-
-/*=========================================
-=          BOKEH BASE
-=========================================*/
-
-.bokeh-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-}
-
-.bokeh-layer span{
-
-    position:absolute;
-
-    display:block;
-
-    border-radius:50%;
-
-    filter:blur(4px);
-
-    opacity:.22;
-
-    animation:bokehFloat linear infinite;
-
-}
-
-
-/*=========================================
-=      BOKEH 1
-=========================================*/
-
-.bokeh-layer span:nth-child(1){
-
-    width:180px;
-    height:180px;
-
-    left:5%;
-    top:8%;
-
-    background:rgba(255,255,255,.20);
-
-    animation-duration:24s;
-
-}
-
-
-/*=========================================
-=      BOKEH 2
-=========================================*/
-
-.bokeh-layer span:nth-child(2){
-
-    width:260px;
-    height:260px;
-
-    right:6%;
-    top:18%;
-
-    background:rgba(214,179,106,.18);
-
-    animation-duration:34s;
-
-}
-
-
-/*=========================================
-=      BOKEH 3
-=========================================*/
-
-.bokeh-layer span:nth-child(3){
-
-    width:140px;
-    height:140px;
-
-    left:20%;
-    bottom:8%;
-
-    background:rgba(255,255,255,.16);
-
-    animation-duration:26s;
-
-}
-
-
-/*=========================================
-=      BOKEH 4
-=========================================*/
-
-.bokeh-layer span:nth-child(4){
-
-    width:320px;
-    height:320px;
-
-    right:15%;
-    bottom:5%;
-
-    background:rgba(255,235,200,.15);
-
-    animation-duration:40s;
-
-}
-
-
-/*=========================================
-=      BOKEH 5
-=========================================*/
-
-.bokeh-layer span:nth-child(5){
-
-    width:90px;
-    height:90px;
-
-    left:48%;
-    top:15%;
-
-    background:rgba(255,255,255,.20);
-
-    animation-duration:18s;
-
-}
-
-
-/*=========================================
-=      BOKEH 6
-=========================================*/
-
-.bokeh-layer span:nth-child(6){
-
-    width:200px;
-    height:200px;
-
-    left:38%;
-    bottom:15%;
-
-    background:rgba(214,179,106,.14);
-
-    animation-duration:30s;
-
-}
-
-
-/*=========================================
-=      BOKEH 7
-=========================================*/
-
-.bokeh-layer span:nth-child(7){
-
-    width:110px;
-    height:110px;
-
-    right:30%;
-    top:35%;
-
-    background:rgba(255,255,255,.16);
-
-    animation-duration:22s;
-
-}
-
-
-/*=========================================
-=      BOKEH 8
-=========================================*/
-
-.bokeh-layer span:nth-child(8){
-
-    width:150px;
-    height:150px;
-
-    left:60%;
-    bottom:28%;
-
-    background:rgba(255,240,210,.14);
-
-    animation-duration:28s;
-
-}
-
-
-/*=========================================
-=      BOKEH 9
-=========================================*/
-
-.bokeh-layer span:nth-child(9){
-
-    width:70px;
-    height:70px;
-
-    left:75%;
-    top:60%;
-
-    background:rgba(255,255,255,.22);
-
-    animation-duration:15s;
-
-}
-
-
-/*=========================================
-=      BOKEH 10
-=========================================*/
-
-.bokeh-layer span:nth-child(10){
-
-    width:240px;
-    height:240px;
-
-    left:42%;
-    top:45%;
-
-    background:rgba(214,179,106,.10);
-
-    animation-duration:36s;
-
-}
-
-
-/*=========================================
-=      PARALLAX DEPTH
-=========================================*/
-
-.bokeh-layer span:nth-child(odd){
-
-    animation-name:bokehFloat;
-
-}
-
-.bokeh-layer span:nth-child(even){
-
-    animation-name:bokehFloatReverse;
-
-}
-
-
-/*=========================================
-=      KEYFRAMES
-=========================================*/
-
-@keyframes bokehFloat{
-
-    0%{
-
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(1);
-
-    }
-
-    25%{
-
-        transform:
-            translateY(-18px)
-            translateX(12px)
-            scale(1.04);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-35px)
-            translateX(-10px)
-            scale(1.08);
-
-    }
-
-    75%{
-
-        transform:
-            translateY(-15px)
-            translateX(18px)
-            scale(1.03);
-
-    }
-
-    100%{
-
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(1);
-
-    }
-
-}
-
-
-@keyframes bokehFloatReverse{
-
-    0%{
-
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(28px)
-            translateX(-22px)
-            scale(1.07);
-
-    }
-
-    100%{
-
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(1);
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  PART 2C
-  FLOATING DUST
-==================================================*/
-
-
-/*=========================================
-=          DUST LAYER
-=========================================*/
-
-.dust-layer{
-
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:-88;
-
-}
-
-
-/*=========================================
-=      SMALL PARTICLES
-=========================================*/
-
-.dust-small{
-
-    position:absolute;
-
-    width:2px;
-
-    height:2px;
-
-    border-radius:50%;
-
-    background:#ffffff;
-
-    opacity:.45;
-
-    box-shadow:
-
-    5vw 10vh #fff,
-    12vw 80vh #fff,
-    18vw 45vh #fff,
-    25vw 20vh #fff,
-    33vw 75vh #fff,
-    41vw 60vh #fff,
-    47vw 12vh #fff,
-    56vw 34vh #fff,
-    63vw 85vh #fff,
-    71vw 28vh #fff,
-    80vw 50vh #fff,
-    91vw 15vh #fff,
-
-    8vw 55vh rgba(214,179,106,.8),
-    14vw 38vh rgba(214,179,106,.7),
-    29vw 88vh rgba(214,179,106,.8),
-    36vw 18vh rgba(214,179,106,.8),
-    44vw 42vh rgba(214,179,106,.7),
-    58vw 72vh rgba(214,179,106,.7),
-    66vw 12vh rgba(214,179,106,.8),
-    74vw 65vh rgba(214,179,106,.7),
-    83vw 36vh rgba(214,179,106,.8),
-    95vw 90vh rgba(214,179,106,.8);
-
-    animation:
-
-        dustFloatOne 34s linear infinite;
-
-}
-
-
-/*=========================================
-=      LARGE PARTICLES
-=========================================*/
-
-.dust-large{
-
-    position:absolute;
-
-    width:4px;
-
-    height:4px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.65);
-
-    filter:blur(.5px);
-
-    box-shadow:
-
-    10vw 30vh,
-    18vw 60vh,
-    31vw 12vh,
-    42vw 82vh,
-    56vw 46vh,
-    63vw 24vh,
-    75vw 74vh,
-    88vw 42vh,
-
-    6vw 70vh rgba(214,179,106,.8),
-    28vw 40vh rgba(214,179,106,.8),
-    51vw 18vh rgba(214,179,106,.8),
-    72vw 58vh rgba(214,179,106,.8),
-    90vw 20vh rgba(214,179,106,.8);
-
-    animation:
-
-        dustFloatTwo 55s linear infinite;
-
-}
-
-
-/*=========================================
-=      TWINKLE
-=========================================*/
-
-.dust{
-
-    animation-timing-function:linear;
-
-    will-change:transform;
-
-}
-
-
-/*=========================================
-=      KEYFRAMES
-=========================================*/
-
-@keyframes dustFloatOne{
-
-    from{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-    to{
-
-        transform:
-
-            translateY(-120px);
-
-    }
-
-}
-
-
-@keyframes dustFloatTwo{
-
-    from{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-    to{
-
-        transform:
-
-            translateY(-180px);
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  PART 3A
-  INTERACTIVE COMPONENTS
-==================================================*/
-
-
-/*=========================================
-=      BUTTON TRANSITION
-=========================================*/
-
-.btn-open{
-
-    position:relative;
-
-    overflow:hidden;
-
-    isolation:isolate;
-
-    transform:translateZ(0);
+.cover-content{
 
     transition:
 
@@ -2226,62 +889,48 @@ img{
 
         box-shadow .35s ease,
 
-        letter-spacing .35s ease;
+        border-color .35s ease;
 
 }
 
 
-/*=========================================
-=      BUTTON SHADOW
-=========================================*/
+.cover-content:hover{
 
-.btn-open:hover{
+    border-color:
 
-    transform:
-
-        translateY(-6px)
-
-        scale(1.04);
-
-    letter-spacing:2px;
+        rgba(199,168,111,.35);
 
     box-shadow:
 
-        0 15px 35px rgba(214,179,106,.45),
+        0 35px 80px rgba(0,0,0,.40),
 
-        0 0 40px rgba(214,179,106,.25);
-
-}
-
-
-.btn-open:active{
-
-    transform:
-
-        scale(.97);
+        0 0 35px rgba(199,168,111,.12);
 
 }
+
 
 
 /*=========================================
-=      BUTTON SHINE
+=        GOLD TOP LINE
 =========================================*/
 
-.btn-open::after{
+.cover-content::after{
 
     content:"";
 
     position:absolute;
 
-    top:-60%;
+    top:0;
 
-    left:-120%;
+    left:50%;
 
-    width:60%;
+    transform:translateX(-50%);
 
-    height:220%;
+    width:120px;
 
-    transform:rotate(25deg);
+    height:2px;
+
+    border-radius:30px;
 
     background:
 
@@ -2291,83 +940,173 @@ img{
 
             transparent,
 
-            rgba(255,255,255,.8),
+            var(--gold-light),
 
             transparent
 
         );
 
-    animation:
-
-        premiumButtonShine 5s linear infinite;
-
 }
+
 
 
 /*=========================================
-=      COVER FLOAT
-=========================================*/
-
-.cover-content{
-
-    animation:
-
-        luxuryFloat 8s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=      GUEST BOX
-=========================================*/
-
-.guest-box{
-
-    transition:
-
-        .4s ease;
-
-}
-
-
-.guest-box:hover{
-
-    transform:
-
-        translateY(-4px);
-
-    box-shadow:
-
-        0 15px 35px rgba(214,179,106,.18);
-
-}
-
-
-/*=========================================
-=      TITLE GLOW
+=         TITLE UNDERLINE
 =========================================*/
 
 .title{
-
-    animation:
-
-        titleGlow 5s ease-in-out infinite;
-
-}
-
-
-/*=========================================
-=      DATE SHIMMER
-=========================================*/
-
-.date{
 
     position:relative;
 
 }
 
 
-.date::before{
+.title::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-10px;
+
+    transform:translateX(-50%);
+
+    width:70px;
+
+    height:2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(199,168,111,.9),
+
+            transparent
+
+        );
+
+    opacity:.7;
+
+}
+
+
+
+/*=========================================
+=        DATE HOVER
+=========================================*/
+
+.date{
+
+    transition:.35s ease;
+
+}
+
+
+.date:hover{
+
+    color:#FFF6E4;
+
+    letter-spacing:3px;
+
+}
+
+
+
+/*=========================================
+=        GUEST BOX
+=========================================*/
+
+.guest-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.guest-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:50%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.15),
+
+            transparent
+
+        );
+
+    transform:skewX(-20deg);
+
+    transition:left .8s ease;
+
+}
+
+
+.guest-box:hover::before{
+
+    left:150%;
+
+}
+
+
+
+/*=========================================
+=        NOTE
+=========================================*/
+
+.note{
+
+    opacity:.85;
+
+    transition:.35s ease;
+
+}
+
+
+.note:hover{
+
+    opacity:1;
+
+}
+
+
+
+/*=========================================
+=        SUBTITLE
+=========================================*/
+
+.subtitle{
+
+    position:relative;
+
+}
+
+
+.subtitle::after{
 
     content:"";
 
@@ -2379,408 +1118,79 @@ img{
 
     transform:translateX(-50%);
 
-    width:80%;
+    width:40px;
 
-    height:2px;
+    height:1px;
 
     background:
 
-        linear-gradient(
+        rgba(199,168,111,.7);
 
-            90deg,
+}
 
-            transparent,
 
-            var(--gold),
 
-            transparent
+/*=========================================
+=      BACKGROUND ZOOM
+=========================================*/
 
-        );
+.background{
 
     animation:
 
-        shimmerLine 4s linear infinite;
+        bgZoom 20s ease-in-out infinite alternate;
 
 }
+
 
 
 /*=========================================
-=      NOTE
+=      FLOAT CARD
 =========================================*/
 
-.note{
+.cover-content{
 
-    transition:.4s ease;
+    animation:
 
-}
-
-
-.note:hover{
-
-    color:var(--gold-light);
+        floatingCard 8s ease-in-out infinite;
 
 }
+
 
 
 /*=========================================
-=      CARD SHADOW
+=          KEYFRAMES
 =========================================*/
 
-.cover-content:hover{
-
-    box-shadow:
-
-        0 30px 70px rgba(0,0,0,.30),
-
-        0 0 70px rgba(214,179,106,.22);
-
-}
-
-
-/*=========================================
-=      KEYFRAMES
-=========================================*/
-
-@keyframes luxuryFloat{
-
-    0%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-
-            translateY(-8px);
-
-    }
-
-    100%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-
-@keyframes premiumButtonShine{
+@keyframes bgZoom{
 
     from{
 
-        left:-120%;
+        transform:
+
+            scale(1.05);
 
     }
 
     to{
 
-        left:170%;
+        transform:
+
+            scale(1.12);
 
     }
 
 }
 
 
-@keyframes shimmerLine{
 
-    0%{
-
-        opacity:.2;
-
-        width:30%;
-
-    }
-
-    50%{
-
-        opacity:1;
-
-        width:90%;
-
-    }
-
-    100%{
-
-        opacity:.2;
-
-        width:30%;
-
-    }
-
-}
-
-
-@keyframes titleGlow{
-
-    0%{
-
-        filter:
-
-            drop-shadow(0 0 0 rgba(214,179,106,.25));
-
-    }
-
-    50%{
-
-        filter:
-
-            drop-shadow(0 0 18px rgba(214,179,106,.45));
-
-    }
-
-    100%{
-
-        filter:
-
-            drop-shadow(0 0 0 rgba(214,179,106,.25));
-
-    }
-
-}
-
-/*==================================================
-  PREMIUM.CSS
-  PART 3B
-  Sparkle & Floating Light
-==================================================*/
-
-
-/*=========================================
-=          SPARKLES
-=========================================*/
-
-.sparkles{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:-70;
-
-}
-
-.sparkles span{
-
-    position:absolute;
-
-    width:4px;
-
-    height:4px;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    box-shadow:
-
-        0 0 12px #fff,
-
-        0 0 24px rgba(214,179,106,.8);
-
-    animation:
-
-        sparkle 4s ease-in-out infinite;
-
-}
-
-.sparkles span:nth-child(1){left:8%;top:18%;animation-delay:0s;}
-.sparkles span:nth-child(2){left:18%;top:62%;animation-delay:.5s;}
-.sparkles span:nth-child(3){left:28%;top:35%;animation-delay:1s;}
-.sparkles span:nth-child(4){left:42%;top:15%;animation-delay:1.5s;}
-.sparkles span:nth-child(5){left:56%;top:72%;animation-delay:2s;}
-.sparkles span:nth-child(6){left:68%;top:28%;animation-delay:2.5s;}
-.sparkles span:nth-child(7){left:80%;top:55%;animation-delay:3s;}
-.sparkles span:nth-child(8){left:90%;top:22%;animation-delay:3.5s;}
-.sparkles span:nth-child(9){left:12%;top:82%;animation-delay:4s;}
-.sparkles span:nth-child(10){left:36%;top:88%;animation-delay:4.5s;}
-.sparkles span:nth-child(11){left:63%;top:86%;animation-delay:5s;}
-.sparkles span:nth-child(12){left:84%;top:80%;animation-delay:5.5s;}
-
-
-/*=========================================
-=      FLOATING LIGHT
-=========================================*/
-
-.floating-lights{
-
-    position:fixed;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:-72;
-
-}
-
-.floating-lights span{
-
-    position:absolute;
-
-    border-radius:50%;
-
-    filter:blur(30px);
-
-    opacity:.25;
-
-    animation:
-
-        floatingLight 18s ease-in-out infinite;
-
-}
-
-.floating-lights span:nth-child(1){
-
-    width:180px;
-    height:180px;
-
-    left:5%;
-    bottom:10%;
-
-    background:rgba(214,179,106,.22);
-
-}
-
-.floating-lights span:nth-child(2){
-
-    width:220px;
-    height:220px;
-
-    right:8%;
-    top:18%;
-
-    background:rgba(255,255,255,.16);
-
-    animation-delay:3s;
-
-}
-
-.floating-lights span:nth-child(3){
-
-    width:140px;
-    height:140px;
-
-    left:45%;
-    top:70%;
-
-    background:rgba(255,235,180,.20);
-
-    animation-delay:5s;
-
-}
-
-.floating-lights span:nth-child(4){
-
-    width:260px;
-    height:260px;
-
-    right:35%;
-    bottom:5%;
-
-    background:rgba(214,179,106,.16);
-
-    animation-delay:7s;
-
-}
-
-.floating-lights span:nth-child(5){
-
-    width:160px;
-    height:160px;
-
-    left:25%;
-    top:10%;
-
-    background:rgba(255,255,255,.14);
-
-    animation-delay:9s;
-
-}
-
-.floating-lights span:nth-child(6){
-
-    width:210px;
-    height:210px;
-
-    right:15%;
-    bottom:30%;
-
-    background:rgba(255,230,170,.18);
-
-    animation-delay:11s;
-
-}
-
-
-/*=========================================
-=      FLOWERS
-=========================================*/
-
-.flowers{
-
-    opacity:.55;
-
-    filter:
-
-        drop-shadow(0 0 12px rgba(214,179,106,.25));
-
-}
-
-
-/*=========================================
-=      KEYFRAMES
-=========================================*/
-
-@keyframes sparkle{
-
-    0%{
-
-        transform:scale(.4);
-
-        opacity:.1;
-
-    }
-
-    50%{
-
-        transform:scale(1.6);
-
-        opacity:1;
-
-    }
-
-    100%{
-
-        transform:scale(.4);
-
-        opacity:.1;
-
-    }
-
-}
-
-
-@keyframes floatingLight{
+@keyframes floatingCard{
 
     0%{
 
         transform:
 
-            translateY(0)
-
-            scale(1);
+            translateY(0px);
 
     }
 
@@ -2788,9 +1198,7 @@ img{
 
         transform:
 
-            translateY(-35px)
-
-            scale(1.08);
+            translateY(-6px);
 
     }
 
@@ -2798,11 +1206,56 @@ img{
 
         transform:
 
-            translateY(0)
-
-            scale(1);
+            translateY(0px);
 
     }
 
 }
 
+
+
+/*=========================================
+=        MOBILE IMPROVEMENT
+=========================================*/
+
+@media(max-width:768px){
+
+    .cover{
+
+        padding:25px;
+
+    }
+
+    .cover-content{
+
+        padding:45px 28px;
+
+        border-radius:22px;
+
+    }
+
+    .title{
+
+        font-size:2.5rem;
+
+    }
+
+    .and{
+
+        font-size:2.3rem;
+
+    }
+
+    .guest-box{
+
+        margin:35px auto;
+
+    }
+
+    .btn-open{
+
+        width:100%;
+
+    }
+
+}
