@@ -48,6 +48,65 @@
 
     </audio>
 
+    // =======================================
+    // COUNTDOWN
+    // =======================================
+
+// Format:
+// Tahun, Bulan(0-11), Tanggal, Jam, Menit, Detik
+const weddingDate = new Date(2027, 0, 10, 10, 0, 0).getTime();
+
+const day = document.getElementById("day");
+const hour = document.getElementById("hour");
+const minute = document.getElementById("minute");
+const second = document.getElementById("second");
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const distance = weddingDate - now;
+
+    if (distance <= 0) {
+
+        day.textContent = "00";
+        hour.textContent = "00";
+        minute.textContent = "00";
+        second.textContent = "00";
+
+        clearInterval(timer);
+
+        return;
+    }
+
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const h = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const m = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const s = Math.floor(
+        (distance % (1000 * 60)) /
+        1000
+    );
+
+    day.textContent = String(d).padStart(2, "0");
+    hour.textContent = String(h).padStart(2, "0");
+    minute.textContent = String(m).padStart(2, "0");
+    second.textContent = String(s).padStart(2, "0");
+
+}
+
+updateCountdown();
+
+const timer = setInterval(updateCountdown, 1000);
+
     <!--=========================================
                 HERO SECTION
     ==========================================-->
@@ -559,7 +618,7 @@
 
                     <strong>Tanggal</strong><br>
 
-                    1 Januari 2020
+                    1 Januari 2027
 
                 </p>
 
@@ -624,7 +683,7 @@
 
                     <strong>Tanggal</strong><br>
 
-                    1 Januari 2020
+                    1 Januari 2027
 
                 </p>
 
