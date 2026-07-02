@@ -75,42 +75,37 @@ function renderComments(){
         .slice(0,visible)
         .forEach(item=>{
 
-            container.innerHTML+=`
+            container.innerHTML += `
 
-            <div class="comment">
+<div class="comment">
 
-                <div class="comment-avatar">
+    <div class="comment-avatar">
+        ${initials(item.name)}
+    </div>
 
-                    ${initials(item.name)}
+    <div class="comment-body">
 
-                </div>
+        <div class="comment-header">
 
-                <div class="comment-body">
-
-                    <div class="comment-name">
-
-                        ${item.name}
-
-                    </div>
-
-                    <div class="comment-time">
-
-                        ${relativeTime(item.date)}
-
-                    </div>
-
-                    <div>
-
-                        ${item.message}
-
-                    </div>
-
-                </div>
-
+            <div class="comment-name">
+                ${item.name}
             </div>
 
-            `;
+            <div class="comment-time">
+                ${relativeTime(item.date)}
+            </div>
 
+        </div>
+
+        <div class="comment-message">
+            ${item.message}
+        </div>
+
+    </div>
+
+</div>
+
+`;
         });
 
     document.getElementById("loadMoreBtn").style.display=
