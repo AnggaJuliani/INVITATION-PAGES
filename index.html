@@ -62,9 +62,9 @@
 
                 <small>Kepada Yth.</small>
 
-                <h2 id="guestName">
+                   <h2 id="guestName">
                     Tamu Undangan
-                </h2>
+                    </h2>
 
             </div>
 
@@ -83,50 +83,50 @@
         </div>
 
     </section>
-
-    <!-- Music -->
-    <audio id="bgMusic" loop>
-        <source src="music/wedding.mp3" type="audio/mpeg">
-    </audio>
-
+    
+    <script src="js/api.js"></script>
+    
     <script>
 
-        // Ambil kode tamu dari URL
+// ======================================
+// GUEST
+// ======================================
 const params = new URLSearchParams(window.location.search);
-const guestCode = (params.get("to") || "").trim().toLowerCase();
 
-const GUEST_API =
-  "https://raw.githubusercontent.com/AnggaJuliani/INVITATION-PAGES/main/guest.json";
+const guestCode = params.get("to");
 
 async function loadGuest() {
+
+    if (!guestCode) return;
+
     try {
-        const res = await fetch(GUEST_API);
-        const guests = await res.json();
 
-        if (!guestCode) return;
-
-        const foundGuest = guests.find(g =>
-            (g.kode || "").toLowerCase() === guestCode
+        const res = await fetch(
+            API_URL +
+            "?action=guest&code=" +
+            encodeURIComponent(guestCode)
         );
 
-        document.getElementById("guestName").innerText =
-            foundGuest ? foundGuest.nama : "Tamu Undangan";
+        const guest = await res.json();
 
-    } catch (error) {
-        console.error("Gagal load guest.json:", error);
-        document.getElementById("guestName").innerText = "Tamu Undangan";
+        if (guest.status) {
+
+            document.getElementById("guestName").innerText =
+                guest.name;
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
     }
-}
 
-loadGuest();
+}        loadGuest();
         
         const button = document.getElementById("openInvitation");
 
-        const music = document.getElementById("bgMusic");
-
         button.addEventListener("click", () => {
-
-            music.play().catch(() => { });
 
             setTimeout(() => {
 
