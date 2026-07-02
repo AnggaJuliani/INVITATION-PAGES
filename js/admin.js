@@ -274,3 +274,21 @@ document.querySelectorAll("[data-link]").forEach(item => {
     });
 
 });
+
+
+const API =
+"https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
+
+async function loadGuests(){
+
+    const res =
+    await fetch(API+"?action=getGuests");
+
+    const guests =
+    await res.json();
+
+    console.log(guests);
+
+}
+
+loadGuests();
