@@ -1061,31 +1061,32 @@ const timer = setInterval(updateCountdown, 1000);
 }
 
 const params = new URLSearchParams(window.location.search);
-const slug = params.get("to");
 
 const WEBAPP = "https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
 
-async function loadTicket(){
+async function loadTicket() {
 
-  const code = params.get("code");
-  if(!code) return;
+    const slug = params.get("to");
 
-  const res = await fetch(`${WEBAPP}?action=ticket&to=${encodeURIComponent(slug)}`);
-  const data = await res.json();
+    if (!slug) return;
 
-  console.log(data);
+    const res = await fetch(
+        `${WEBAPP}?action=ticket&to=${encodeURIComponent(slug)}`
+    );
 
-  if(!data.status) return;
+    const data = await res.json();
 
-  document.getElementById("ticket").style.display = "block";
+    console.log(data);
 
-  document.getElementById("name").innerText = data.name;
-  document.getElementById("status").innerText = data.checkin_status || "-";
-  document.getElementById("time").innerText = data.checkin_time || "-";
+    if (!data.status) return;
 
-  document.getElementById("qr").src = data.qr_image;
+    document.getElementById("ticket").style.display = "block";
 
-}        
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("status").innerText = data.checkin_status || "-";
+    document.getElementById("time").innerText = data.checkin_time || "-";
+    document.getElementById("qr").src = data.qr_image;
+}
     </script>
     
     <script src="js/api.js"></script>
