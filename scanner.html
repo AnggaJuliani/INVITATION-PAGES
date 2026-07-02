@@ -153,6 +153,7 @@ const text=await response.text();
 const data=JSON.parse(text);
 
 playBeep();
+vibrateSuccess();
 
 const now=new Date();
 const timeString=now.toLocaleString("id-ID",{
