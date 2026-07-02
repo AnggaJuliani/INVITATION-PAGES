@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>QR Check-In Wedding</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+body{
+
+margin:0;
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+
+}
+
+h2{
+
+margin-top:20px;
+
+}
+
+#reader{
+
+width:100%;
+max-width:500px;
+margin:auto;
+
+}
+
+#result{
+
+margin-top:25px;
+font-size:22px;
+font-weight:bold;
+
+}
+
+.success{
+
+color:#4CAF50;
+
+}
+
+.error{
+
+color:#ff5252;
+
+}
+
+.loading{
+
+color:#ffd54f;
+
+}
+
+button{
+
+margin-top:20px;
+padding:12px 25px;
+font-size:18px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Wedding QR Scanner</h2>
+
+<div id="reader"></div>
+
+<div id="result">
+Silahkan Scan QR
+</div>
+
+<audio id="beep">
+
+<source src="https://actions.google.com/sounds/v1/cartoon/pop.ogg">
+
+</audio>
+
+<script>
+
+///////////////////////////////////////////////////////////////
+
+const WEBAPP="YOUR_WEBAPP_URL";
+
+///////////////////////////////////////////////////////////////
+
+let lastCode="";
+let scanning=true;
+
+const result=document.getElementById("result");
+
+const beep=document.getElementById("beep");
+
+function playBeep(){
+
+beep.currentTime=0;
+beep.play();
+
+}
+
+function showMessage(msg,cls){
+
+result.className=cls;
+result.innerHTML=msg;
+
+}
+
+async function sendCheckin(code){
+
+showMessage("Mengirim data...","loading");
+
+try{
+
+const response=await fetch(WEBAPP,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+code:code
+
+})
+
+});
+
+const data=await response.json();
+
+playBeep();
+
+if(data.status=="success"){
+
+showMessage(
+
+"✅ "+data.message,
+
+"success"
+
+);
+
+}else{
+
+showMessage(
+
+"❌ "+data.message,
+
+"error"
+
+);
+
+}
+
+}catch(e){
+
+showMessage(
+
+"Server Error",
+
+"error"
+
+);
+
+}
+
+}
+
+function onScanSuccess(decodedText){
+
+if(!scanning)return;
+
+if(decodedText==lastCode)return;
+
+lastCode=decodedText;
+
+scanning=false;
+
+sendCheckin(decodedText);
+
+setTimeout(()=>{
+
+scanning=true;
+
+lastCode="";
+
+},3000);
+
+}
+
+function onScanFailure(error){
+
+}
+
+const html5QrCode=new Html5Qrcode("reader");
+
+html5QrCode.start(
+
+{
+
+facingMode:"environment"
+
+},
+
+{
+
+fps:10,
+
+qrbox:{
+
+width:250,
+
+height:250
+
+}
+
+},
+
+onScanSuccess,
+
+onScanFailure
+
+);
+
+</script>
+
+</body>
+</html>
