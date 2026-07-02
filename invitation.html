@@ -1165,6 +1165,44 @@ document.getElementById("guestTime").innerText = data.checkin_time || "-";
 
 document.getElementById("qrImage").src = data.qr_image;
 }
+
+//====================================
+// GOOGLE CALENDAR
+//====================================
+
+const eventTitle =
+"Wedding Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani";
+
+const eventLocation =
+"Gedung Serbaguna Anggun, Surabaya";
+
+const eventDescription =
+"Undangan Pernikahan Anggara Wisnu Wardhana & Tsamara Alifia Ramadhani";
+
+// Tahun, Bulan(0-11), Tanggal, Jam, Menit
+const eventStart = new Date(2027,0,1,10,0,0);
+const eventEnd   = new Date(2027,0,1,15,0,0);
+
+function googleDate(date){
+
+    return date
+    .toISOString()
+    .replace(/[-:]/g,"")
+    .replace(/\.\d{3}/,"");
+
+}
+
+const calendarUrl =
+"https://calendar.google.com/calendar/render?action=TEMPLATE"+
+"&text="+encodeURIComponent(eventTitle)+
+"&dates="+googleDate(eventStart)+"/"+googleDate(eventEnd)+
+"&details="+encodeURIComponent(eventDescription)+
+"&location="+encodeURIComponent(eventLocation);
+
+document
+.getElementById("googleCalendarBtn")
+.href = calendarUrl;
+        
     </script>
     
     <script src="js/api.js"></script>
