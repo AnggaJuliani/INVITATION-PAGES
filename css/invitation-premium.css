@@ -3564,5 +3564,224 @@ FINAL PERFORMANCE
 }
 
 /*==================================================
+GIFT CARD
+==================================================*/
+.inv-gift{
+
+    padding:90px 20px;
+
+}
+
+.gift-card{
+
+    max-width:520px;
+
+    margin:40px auto;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.65);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.gift-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    background:rgba(255,255,255,.35);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    right:-120px;
+
+}
+
+.gift-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 25px 55px rgba(0,0,0,.18);
+
+}
+
+.gift-bank{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.gift-logo{
+
+    width:60px;
+
+}
+
+.gift-bank span{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#1a3d7c;
+
+}
+
+.gift-number{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    color:#333;
+
+    margin-bottom:12px;
+
+}
+
+.gift-owner{
+
+    font-size:17px;
+
+    color:#777;
+
+    margin-bottom:30px;
+
+}
+
+.copy-btn{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:50px;
+
+    padding:16px;
+
+    background:#1565C0;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.copy-btn:hover{
+
+    background:#0D47A1;
+
+    transform:scale(1.02);
+
+}
+
+#toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:40px;
+
+    transform:translateX(-50%) translateY(100px);
+
+    background:#2E7D32;
+
+    color:white;
+
+    padding:16px 28px;
+
+    border-radius:40px;
+
+    opacity:0;
+
+    transition:.4s;
+
+    z-index:9999;
+
+    font-weight:600;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+}
+
+#toast.show{
+
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+
+}
+
+@media(max-width:768px){
+
+.gift-card{
+
+    padding:25px;
+
+}
+
+.gift-number{
+
+    font-size:26px;
+
+}
+
+.gift-bank span{
+
+    font-size:16px;
+
+}
+
+.copy-btn{
+
+    font-size:15px;
+
+}
+
+}
+
+/*==================================================
 THE END
 ==================================================*/
