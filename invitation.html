@@ -1061,18 +1061,21 @@ const timer = setInterval(updateCountdown, 1000);
 }
 
 const params = new URLSearchParams(window.location.search);
-const name = params.get("to");
+const code = params.get("code");
 
 const WEBAPP = "https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
 
-async function loadTicket() {
+async function loadTicket(){
 
-  if (!name) return;
+  const code = params.get("code");
+  if(!code) return;
 
-  const res = await fetch(`${WEBAPP}?action=ticket&name=${encodeURIComponent(name)}`);
+  const res = await fetch(`${WEBAPP}?action=ticket&code=${encodeURIComponent(code)}`);
   const data = await res.json();
 
-  if (!data.status) return;
+  console.log(data);
+
+  if(!data.status) return;
 
   document.getElementById("ticket").style.display = "block";
 
@@ -1082,10 +1085,7 @@ async function loadTicket() {
 
   document.getElementById("qr").src = data.qr_image;
 
-}
-
-loadTicket();
-        
+}        
     </script>
     
     <script src="js/api.js"></script>
