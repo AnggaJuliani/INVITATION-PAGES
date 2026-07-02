@@ -701,14 +701,33 @@
     <!--=========================================
                 TICKET
     ==========================================-->
-    <div id="ticket" style="display:none;">
-  <h2>🎫 E-TICKET</h2>
+<div class="eticket-title">
+    <i class="fa-solid fa-ticket"></i>
+    <span>E-TICKET</span>
+</div>
+    <div class="ticket-info">
 
-  <p>Nama: <span id="name"></span></p>
-  <p>Status: <span id="status"></span></p>
-  <p>Check-in: <span id="time"></span></p>
+<div>
+<i class="fa-solid fa-user"></i>
+<span id="guestName"></span>
+</div>
 
-  <img id="qr" width="220"/>
+<div>
+<i class="fa-solid fa-circle-check"></i>
+<span id="guestStatus"></span>
+</div>
+
+<div>
+<i class="fa-solid fa-clock"></i>
+<span id="guestTime"></span>
+</div>
+
+</div>
+    <div class="qr-box">
+    <img id="qrImage">
+</div>
+    <div class="ticket-footer">
+Scan QR saat memasuki venue
 </div>
 
         <!--=========================================
