@@ -1060,51 +1060,19 @@ const timer = setInterval(updateCountdown, 1000);
 
 }
 
-                // =======================================
-    // TICKET
-    // =======================================
-        
-        function getTicket(name) {
-
-  const sheet = SpreadsheetApp
-    .openById(SPREADSHEET_ID)
-    .getSheetByName(GUEST_SHEET);
-
-  const data = sheet.getDataRange().getValues();
-
-  for (let i = 1; i < data.length; i++) {
-
-    if (data[i][0] == name) {
-
-      return json({
-        status: true,
-        name: data[i][0],
-        link: data[i][1],
-        qr_code: data[i][2],
-        checkin_status: data[i][3],
-        checkin_time: data[i][4],
-        qr_image: data[i][5]
-      });
-
-    }
-  }
-
-  return json({
-    status: false,
-    message: "Guest tidak ditemukan"
-  });
-}
-        const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
 const name = params.get("to");
 
-const WEBAPP = "https://script.google.com/macros/s/YOUR_ID/exec";
+const WEBAPP = "https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
 
-async function loadTicket(){
+async function loadTicket() {
+
+  if (!name) return;
 
   const res = await fetch(`${WEBAPP}?action=ticket&name=${encodeURIComponent(name)}`);
   const data = await res.json();
 
-  if(!data.status) return;
+  if (!data.status) return;
 
   document.getElementById("ticket").style.display = "block";
 
