@@ -15,3 +15,10 @@ function showScanSuccess(guestName) {
 function closeModal() {
   document.getElementById("scanModal").classList.add("hidden");
 }
+
+function vibrateSuccess(){
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]); 
+    // getar - jeda - getar (efek "notifikasi sukses")
+  }
+}
