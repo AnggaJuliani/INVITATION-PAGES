@@ -141,14 +141,17 @@ showMessage("Mengirim data...","loading");
 try{
 
 const formData = new URLSearchParams();
-formData.append("action","checkin");
-formData.append("qr",code);
-
 const response = await fetch(WEBAPP,{
-method:"POST",
-body:formData
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        action:"checkin",
+        qr:code
+    })
 });
-
+  
 const text=await response.text();
 const data=JSON.parse(text);
 
