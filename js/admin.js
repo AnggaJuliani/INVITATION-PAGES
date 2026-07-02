@@ -261,3 +261,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+    /* ==========================================
+       SCANNER 
+    ========================================== */
+document.querySelectorAll("[data-link]").forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        window.location.href = item.dataset.link;
+
+    });
+
+});
