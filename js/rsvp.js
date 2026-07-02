@@ -156,8 +156,6 @@ async function sendRSVP(){
         message
 
     })
-
-});
     });
 
     document.getElementById("rsvpMessage").value="";
