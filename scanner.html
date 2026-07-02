@@ -170,16 +170,14 @@ if (data.status) {
     );
 
 }
-}catch(e){
+}
+catch (e) {
+    console.error(e);
 
-showMessage(
-
-"Server Error",
-
-"error"
-
-);
-
+    alert(
+        e.name + "\n\n" +
+        e.message
+    );
 }
 }
 
