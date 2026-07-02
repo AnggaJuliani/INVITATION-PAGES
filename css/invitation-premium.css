@@ -3926,6 +3926,132 @@ RSVP
 
 }
 
+.comments-header{
+    text-align:center;
+    margin:40px 0 20px;
+}
+
+.comment-counter{
+    color:#b58b5a;
+    font-weight:600;
+    margin-top:8px;
+}
+
+.comments-loading{
+    text-align:center;
+    color:#999;
+    padding:20px;
+}
+
+.comment{
+
+    display:flex;
+    gap:15px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    opacity:0;
+
+    transform:translateY(15px);
+
+    animation:fadeComment .35s forwards;
+
+}
+
+@keyframes fadeComment{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.comment-avatar{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    background:#b58b5a;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+.comment-body{
+
+    flex:1;
+
+}
+
+.comment-name{
+
+    font-weight:bold;
+
+    color:#b58b5a;
+
+}
+
+.comment-time{
+
+    color:#999;
+
+    font-size:13px;
+
+    margin:4px 0 10px;
+
+}
+
+.load-more-btn{
+
+    background:#b58b5a;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:40px;
+
+    padding:12px 30px;
+
+    cursor:pointer;
+
+}
+
+.read-more-wrapper{
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
 /*==================================================
 THE END
 ==================================================*/
