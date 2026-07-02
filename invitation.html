@@ -14,6 +14,8 @@
         content="Undangan Pernikahan Anggara Wisnu Wardhana, S.H & Tsamara Alifia Ramadhani, S.Gz">
 
     <!-- Google Font -->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -701,35 +703,57 @@
     <!--=========================================
                 TICKET
     ==========================================-->
-<div class="eticket-title">
-    <i class="fa-solid fa-ticket"></i>
-    <span>E-TICKET</span>
-</div>
+<div id="ticket" class="eticket-card">
+
+    <div class="eticket-title">
+
+        <i class="fa-solid fa-ticket"></i>
+
+        <span>E-Ticket</span>
+
+    </div>
+
     <div class="ticket-info">
 
-<div>
-<i class="fa-solid fa-user"></i>
-<span id="guestName"></span>
-</div>
+        <div>
 
-<div>
-<i class="fa-solid fa-circle-check"></i>
-<span id="guestStatus"></span>
-</div>
+            <i class="fa-solid fa-user"></i>
 
-<div>
-<i class="fa-solid fa-clock"></i>
-<span id="guestTime"></span>
-</div>
+            <span id="guestName"></span>
 
-</div>
+        </div>
+
+        <div>
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span id="guestStatus"></span>
+
+        </div>
+
+        <div>
+
+            <i class="fa-solid fa-clock"></i>
+
+            <span id="guestTime"></span>
+
+        </div>
+
+    </div>
+
     <div class="qr-box">
-    <img id="qrImage">
-</div>
-    <div class="ticket-footer">
-Scan QR saat memasuki venue
-</div>
 
+        <img id="qrImage">
+
+    </div>
+
+    <div class="ticket-footer">
+
+        Scan QR saat memasuki venue
+
+    </div>
+
+</div>
         <!--=========================================
                 WEDDING GIFT
     ==========================================-->
@@ -1099,12 +1123,15 @@ async function loadTicket() {
 
     if (!data.status) return;
 
-    document.getElementById("ticket").style.display = "block";
+document.getElementById("ticket").style.display = "block";
 
-    document.getElementById("name").innerText = data.name;
-    document.getElementById("status").innerText = data.checkin_status || "-";
-    document.getElementById("time").innerText = data.checkin_time || "-";
-    document.getElementById("qr").src = data.qr_image;
+document.getElementById("guestName").innerText = data.name;
+
+document.getElementById("guestStatus").innerText = data.checkin_status || "Belum Hadir";
+
+document.getElementById("guestTime").innerText = data.checkin_time || "-";
+
+document.getElementById("qrImage").src = data.qr_image;
 }
     </script>
     
