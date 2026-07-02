@@ -3783,5 +3783,149 @@ GIFT CARD
 }
 
 /*==================================================
+RSVP
+==================================================*/
+
+
+.inv-rsvp{
+
+    padding:90px 20px;
+
+}
+
+.rsvp-form{
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+.rsvp-form input,
+.rsvp-form textarea{
+
+    width:100%;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    border:1px solid #ddd;
+
+    margin-bottom:18px;
+
+    font-size:16px;
+
+    font-family:Poppins,sans-serif;
+
+    box-sizing:border-box;
+
+}
+
+.rsvp-form textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+.rsvp-form button{
+
+    width:100%;
+
+    background:#b58b5a;
+
+    color:white;
+
+    border:none;
+
+    border-radius:50px;
+
+    padding:16px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.rsvp-form button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.comment{
+
+    background:white;
+
+    margin-top:25px;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.comment-name{
+
+    font-weight:bold;
+
+    color:#b58b5a;
+
+    margin-bottom:10px;
+
+}
+
+.comment-date{
+
+    color:#888;
+
+    font-size:13px;
+
+    margin-top:12px;
+
+}
+
+#rsvpToast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:35px;
+
+    transform:translateX(-50%);
+
+    background:#2e7d32;
+
+    color:white;
+
+    padding:15px 25px;
+
+    border-radius:40px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+#rsvpToast.show{
+
+    opacity:1;
+
+}
+
+/*==================================================
 THE END
 ==================================================*/
