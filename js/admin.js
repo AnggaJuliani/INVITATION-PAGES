@@ -265,10 +265,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==========================================
        SCANNER 
     ========================================== */
-document.querySelectorAll("[data-link]").forEach(item => {
+
 
     item.addEventListener("click", () => {
-
+         document.querySelectorAll("[data-link]").forEach(item => {
         window.location.href = item.dataset.link;
 
     });
@@ -292,3 +292,67 @@ async function loadGuests(){
 }
 
 loadGuests();
+async function loadDashboard(){
+
+  const res = await fetch(API + "?action=dashboard");
+  const data = await res.json();
+
+  animateCounter("totalGuest", data.total);
+  animateCounter("totalPresent", data.hadir);
+  animateCounter("totalAbsent", data.belum);
+
+}
+
+async function renderGuests(){
+
+  const res = await fetch(API + "?action=getGuests");
+  const data = await res.json();
+
+  const table = document.getElementById("guestTable");
+
+  table.innerHTML = "";
+
+  data.forEach(g => {
+
+    table.innerHTML += `
+      <tr>
+        <td>${g.name}</td>
+        <td>${g.link}</td>
+        <td>${g.status}</td>
+        <td>
+          <button onclick="previewQR('${g.qr}')">QR</button>
+          <button onclick="editGuest(${g.id})">Edit</button>
+          <button onclick="deleteGuest(${g.id})">Delete</button>
+        </td>
+      </tr>
+    `;
+
+  });
+
+}
+
+async function deleteGuest(id){
+
+  await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "deleteGuest",
+      id: id
+    })
+  });
+
+  renderGuests();
+  loadDashboard();
+
+}
+
+function previewQR(qr){
+
+  const url =
+  "https://quickchart.io/qr?size=500&text=" +
+  encodeURIComponent(qr);
+
+  window.open(url, "_blank");
+
+}
+
