@@ -1,49 +1,140 @@
+let comments = [];
+let visible = 4;
+
+function initials(name){
+
+    return name
+        .split(" ")
+        .map(v=>v[0])
+        .join("")
+        .substring(0,2)
+        .toUpperCase();
+
+}
+
+function relativeTime(date){
+
+    const now = new Date();
+
+    const then = new Date(date);
+
+    const sec = Math.floor((now-then)/1000);
+
+    if(sec<60) return "Baru saja";
+
+    const min=Math.floor(sec/60);
+
+    if(min<60)
+        return min+" menit yang lalu";
+
+    const hour=Math.floor(min/60);
+
+    if(hour<24)
+        return hour+" jam yang lalu";
+
+    const day=Math.floor(hour/24);
+
+    if(day==1)
+        return "Kemarin";
+
+    if(day<7)
+        return day+" hari yang lalu";
+
+    const week=Math.floor(day/7);
+
+    return week+" minggu yang lalu";
+
+}
+
 async function loadComments(){
 
+    document.getElementById("commentsLoading").style.display="block";
+
     const res = await fetch(
-        API_URL + "?action=comments"
+        API_URL+"?action=comments"
     );
 
-    const data = await res.json();
+    comments = await res.json();
 
-    const container =
-        document.getElementById("comments");
+    document.getElementById("commentsLoading").style.display="none";
 
-    container.innerHTML = "";
+    document.getElementById("commentCounter").innerHTML=
+        "❤️ "+comments.length+" Ucapan";
 
-    data.forEach(item=>{
+    renderComments();
 
-        container.innerHTML += `
+}
+
+function renderComments(){
+
+    const container=document.getElementById("comments");
+
+    container.innerHTML="";
+
+    comments
+        .slice(0,visible)
+        .forEach(item=>{
+
+            container.innerHTML+=`
+
             <div class="comment">
 
-                <div class="comment-name">
+                <div class="comment-avatar">
 
-                    ${item.name}
+                    ${initials(item.name)}
 
                 </div>
 
-                <div>
+                <div class="comment-body">
 
-                    ${item.message}
+                    <div class="comment-name">
+
+                        ${item.name}
+
+                    </div>
+
+                    <div class="comment-time">
+
+                        ${relativeTime(item.date)}
+
+                    </div>
+
+                    <div>
+
+                        ${item.message}
+
+                    </div>
 
                 </div>
 
             </div>
-        `;
 
-    });
+            `;
+
+        });
+
+    document.getElementById("loadMoreBtn").style.display=
+        visible>=comments.length?"none":"inline-block";
 
 }
 
+document
+.getElementById("loadMoreBtn")
+.onclick=()=>{
+
+    visible+=4;
+
+    renderComments();
+
+};
+
 async function sendRSVP(){
 
-    const name =
-        document.getElementById("rsvpName").value.trim();
+    const name=document.getElementById("rsvpName").value.trim();
 
-    const message =
-        document.getElementById("rsvpMessage").value.trim();
+    const message=document.getElementById("rsvpMessage").value.trim();
 
-    if(name=="" || message==""){
+    if(!name||!message){
 
         alert("Lengkapi data.");
 
@@ -51,9 +142,19 @@ async function sendRSVP(){
 
     }
 
+    const btn=document.getElementById("sendRSVP");
+
+    btn.disabled=true;
+
+    btn.innerHTML="Mengirim...";
+
     await fetch(API_URL,{
 
         method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
 
         body:JSON.stringify({
 
@@ -69,17 +170,21 @@ async function sendRSVP(){
 
     document.getElementById("rsvpMessage").value="";
 
-    const toast=document.getElementById("rsvpToast");
+    btn.disabled=false;
 
-    toast.classList.add("show");
+    btn.innerHTML="Kirim Ucapan";
 
-    setTimeout(()=>{
+    visible=4;
 
-        toast.classList.remove("show");
+    await loadComments();
 
-    },2500);
+    window.scrollTo({
 
-    loadComments();
+        top:document.getElementById("comments").offsetTop-80,
+
+        behavior:"smooth"
+
+    });
 
 }
 
