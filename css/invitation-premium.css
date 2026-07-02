@@ -4153,6 +4153,202 @@ RSVP
 
 }
 
+/*========================================
+ETIKET
+=========================================*/
+.eticket-card{
+    position:fixed;
+    top:30px;
+    left:30px;
+
+    width:310px;
+
+    padding:22px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.14);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.35);
+
+    z-index:9999;
+
+    overflow:hidden;
+}
+
+.eticket-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.20),
+    rgba(255,255,255,.03));
+
+    pointer-events:none;
+}
+
+.eticket-title{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:30px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    color:#fff;
+
+    margin-bottom:18px;
+
+    font-weight:700;
+}
+
+.eticket-title i{
+
+    color:#d4af37;
+
+    font-size:28px;
+}
+
+.ticket-info{
+
+    color:white;
+
+    font-size:15px;
+
+    line-height:2;
+
+    margin-bottom:20px;
+}
+
+.ticket-info div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.ticket-info i{
+
+    color:#d4af37;
+
+    width:18px;
+}
+
+.qr-box{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:18px auto;
+
+    width:200px;
+}
+
+.qr-box img{
+
+    width:170px;
+
+    height:170px;
+}
+
+.ticket-footer{
+
+    margin-top:15px;
+
+    color:#eee;
+
+    text-align:center;
+
+    font-size:13px;
+
+    opacity:.8;
+}
+
+@keyframes ticketFloat{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-6px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+.eticket-card{
+
+animation:ticketFloat 5s ease-in-out infinite;
+
+}
+
+@media(max-width:768px){
+
+.eticket-card{
+
+left:50%;
+top:15px;
+
+transform:translateX(-50%);
+
+width:90%;
+
+max-width:340px;
+
+}
+
+.qr-box{
+
+width:170px;
+
+}
+
+.qr-box img{
+
+width:145px;
+height:145px;
+
+}
+
+}
+
+
+
 /*==================================================
 THE END
 ==================================================*/
