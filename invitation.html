@@ -703,58 +703,72 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     <!--=========================================
                 TICKET
     ==========================================-->
-<div id="ticket" class="eticket-card">
+<!--=========================================
+                E-TICKET
+==========================================-->
 
-    <div class="eticket-title">
+<section id="eticket" class="inv-ticket">
 
-        <i class="fa-solid fa-ticket"></i>
+    <div class="inv-container">
 
-        <span>E-Ticket</span>
+        <p class="inv-section-title fade-up">
+            E-Ticket
+        </p>
 
-    </div>
+        <div class="divider fade-up"></div>
 
-    <div class="ticket-info">
+        <p class="inv-text fade-up">
+            Tunjukkan QR Code berikut kepada petugas ketika memasuki lokasi acara.
+        </p>
 
-        <div>
+        <div id="ticket" class="eticket-card fade-up">
 
-            <i class="fa-solid fa-user"></i>
+            <div class="ticket-header">
 
-            <span id="guestName"></span>
+                <i class="fa-solid fa-ticket"></i>
+
+                <span>E-Ticket Wedding</span>
+
+            </div>
+
+            <div class="ticket-body">
+
+                <div class="ticket-left">
+
+                    <div class="ticket-name" id="guestName"></div>
+
+                    <div class="ticket-status">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span id="guestStatus"></span>
+
+                    </div>
+
+                    <div class="ticket-time">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <span id="guestTime"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="ticket-right">
+
+                    <img id="qrImage">
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div>
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            <span id="guestStatus"></span>
-
-        </div>
-
-        <div>
-
-            <i class="fa-solid fa-clock"></i>
-
-            <span id="guestTime"></span>
-
-        </div>
-
     </div>
 
-    <div class="qr-box">
-
-        <img id="qrImage">
-
-    </div>
-
-    <div class="ticket-footer">
-
-        Scan QR saat memasuki venue
-
-    </div>
-
-</div>
-        <!--=========================================
+</section>
+    <!--=========================================
                 WEDDING GIFT
     ==========================================-->
     <section class="inv-gift">
@@ -1141,6 +1155,14 @@ document.getElementById("qrImage").src = data.qr_image;
     <script>
     loadTicket();
     </script>
+
+<a href="#eticket" class="floating-ticket">
+
+    <i class="fa-solid fa-qrcode"></i>
+
+    <span>E-Ticket QR</span>
+
+</a>
 </body>
 
 </html>
