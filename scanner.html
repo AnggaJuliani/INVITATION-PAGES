@@ -130,17 +130,14 @@ const response=await fetch(WEBAPP,{
 
 method:"POST",
 
-headers:{
-"Content-Type":"application/json"
-},
+const formData = new URLSearchParams();
+formData.append("action", "checkin");
+formData.append("qr", code);
 
-body: JSON.stringify({
-
-    action: "checkin",
-
-    qr: code
-
-})
+const response = await fetch(WEBAPP, {
+    method: "POST",
+    body: formData
+});
 
 });
 
