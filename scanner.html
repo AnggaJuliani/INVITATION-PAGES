@@ -148,28 +148,21 @@ const data=await response.json();
 
 playBeep();
 
-if(data.status=="success"){
+if (data.status) {
 
-showMessage(
+    showMessage(
+        "✅ " + data.message,
+        "success"
+    );
 
-"✅ "+data.message,
+} else {
 
-"success"
-
-);
-
-}else{
-
-showMessage(
-
-"❌ "+data.message,
-
-"error"
-
-);
+    showMessage(
+        "❌ " + data.message,
+        "error"
+    );
 
 }
-
 }catch(e){
 
 showMessage(
@@ -179,8 +172,6 @@ showMessage(
 "error"
 
 );
-
-}
 
 }
 
