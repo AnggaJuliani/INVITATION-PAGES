@@ -4340,7 +4340,81 @@ html{
 
 }
 
+/*==============================
+      GOOGLE CALENDAR
+===============================*/
 
+.calendar-box{
+
+    margin-top:45px;
+
+    text-align:center;
+
+}
+
+.calendar-title{
+
+    color:#ffffff;
+
+    font-size:17px;
+
+    margin-bottom:18px;
+
+    font-family:"Poppins",sans-serif;
+
+    opacity:.9;
+
+}
+
+.calendar-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 28px;
+
+    border-radius:60px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(181,139,90,.55);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    transition:.35s;
+
+    font-weight:600;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+
+.calendar-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:rgba(181,139,90,.18);
+
+    box-shadow:0 15px 35px rgba(181,139,90,.35);
+
+}
+
+.calendar-btn i{
+
+    color:#FFD15C;
+
+    font-size:22px;
+
+}
 
 /*==================================================
 THE END
