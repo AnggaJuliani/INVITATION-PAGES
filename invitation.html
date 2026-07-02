@@ -697,6 +697,20 @@
 
     </section>
 
+
+    <!--=========================================
+                TICKET
+    ==========================================-->
+    <div id="ticket" style="display:none;">
+  <h2>🎫 E-TICKET</h2>
+
+  <p>Nama: <span id="name"></span></p>
+  <p>Status: <span id="status"></span></p>
+  <p>Check-in: <span id="time"></span></p>
+
+  <img id="qr" width="220"/>
+</div>
+
         <!--=========================================
                 WEDDING GIFT
     ==========================================-->
@@ -1045,6 +1059,64 @@ const timer = setInterval(updateCountdown, 1000);
     },2500);
 
 }
+
+                // =======================================
+    // TICKET
+    // =======================================
+        
+        function getTicket(name) {
+
+  const sheet = SpreadsheetApp
+    .openById(SPREADSHEET_ID)
+    .getSheetByName(GUEST_SHEET);
+
+  const data = sheet.getDataRange().getValues();
+
+  for (let i = 1; i < data.length; i++) {
+
+    if (data[i][0] == name) {
+
+      return json({
+        status: true,
+        name: data[i][0],
+        link: data[i][1],
+        qr_code: data[i][2],
+        checkin_status: data[i][3],
+        checkin_time: data[i][4],
+        qr_image: data[i][5]
+      });
+
+    }
+  }
+
+  return json({
+    status: false,
+    message: "Guest tidak ditemukan"
+  });
+}
+        const params = new URLSearchParams(window.location.search);
+const name = params.get("to");
+
+const WEBAPP = "https://script.google.com/macros/s/YOUR_ID/exec";
+
+async function loadTicket(){
+
+  const res = await fetch(`${WEBAPP}?action=ticket&name=${encodeURIComponent(name)}`);
+  const data = await res.json();
+
+  if(!data.status) return;
+
+  document.getElementById("ticket").style.display = "block";
+
+  document.getElementById("name").innerText = data.name;
+  document.getElementById("status").innerText = data.checkin_status || "-";
+  document.getElementById("time").innerText = data.checkin_time || "-";
+
+  document.getElementById("qr").src = data.qr_image;
+
+}
+
+loadTicket();
         
     </script>
     
