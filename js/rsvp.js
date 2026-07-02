@@ -145,22 +145,19 @@ async function sendRSVP(){
 
     await fetch(API_URL,{
 
-        method:"POST",
+    method:"POST",
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+    body:JSON.stringify({
 
-        body:JSON.stringify({
+        action:"rsvp",
 
-            action:"rsvp",
+        name,
 
-            name,
+        message
 
-            message
+    })
 
-        })
-
+});
     });
 
     document.getElementById("rsvpMessage").value="";
