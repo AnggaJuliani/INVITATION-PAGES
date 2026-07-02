@@ -1061,7 +1061,7 @@ const timer = setInterval(updateCountdown, 1000);
 }
 
 const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+const slug = params.get("to");
 
 const WEBAPP = "https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
 
@@ -1070,7 +1070,7 @@ async function loadTicket(){
   const code = params.get("code");
   if(!code) return;
 
-  const res = await fetch(`${WEBAPP}?action=ticket&code=${encodeURIComponent(code)}`);
+  const res = await fetch(`${WEBAPP}?action=ticket&to=${encodeURIComponent(slug)}`);
   const data = await res.json();
 
   console.log(data);
