@@ -696,15 +696,3 @@ window.addEventListener("load",()=>{
 
 });
 
-/* ==========================================================
-   AUTO LOAD DASHBOARD
-========================================================== */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    loadDashboard();
-
-    loadGuests();
-
-});
-
