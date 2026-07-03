@@ -24,7 +24,7 @@ async function initDashboard(){
 
     initQuickAction();
 
-try{
+await withLoading(async()=>{
 
     await Promise.all([
 
@@ -49,26 +49,59 @@ hideLoading();
    Loading
 ========================================================== */
 
-function hideLoading(){
+function showLoading(text = "Memproses...") {
 
     const loading = document.getElementById("loading");
 
-    if(!loading) return;
+    if (!loading) return;
 
-    setTimeout(()=>{
+    const txt = loading.querySelector(".loading-text");
 
-        loading.style.opacity="0";
+    if (txt) txt.innerHTML = text;
 
-        setTimeout(()=>{
+    loading.style.display = "flex";
 
-            loading.style.display="none";
+    requestAnimationFrame(() => {
 
-        },300);
+        loading.style.opacity = "1";
 
-    },500);
+    });
 
 }
 
+function hideLoading() {
+
+    const loading = document.getElementById("loading");
+
+    if (!loading) return;
+
+    loading.style.opacity = "0";
+
+    setTimeout(() => {
+
+        loading.style.display = "none";
+
+    },300);
+
+}
+
+async function withLoading(callback, text="Memproses..."){
+
+    showLoading(text);
+
+    try{
+
+        return await callback();
+
+    }
+
+    finally{
+
+        hideLoading();
+
+    }
+
+}
 /* ==========================================================
    Sidebar
 ========================================================== */
@@ -469,18 +502,17 @@ document.addEventListener("click",(e)=>{
    REFRESH
 ========================================================== */
 
-const refreshBtn =
-document.getElementById("refreshGuest");
+refreshBtn.onclick = ()=>{
 
-if(refreshBtn){
+    withLoading(async()=>{
 
-    refreshBtn.onclick=()=>{
+        await loadGuests();
 
-        loadGuests();
+        await loadDashboard();
 
-    };
+    },"Memuat Data...");
 
-}
+};
 
 
 /* ==========================================================
@@ -489,76 +521,98 @@ if(refreshBtn){
 
 async function deleteGuest(id){
 
-    if(!confirm("Hapus tamu ini?")) return;
+    const ok = await showConfirm(
 
-    const res = await fetch(API_URL,{
+        "Hapus Data Tamu",
+        "Data tamu yang dihapus tidak dapat dikembalikan."
 
-        method:"POST",
+    );
 
-        body:JSON.stringify({
+    if(!ok) return;
 
-            action:"deleteGuest",
+    await withLoading(async()=>{
 
-            id:id
+        const res = await fetch(API_URL,{
 
-        })
+            method:"POST",
 
-    });
+            body:JSON.stringify({
 
-    const data = await res.json();
+                action:"deleteGuest",
 
-    if(data.status){
+                id:id
 
-    showToast("✔ Data tamu berhasil dihapus");
+            })
 
-    await loadGuests();
-       await loadDashboard();
+        });
 
-}else{
+        const data = await res.json();
 
-    alert(data.message);
+        if(data.status){
+
+            showToast("✔ Data tamu berhasil dihapus");
+
+            await loadGuests();
+
+            await loadDashboard();
+
+        }
+
+        else{
+
+            showToast(data.message,"#e74c3c");
+
+        }
+
+    },"Menghapus Data...");
 
 }
-
-}
-
 /* ==========================================================
    RESET CHECK IN
 ========================================================== */
 
 async function resetCheckin(id){
 
-    if(!confirm("Reset status check in?"))
+    const ok = await showConfirm(
 
-        return;
+        "Reset Check In",
+        "Status check in akan dikembalikan menjadi Belum Hadir."
 
-    const res = await fetch(API_URL,{
+    );
 
-        method:"POST",
+    if(!ok) return;
 
-        body:JSON.stringify({
+    await withLoading(async()=>{
 
-            action:"resetCheckin",
+        const res = await fetch(API_URL,{
 
-            id:id
+            method:"POST",
 
-        })
+            body:JSON.stringify({
 
-    });
+                action:"resetCheckin",
 
-    const data = await res.json();
+                id:id
 
-if(data.status){
+            })
 
-   showToast("✔ Status Check In berhasil direset");
-    await loadGuests();
+        });
 
-    await loadDashboard();
+        const data = await res.json();
+
+        if(data.status){
+
+            showToast("✔ Status Check In berhasil direset");
+
+            await loadGuests();
+
+            await loadDashboard();
+
+        }
+
+    },"Mereset Status...");
 
 }
-
-}
-
 /* ==========================================================
    SEARCH DATA TAMU
 ========================================================== */
@@ -590,7 +644,7 @@ if(searchGuest){
 
 function showToast(text,color="#27ae60"){
 
-    let toast=document.createElement("div");
+    const toast=document.createElement("div");
 
     toast.className="toast";
 
@@ -600,18 +654,51 @@ function showToast(text,color="#27ae60"){
 
     document.body.appendChild(toast);
 
-    setTimeout(()=>{
+    requestAnimationFrame(()=>{
+
         toast.classList.add("show");
-    },50);
+
+    });
 
     setTimeout(()=>{
+
         toast.classList.remove("show");
 
-        setTimeout(()=>{
-            toast.remove();
-        },300);
+        setTimeout(()=>toast.remove(),300);
 
     },2500);
+
+}
+
+function showConfirm(title,message){
+
+    return new Promise(resolve=>{
+
+        const modal=document.getElementById("confirmModal");
+
+        modal.querySelector(".confirm-title").innerHTML=title;
+
+        modal.querySelector(".confirm-message").innerHTML=message;
+
+        modal.classList.add("show");
+
+        modal.querySelector(".btn-ok").onclick=()=>{
+
+            modal.classList.remove("show");
+
+            resolve(true);
+
+        };
+
+        modal.querySelector(".btn-cancel").onclick=()=>{
+
+            modal.classList.remove("show");
+
+            resolve(false);
+
+        };
+
+    });
 
 }
 
