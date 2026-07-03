@@ -461,56 +461,26 @@ Memuat data tamu...
 <section id="addPage"
          class="page">
 
-    <h1>
+    <div class="card">
 
-        Tambah Tamu
+    <h2>Tambah Tamu</h2>
 
-    </h1>
+    <div class="form-group">
 
-    <div class="form-card">
+        <label>Nama Tamu</label>
 
-        <div class="form-group">
-
-            <label>
-
-                Nama Tamu
-
-            </label>
-
-            <input
-                type="text"
-                id="guestName"
-                placeholder="Nama Lengkap">
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-
-                Link Undangan
-
-            </label>
-
-            <input
-                type="text"
-                id="guestLink"
-                placeholder="contoh : budi-santoso">
-
-        </div>
-
-        <button
-            id="btnAddGuest"
-            class="primary-btn">
-
-            <i class="fa-solid fa-floppy-disk"></i>
-
-            Simpan Tamu
-
-        </button>
+        <input
+            type="text"
+            id="guestName"
+            placeholder="Masukkan nama tamu">
 
     </div>
 
+    <button id="btnAddGuest">
+        Tambah Tamu
+    </button>
+
+</div>
 </section>
 
 <!-- ===================================================== -->
@@ -662,7 +632,72 @@ Belum ada pencarian.
 </html>
 
 
+document
+.getElementById("btnAddGuest")
+.onclick=addGuest;
 
+async function addGuest(){
 
+    const name=document
+    .getElementById("guestName")
+    .value
+    .trim();
 
+    if(!name){
+
+        alert("Masukkan nama tamu.");
+
+        return;
+
+    }
+
+    const btn=document.getElementById("btnAddGuest");
+
+    btn.disabled=true;
+
+    btn.innerHTML="Menambahkan...";
+
+    try{
+
+        const res=await fetch(API_URL,{
+
+            method:"POST",
+
+            body:JSON.stringify({
+
+                action:"addGuest",
+
+                name
+
+            })
+
+        });
+
+        const result=await res.json();
+
+        if(result.success){
+
+            alert("Tamu berhasil ditambahkan.");
+
+            document.getElementById("guestName").value="";
+
+            loadGuests();
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(e){
+
+        alert("Gagal terhubung.");
+
+    }
+
+    btn.disabled=false;
+
+    btn.innerHTML="Tambah Tamu";
+
+}
 
