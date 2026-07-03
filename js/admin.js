@@ -467,23 +467,16 @@ onclick="copyGuestLink('${guest.link}')">
 
 </button>
 
-<div id="qrToast" class="toast">
+<button
+    class="btn-qr"
+    onclick="previewQR('${guest.qr}','${guest.name}')"
+    title="Preview QR">
 
-    <div class="toast-box">
+    <i class="fa-solid fa-qrcode"></i>
 
-        <h3>QR Code</h3>
-
-        <img id="previewQR">
-
-        <p id="previewGuest"></p>
-
-        <button onclick="closeQRToast()">
-            Tutup
-        </button>
-
-    </div>
-
-</div>            </td>
+</button>
+           
+</td>
 
         </tr>
         `;
