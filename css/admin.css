@@ -1006,6 +1006,168 @@ label{
     opacity: 1;
 }
 
+/* ==========================================================
+   CONFIRM MODAL
+========================================================== */
+
+.confirm-card{
+    width:430px;
+    max-width:92%;
+    background:#fff;
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    animation:popup .28s ease;
+}
+
+#confirmIcon{
+
+    width:85px;
+    height:85px;
+
+    margin:auto auto 18px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:38px;
+
+}
+
+.confirm-delete #confirmIcon{
+
+    background:#ffe8e8;
+    color:#d63031;
+
+}
+
+.confirm-reset #confirmIcon{
+
+    background:#eaf7ff;
+    color:#0984e3;
+
+}
+
+#confirmTitle{
+
+    font-size:24px;
+    margin-bottom:10px;
+    font-weight:700;
+
+}
+
+#confirmSubtitle{
+
+    color:#666;
+    line-height:1.7;
+    margin-bottom:20px;
+
+}
+
+.guest-box{
+
+    background:#fafafa;
+    border:2px dashed #ddd;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    margin-bottom:25px;
+
+}
+
+#confirmGuest{
+
+    font-size:20px;
+    color:var(--primary);
+    font-weight:700;
+
+}
+
+.confirm-buttons{
+
+    display:flex;
+    gap:15px;
+
+}
+
+.confirm-buttons button{
+
+    flex:1;
+    border:none;
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+#btnCancel{
+
+    background:#efefef;
+
+}
+
+#btnCancel:hover{
+
+    background:#dddddd;
+
+}
+
+.confirm-btn.delete{
+
+    background:#e74c3c;
+    color:#fff;
+
+}
+
+.confirm-btn.delete:hover{
+
+    background:#c0392b;
+
+}
+
+.confirm-btn.reset{
+
+    background:#27ae60;
+    color:#fff;
+
+}
+
+.confirm-btn.reset:hover{
+
+    background:#1f8a4c;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+        transform:translateY(30px) scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:none;
+
+    }
+
+}
+
 /* ===========================
    Loading Screen
 =========================== */
