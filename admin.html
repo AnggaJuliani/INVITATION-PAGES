@@ -9,13 +9,13 @@
 
     <title>Wedding Admin Dashboard</title>
 
-    <!-- Font -->
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
 
-    <!-- Icon -->
+    <!-- Font Awesome -->
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/admin.css">
@@ -23,8 +23,10 @@
 </head>
 
 <body>
-    
-    <div class="loading">
+
+<!-- ================= Loading ================= -->
+
+<div class="loading" id="loading">
 
     <div class="loader"></div>
 
@@ -32,430 +34,368 @@
 
 </div>
 
+<!-- ================= Wrapper ================= -->
+
 <div class="wrapper">
 
-    <!-- ================= Sidebar ================= -->
+<!-- ================= Sidebar ================= -->
 
-    <aside class="sidebar">
+<aside class="sidebar">
 
-        <div class="logo">
+    <div class="logo">
 
-            <i class="fa-solid fa-heart"></i>
+        <i class="fa-solid fa-heart"></i>
 
-            <h2>Wedding Admin</h2>
+        <h2>Wedding Admin</h2>
 
-        </div>
+    </div>
 
-        <ul class="menu">
+    <ul class="menu">
 
-            <li class="active" data-page="dashboard">
+        <li class="active"
+            data-page="dashboard">
 
-                <i class="fa-solid fa-house"></i>
+            <i class="fa-solid fa-house"></i>
 
-                <span>Dashboard</span>
+            <span>Dashboard</span>
 
-            </li>
+        </li>
 
-            <li data-link="scanner.html">
+        <li data-link="scanner.html">
 
-                <i class="fa-solid fa-qrcode"></i>
-            
-                <span>Scanner QR</span>
-            
-            </li>
+            <i class="fa-solid fa-qrcode"></i>
 
-            <li data-page="guest">
+            <span>Scanner QR</span>
 
-                <i class="fa-solid fa-users"></i>
+        </li>
 
-                <span>Data Tamu</span>
+        <li data-page="guest">
 
-            </li>
+            <i class="fa-solid fa-users"></i>
 
-            <li data-page="add">
+            <span>Data Tamu</span>
 
-                <i class="fa-solid fa-user-plus"></i>
+        </li>
 
-                <span>Tambah Tamu</span>
+        <li data-page="add">
 
-            </li>
+            <i class="fa-solid fa-user-plus"></i>
 
-            <li data-page="search">
+            <span>Tambah Tamu</span>
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+        </li>
 
-                <span>Cari Tamu</span>
+        <li data-page="search">
 
-            </li>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-            <li data-page="rsvp">
+            <span>Cari Tamu</span>
 
-                <i class="fa-solid fa-calendar-check"></i>
+        </li>
 
-                <span>RSVP</span>
+        <li data-page="rsvp">
 
-            </li>
+            <i class="fa-solid fa-calendar-check"></i>
 
-            <li data-page="comment">
+            <span>RSVP</span>
 
-                <i class="fa-solid fa-comments"></i>
+        </li>
 
-                <span>Ucapan</span>
+        <li data-page="comment">
 
-            </li>
+            <i class="fa-solid fa-comments"></i>
 
-            <li data-page="export">
+            <span>Ucapan</span>
 
-                <i class="fa-solid fa-download"></i>
+        </li>
 
-                <span>Export</span>
+        <li data-page="export">
 
-            </li>
+            <i class="fa-solid fa-download"></i>
 
-            <li data-page="setting">
+            <span>Export</span>
 
-                <i class="fa-solid fa-gear"></i>
+        </li>
 
-                <span>Pengaturan</span>
+        <li data-page="setting">
 
-            </li>
+            <i class="fa-solid fa-gear"></i>
 
-        </ul>
+            <span>Pengaturan</span>
 
-    </aside>
+        </li>
 
-    <!-- ================= Main ================= -->
+    </ul>
 
-    <main class="main">
+</aside>
 
-        <!-- Header -->
+<!-- ================= Main ================= -->
 
-        <header class="topbar">
+<main class="main">
 
-            <button id="menuBtn">
+<!-- ================= Header ================= -->
 
-                <i class="fa-solid fa-bars"></i>
+<header class="topbar">
 
-            </button>
+    <button id="menuBtn">
 
-            <div class="title">
+        <i class="fa-solid fa-bars"></i>
 
-                Dashboard
+    </button>
 
-            </div>
+    <div class="title">
 
-            <div class="admin">
+        Dashboard
 
-                <i class="fa-solid fa-user"></i>
+    </div>
 
-                Administrator 
+    <div class="admin">
 
-            </div>
+        <i class="fa-solid fa-user"></i>
 
-        </header>
+        Administrator
 
-        <!-- Content -->
+    </div>
 
-        <div class="content">
+</header>
 
-            <!-- Dashboard -->
+<!-- ================= Content ================= -->
 
-            <section id="dashboardPage"
-                     class="page active">
+<div class="content">
 
-                <h1>
+<!-- ===================================================== -->
+<!-- Dashboard -->
+<!-- ===================================================== -->
 
-                    Selamat Datang 👋
+<section
+id="dashboardPage"
+class="page active">
 
-                </h1>
+<h1>
 
-                <p>
+Selamat Datang 👋
 
-                    Kelola tamu undangan, QR Code, RSVP dan seluruh data
-                    dari satu dashboard.
+</h1>
 
-                </p>
+<p>
 
-                <!-- Cards -->
+Kelola seluruh tamu, RSVP, QR Code dan Check In
+melalui dashboard admin.
 
-                <div class="cards">
+</p>
 
-                    <div class="card">
+<!-- ================= Cards ================= -->
 
-                        <div class="icon blue">
+<div class="cards">
 
-                            <i class="fa-solid fa-users"></i>
+<div class="card">
 
-                        </div>
+<div class="icon blue">
 
-                        <h2 id="totalGuest">
-
-                            0
-
-                        </h2>
-
-                        <p>Total Tamu</p>
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="icon green">
-
-                            <i class="fa-solid fa-circle-check"></i>
-
-                        </div>
-
-                        <h2 id="totalPresent">
-
-                            0
-
-                        </h2>
-
-                        <p>Sudah Hadir</p>
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="icon orange">
-
-                            <i class="fa-solid fa-clock"></i>
-
-                        </div>
-
-                        <h2 id="totalAbsent">
-
-                            0
-
-                        </h2>
-
-                        <p>Belum Hadir</p>
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="icon pink">
-
-                            <i class="fa-solid fa-calendar-days"></i>
-
-                        </div>
-
-                        <h2 id="totalRSVP">
-
-                            0
-
-                        </h2>
-
-                        <p>RSVP</p>
-
-                    </div>
-
-                </div>
-
-                <!-- Quick Action -->
-
-                <div class="quick">
-
-                    <h2>
-
-                        Quick Action
-
-                    </h2>
-
-                    <div class="quick-grid">
-
-                        <div class="quick-card"
-                             data-link="scanner.html">
-
-                            <i class="fa-solid fa-qrcode"></i>
-
-                            <span>Scanner QR</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="add">
-
-                            <i class="fa-solid fa-user-plus"></i>
-
-                            <span>Tambah Tamu</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="search">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            <span>Cari Tamu</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="guest">
-
-                            <i class="fa-solid fa-users"></i>
-
-                            <span>Data Tamu</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="rsvp">
-
-                            <i class="fa-solid fa-calendar-check"></i>
-
-                            <span>RSVP</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="comment">
-
-                            <i class="fa-solid fa-comments"></i>
-
-                            <span>Ucapan</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="export">
-
-                            <i class="fa-solid fa-download"></i>
-
-                            <span>Export</span>
-
-                        </div>
-
-                        <div class="quick-card"
-                             data-page="setting">
-
-                            <i class="fa-solid fa-gear"></i>
-
-                            <span>Pengaturan</span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- ================= Guest ================= -->
-
-            <section id="guestPage"
-                     class="page">
-
-                <h1>Data Tamu</h1>
-
-                <div class="placeholder">
-
-                    Halaman Data Tamu
-
-                </div>
-
-            </section>
-
-            <!-- ================= Add ================= -->
-
-            <section id="addPage"
-                     class="page">
-
-                <h1>Tambah Tamu</h1>
-
-                <div class="placeholder">
-
-                    Form Tambah Tamu
-
-                </div>
-
-            </section>
-
-            <!-- ================= Search ================= -->
-
-            <section id="searchPage"
-                     class="page">
-
-                <h1>Cari Tamu</h1>
-
-                <div class="placeholder">
-
-                    Search Guest
-
-                </div>
-
-            </section>
-
-            <!-- ================= RSVP ================= -->
-
-            <section id="rsvpPage"
-                     class="page">
-
-                <h1>RSVP</h1>
-
-                <div class="placeholder">
-
-                    Data RSVP
-
-                </div>
-
-            </section>
-
-            <!-- ================= Comment ================= -->
-
-            <section id="commentPage"
-                     class="page">
-
-                <h1>Ucapan</h1>
-
-                <div class="placeholder">
-
-                    Daftar Ucapan
-
-                </div>
-
-            </section>
-
-            <!-- ================= Export ================= -->
-
-            <section id="exportPage"
-                     class="page">
-
-                <h1>Export Data</h1>
-
-                <div class="placeholder">
-
-                    Download Excel / CSV
-
-                </div>
-
-            </section>
-
-            <!-- ================= Setting ================= -->
-
-            <section id="settingPage"
-                     class="page">
-
-                <h1>Pengaturan</h1>
-
-                <div class="placeholder">
-
-                    Pengaturan Website
-
-                </div>
-
-            </section>
-
-        </div>
-
-    </main>
+<i class="fa-solid fa-users"></i>
 
 </div>
 
-<script src="js/admin.js"></script>
+<h2 id="totalGuest">
 
-</body>
-</html>
+0
+
+</h2>
+
+<p>
+
+Total Tamu
+
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon green">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<h2 id="totalPresent">
+
+0
+
+</h2>
+
+<p>
+
+Sudah Hadir
+
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon orange">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<h2 id="totalAbsent">
+
+0
+
+</h2>
+
+<p>
+
+Belum Hadir
+
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="icon pink">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+</div>
+
+<h2 id="totalRSVP">
+
+0
+
+</h2>
+
+<p>
+
+RSVP
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================= Quick Action ================= -->
+
+<div class="quick">
+
+<h2>
+
+Quick Action
+
+</h2>
+
+<div class="quick-grid">
+
+<div class="quick-card"
+     data-link="scanner.html">
+
+<i class="fa-solid fa-qrcode"></i>
+
+<span>
+
+Scanner QR
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="guest">
+
+<i class="fa-solid fa-users"></i>
+
+<span>
+
+Data Tamu
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="add">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<span>
+
+Tambah Tamu
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="search">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<span>
+
+Cari Tamu
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="rsvp">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<span>
+
+RSVP
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="comment">
+
+<i class="fa-solid fa-comments"></i>
+
+<span>
+
+Ucapan
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="export">
+
+<i class="fa-solid fa-download"></i>
+
+<span>
+
+Export
+
+</span>
+
+</div>
+
+<div class="quick-card"
+     data-page="setting">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>
+
+Pengaturan
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
