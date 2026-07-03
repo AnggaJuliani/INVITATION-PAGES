@@ -24,62 +24,57 @@ async function initDashboard(){
 
     initQuickAction();
 
-await withLoading(async()=>{
+    try{
 
-    await Promise.all([
+        await withLoading(async()=>{
 
-        loadDashboard(),
+            await Promise.all([
 
-        loadGuests()
+                loadDashboard(),
+                loadGuests()
 
-    ]);
+            ]);
+
+        },"Memuat Dashboard...");
+
+    }
+
+    catch(e){
+
+        console.error(e);
+
+    }
 
 }
-catch(e){
-
-    console.log(e);
-
-}
-
-}
-
 /* ==========================================================
    Loading
 ========================================================== */
 
-function showLoading(text = "Memproses...") {
+function showLoading(text="Memproses..."){
 
-    const loading = document.getElementById("loading");
+    const loading=document.getElementById("loading");
 
-    if (!loading) return;
+    if(!loading) return;
 
-    const txt = loading.querySelector(".loading-text");
+    const txt=loading.querySelector(".loading-text");
 
-    if (txt) txt.innerHTML = text;
+    if(txt){
 
-    loading.style.display = "flex";
+        txt.innerHTML=text;
 
-    requestAnimationFrame(() => {
+    }
 
-        loading.style.opacity = "1";
-
-    });
+    loading.classList.add("show");
 
 }
 
-function hideLoading() {
+function hideLoading(){
 
-    const loading = document.getElementById("loading");
+    const loading=document.getElementById("loading");
 
-    if (!loading) return;
+    if(!loading) return;
 
-    loading.style.opacity = "0";
-
-    setTimeout(() => {
-
-        loading.style.display = "none";
-
-    },300);
+    loading.classList.remove("show");
 
 }
 
