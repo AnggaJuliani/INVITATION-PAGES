@@ -399,3 +399,359 @@ Pengaturan
 </div>
 
 </section>
+<!-- ===================================================== -->
+<!-- DATA TAMU -->
+<!-- ===================================================== -->
+
+<section id="guestPage" class="page">
+
+    <div class="page-header">
+
+        <h1>Data Tamu</h1>
+
+        <button class="primary-btn"
+                data-page="add">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            Tambah Tamu
+
+        </button>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchGuest"
+                placeholder="Cari nama, link atau QR Code...">
+
+        </div>
+
+        <button
+            class="secondary-btn"
+            id="refreshGuest">
+
+            <i class="fa-solid fa-rotate-right"></i>
+
+            Refresh
+
+        </button>
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table class="guest-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Nama</th>
+
+                    <th>Link</th>
+
+                    <th>QR Code</th>
+
+                    <th>Status</th>
+
+                    <th>Check In</th>
+
+                    <th width="220">
+
+                        Aksi
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="guestTable">
+
+<tr>
+
+<td colspan="7">
+
+Memuat data tamu...
+
+</td>
+
+</tr>
+
+</tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- TAMBAH TAMU -->
+<!-- ===================================================== -->
+
+<section id="addPage"
+         class="page">
+
+    <h1>
+
+        Tambah Tamu
+
+    </h1>
+
+    <div class="form-card">
+
+        <div class="form-group">
+
+            <label>
+
+                Nama Tamu
+
+            </label>
+
+            <input
+                type="text"
+                id="guestName"
+                placeholder="Nama Lengkap">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Link Undangan
+
+            </label>
+
+            <input
+                type="text"
+                id="guestLink"
+                placeholder="contoh : budi-santoso">
+
+        </div>
+
+        <button
+            id="btnAddGuest"
+            class="primary-btn">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Simpan Tamu
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- EDIT TAMU -->
+<!-- ===================================================== -->
+
+<div
+class="modal"
+id="editModal">
+
+<div class="modal-content">
+
+<h2>
+
+Edit Data Tamu
+
+</h2>
+
+<input
+type="hidden"
+id="editId">
+
+<div class="form-group">
+
+<label>
+
+Nama
+
+</label>
+
+<input
+type="text"
+id="editName">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Link
+
+</label>
+
+<input
+type="text"
+id="editLink">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+QR Code
+
+</label>
+
+<input
+type="text"
+id="editQR">
+
+</div>
+
+<div class="modal-footer">
+
+<button
+id="btnCloseEdit"
+class="secondary-btn">
+
+Batal
+
+</button>
+
+<button
+id="btnSaveEdit"
+class="primary-btn">
+
+Simpan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- SEARCH -->
+<!-- ===================================================== -->
+
+<section
+id="searchPage"
+class="page">
+
+<h1>
+
+Cari Tamu
+
+</h1>
+
+<div class="search-panel">
+
+<input
+type="text"
+id="globalSearch"
+placeholder="Masukkan nama tamu...">
+
+<button
+id="btnSearch"
+class="primary-btn">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Cari
+
+</button>
+
+</div>
+
+<div
+id="searchResult">
+
+<div class="placeholder">
+
+Belum ada pencarian.
+
+</div>
+
+</div>
+
+</section>
+
+    <section id="rsvpPage" class="page">
+
+    <h1>RSVP</h1>
+
+    <div id="rsvpContainer">
+
+        <div class="placeholder">
+
+            Memuat data RSVP...
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="commentPage" class="page">
+
+    <h1>Ucapan</h1>
+
+    <div id="commentContainer">
+
+        <div class="placeholder">
+
+            Memuat ucapan...
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="exportPage" class="page">
+
+    <h1>Export</h1>
+
+    <div class="placeholder">
+
+        Download Excel atau CSV.
+
+    </div>
+
+</section>
+
+<section id="settingPage" class="page">
+
+    <h1>Pengaturan</h1>
+
+    <div class="placeholder">
+
+        Pengaturan Website.
+
+    </div>
+
+</section>
+
+    
+    </div> <!-- content -->
+
+</main>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+
+</html>
+
