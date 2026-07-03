@@ -754,12 +754,27 @@ function copyGuestLink(url){
 
 }
 
-function previewQR(code){
+function previewQR(code,name){
 
-    const qr =
-    "https://quickchart.io/qr?size=350&text="
-    + encodeURIComponent(code);
+    document.getElementById("previewQR").src =
+        "https://quickchart.io/qr?size=350&text=" +
+        encodeURIComponent(code);
 
-    img.src = qr;
+    document.getElementById("previewGuest").innerHTML =
+        name + "<br>" + code;
+
+    document
+        .getElementById("qrToast")
+        .classList.add("show");
 
 }
+
+function closeQRToast(){
+
+    document
+        .getElementById("qrToast")
+        .classList.remove("show");
+
+}
+
+
