@@ -441,23 +441,24 @@ function renderGuestTable(data){
             <td>
 
                 <button
-                    class="delete-btn"
-                    data-id="${guest.id}"
-                    title="Delete">
+    class="delete-btn"
+    data-id="${guest.id}"
+    data-name="${guest.name}"
+    title="Delete">
 
-                    <i class="fa-solid fa-trash"></i>
+    <i class="fa-solid fa-trash"></i>
 
-                </button>
+</button>
 
-                <button
-                    class="reset-btn"
-                    data-id="${guest.id}"
-                    title="Reset">
+<button
+    class="reset-btn"
+    data-id="${guest.id}"
+    data-name="${guest.name}"
+    title="Reset">
 
-                    <i class="fa-solid fa-rotate-left"></i>
+    <i class="fa-solid fa-rotate-left"></i>
 
-                </button>
-
+</button>
             </td>
 
         </tr>
@@ -471,12 +472,14 @@ function renderGuestTable(data){
 
 document.addEventListener("click",(e)=>{
 
-
     const del=e.target.closest(".delete-btn");
 
     if(del){
 
-        deleteGuest(del.dataset.id);
+        deleteGuest(
+            del.dataset.id,
+            del.dataset.name
+        );
 
         return;
 
@@ -486,11 +489,15 @@ document.addEventListener("click",(e)=>{
 
     if(reset){
 
-        resetCheckin(reset.dataset.id);
+        resetCheckin(
+            reset.dataset.id,
+            reset.dataset.name
+        );
 
     }
 
 });
+
 /* ==========================================================
    REFRESH
 ========================================================== */
@@ -513,17 +520,12 @@ refreshBtn.onclick = ()=>{
    DELETE GUEST
 ========================================================== */
 
-async function deleteGuest(id){
+async function deleteGuest(id,name){
 
-    const ok = await showConfirm(
-         type:"delete",
-
-    guestName:guest.name,
-
-        "Hapus Data Tamu",
-        "Data tamu yang dihapus tidak dapat dikembalikan."
-
-    );
+    const ok = await showConfirm({
+    type:"reset",
+    guestName:name
+});
 
     if(!ok) return;
 
@@ -566,16 +568,12 @@ async function deleteGuest(id){
    RESET CHECK IN
 ========================================================== */
 
-async function resetCheckin(id){
+async function resetCheckin(id,name){
 
-    const ok = await showConfirm(
-type:"reset",
-
-    guestName:guest.name,
-        "Reset Check In",
-        "Status check in akan dikembalikan menjadi Belum Hadir."
-
-    );
+    const ok = await showConfirm({
+    type:"delete",
+    guestName:name
+});
 
     if(!ok) return;
 
