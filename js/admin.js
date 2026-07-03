@@ -509,7 +509,7 @@ async function deleteGuest(id){
 
     if(data.status){
 
-    alert("Berhasil dihapus");
+    showToast("✔ Data tamu berhasil dihapus");
 
     await loadGuests();
        await loadDashboard();
@@ -550,6 +550,7 @@ async function resetCheckin(id){
 
 if(data.status){
 
+   showToast("✔ Status Check In berhasil direset");
     await loadGuests();
 
     await loadDashboard();
@@ -584,6 +585,33 @@ if(searchGuest){
         });
 
     });
+
+}
+
+function showToast(text,color="#27ae60"){
+
+    let toast=document.createElement("div");
+
+    toast.className="toast";
+
+    toast.style.background=color;
+
+    toast.innerHTML=text;
+
+    document.body.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.classList.add("show");
+    },50);
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+
+        setTimeout(()=>{
+            toast.remove();
+        },300);
+
+    },2500);
 
 }
 
