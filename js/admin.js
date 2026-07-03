@@ -362,113 +362,121 @@ async function loadGuests(){
 
 function renderGuestTable(data){
 
-    const tbody =
-        document.getElementById("guestTable");
+    const tbody = document.getElementById("guestTable");
 
     if(!tbody) return;
 
-    tbody.innerHTML = "";
+    tbody.innerHTML="";
 
     if(data.length===0){
 
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="7" style="text-align:center">
-                    Belum ada data tamu
-                </td>
-            </tr>
+        tbody.innerHTML=`
+        <tr>
+            <td colspan="7" style="text-align:center">
+                Belum ada data tamu
+            </td>
+        </tr>
         `;
 
         return;
-
     }
 
     data.forEach((guest,index)=>{
 
         tbody.innerHTML += `
+        <tr>
 
-<tr>
+            <td>${index+1}</td>
 
-<td>
+            <td>${guest.name}</td>
 
-${index+1}
+            <td>${guest.link}</td>
 
-</td>
+            <td>${guest.qr}</td>
 
-<td>
+            <td>
+                <span class="${
+                    guest.status==="Sudah Hadir"
+                    ?"status-success"
+                    :"status-wait"
+                }">
+                    ${guest.status}
+                </span>
+            </td>
 
-${guest.name}
+            <td>${guest.time || "-"}</td>
 
-</td>
+            <td>
 
-<td>
+                <button
+                    class="edit-btn"
+                    data-id="${guest.id}"
+                    title="Edit">
 
-${guest.link}
+                    <i class="fa-solid fa-pen"></i>
 
-</td>
+                </button>
 
-<td>
+                <button
+                    class="delete-btn"
+                    data-id="${guest.id}"
+                    title="Delete">
 
-${guest.qr}
+                    <i class="fa-solid fa-trash"></i>
 
-</td>
+                </button>
 
-<td>
+                <button
+                    class="reset-btn"
+                    data-id="${guest.id}"
+                    title="Reset">
 
-<span class="${
-guest.status==="Sudah Hadir"
-?"status-success"
-:"status-wait"
-}">
+                    <i class="fa-solid fa-rotate-left"></i>
 
-${guest.status}
+                </button>
 
-</span>
+            </td>
 
-</td>
-
-<td>
-
-${guest.time || "-"}
-
-</td>
-
-<td>
-
-<button
-class="edit-btn"
-data-id="${guest.id}">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="delete-btn"
-data-id="${guest.id}">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-<button
-class="reset-btn"
-data-id="${guest.id}">
-
-<i class="fa-solid fa-rotate-left"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-`;
+        </tr>
+        `;
 
     });
 
+    bindGuestButtons();
+
 }
 
+document.addEventListener("click",(e)=>{
+
+    const edit=e.target.closest(".edit-btn");
+
+    if(edit){
+
+        editGuest(edit.dataset.id);
+
+        return;
+
+    }
+
+    const del=e.target.closest(".delete-btn");
+
+    if(del){
+
+        deleteGuest(del.dataset.id);
+
+        return;
+
+    }
+
+    const reset=e.target.closest(".reset-btn");
+
+    if(reset){
+
+        resetCheckin(reset.dataset.id);
+
+    }
+
+});
 /* ==========================================================
    REFRESH
 ========================================================== */
