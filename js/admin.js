@@ -523,7 +523,7 @@ refreshBtn.onclick = ()=>{
 async function deleteGuest(id,name){
 
     const ok = await showConfirm({
-    type:"reset",
+    type:"delete",
     guestName:name
 });
 
@@ -571,7 +571,7 @@ async function deleteGuest(id,name){
 async function resetCheckin(id,name){
 
     const ok = await showConfirm({
-    type:"delete",
+    type:"reset",
     guestName:name
 });
 
