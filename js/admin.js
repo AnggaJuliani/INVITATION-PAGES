@@ -726,3 +726,22 @@ function showConfirm(options){
     });
 
 }
+
+function copyGuestLink(url){
+
+    navigator.clipboard.writeText(url).then(()=>{
+
+        showToast("Link berhasil disalin");
+
+    });
+
+}
+
+function previewQR(url){
+
+    document.getElementById("qrPreviewImage").src=url;
+
+    document.getElementById("qrModal").classList.add("show");
+
+}
+
