@@ -780,12 +780,16 @@ function closeQRToast(){
 
 const qrToast = document.getElementById("qrToast");
 
-qrToast.addEventListener("click",(e)=>{
+if(qrToast){
 
-    if(e.target===qrToast){
+    qrToast.addEventListener("click",(e)=>{
 
-        closeQRToast();
+        if(e.target===qrToast){
 
-    }
+            closeQRToast();
 
-});
+        }
+
+    });
+
+}
