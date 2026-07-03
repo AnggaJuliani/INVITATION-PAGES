@@ -859,7 +859,7 @@ async function addGuest(){
 
         const data=await res.json();
 
-        if(data.success){
+        if(data.status){
 
             showToast("Tamu berhasil ditambahkan");
 
