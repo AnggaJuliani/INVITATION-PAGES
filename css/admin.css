@@ -982,6 +982,31 @@ label{
 }
 
 /* ===========================
+   modal Screen
+=========================== */
+
+.confirm-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+
+    display: none;          /* penting */
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 99999;
+
+    opacity: 0;
+    transition: .25s;
+}
+
+.confirm-modal.show{
+    display: flex;
+    opacity: 1;
+}
+
+/* ===========================
    Loading Screen
 =========================== */
 
