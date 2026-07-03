@@ -601,22 +601,6 @@ Belum ada pencarian.
 
 </section>
 
-<section id="commentPage" class="page">
-
-    <h1>Ucapan</h1>
-
-    <div id="commentContainer">
-
-        <div class="placeholder">
-
-            Memuat ucapan...
-
-        </div>
-
-    </div>
-
-</section>
-
 <section id="exportPage" class="page">
 
     <h1>Export</h1>
@@ -629,42 +613,30 @@ Belum ada pencarian.
 
 </section>
 
-<section id="settingPage" class="page">
-
-    <h1>Pengaturan</h1>
-
-    <div class="placeholder">
-
-        Pengaturan Website.
-
-    </div>
-
-</section>
-
     <div id="confirmModal" class="confirm-modal">
 
-    <div class="confirm-box">
+    <div class="confirm-card">
 
-        <div class="confirm-icon">
-            <i class="fa-solid fa-circle-question"></i>
+        <div id="confirmIcon"></div>
+
+        <h2 id="confirmTitle"></h2>
+
+        <p id="confirmSubtitle"></p>
+
+        <div class="guest-box">
+
+            <strong id="confirmGuest"></strong>
+
         </div>
 
-        <h2 class="confirm-title"></h2>
+        <div class="confirm-buttons">
 
-        <p class="confirm-message"></p>
-
-        <div class="confirm-action">
-
-            <button class="btn-cancel">
-
+            <button id="btnCancel">
                 Batal
-
             </button>
 
-            <button class="btn-ok">
-
-                Ya
-
+            <button id="btnConfirm">
+                Hapus
             </button>
 
         </div>
