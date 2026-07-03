@@ -102,10 +102,10 @@ async function loadGuest() {
     try {
 
         const res = await fetch(
-            API_URL +
-            "?action=guest&code=" +
-            encodeURIComponent(guestCode)
-        );
+    API_URL +
+    "?action=ticket&to=" +
+    encodeURIComponent(guestCode)
+);
 
         const guest = await res.json();
 
