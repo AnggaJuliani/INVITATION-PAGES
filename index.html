@@ -100,15 +100,17 @@ async function loadGuest() {
     if (!guestCode) return;
 
     try {
-
+console.log("API_URL =", API_URL);
+console.log("guestCode =", guestCode);
+console.log("URL =", window.location.href);
         const res = await fetch(
     API_URL +
     "?action=ticket&to=" +
     encodeURIComponent(guestCode)
 );
-
+console.log("Status =", res.status);
         const guest = await res.json();
-
+console.log("Guest =", guest);
         if (guest.status) {
 
             document.getElementById("guestName").innerText =
