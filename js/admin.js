@@ -24,6 +24,8 @@ async function initDashboard(){
 
     initQuickAction();
 
+   initAddGuest();
+
     try{
 
         await withLoading(async()=>{
@@ -807,4 +809,83 @@ if(qrToast){
 
 }
 
+
+function initAddGuest(){
+
+    const btn=document.getElementById("btnAddGuest");
+
+    if(!btn) return;
+
+    btn.addEventListener("click",addGuest);
+
+}
+
+async function addGuest(){
+
+    const name=document
+        .getElementById("guestName")
+        .value
+        .trim();
+
+    if(!name){
+
+        alert("Masukkan nama tamu.");
+
+        return;
+
+    }
+
+    const btn=document.getElementById("btnAddGuest");
+
+    btn.disabled=true;
+
+    btn.innerHTML="Menambahkan...";
+
+    try{
+
+        const res=await fetch(API_URL,{
+
+            method:"POST",
+
+            body:JSON.stringify({
+
+                action:"addGuest",
+
+                name:name
+
+            })
+
+        });
+
+        const data=await res.json();
+
+        if(data.success){
+
+            showToast("Tamu berhasil ditambahkan");
+
+            document.getElementById("guestName").value="";
+
+            await loadGuests();
+
+            await loadDashboard();
+
+        }else{
+
+            alert(data.message);
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Gagal menambahkan tamu.");
+
+    }
+
+    btn.disabled=false;
+
+    btn.innerHTML="Tambah Tamu";
+
+}
 
