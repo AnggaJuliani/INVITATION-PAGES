@@ -1,358 +1,710 @@
 /* ==========================================================
    Wedding Admin Dashboard
    admin.js
+   PART 1
 ========================================================== */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
+
+/*
+GANTI URL DI ATAS
+dengan URL Web Apps milik Anda
+*/
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const sidebar = document.querySelector(".sidebar");
-    const menuBtn = document.getElementById("menuBtn");
-    const title = document.querySelector(".title");
-
-    const menuItems = document.querySelectorAll(".menu li");
-    const pages = document.querySelectorAll(".page");
-
-    const quickCards = document.querySelectorAll(".quick-card");
-
-    /* ==========================================
-       Sidebar Mobile
-    ========================================== */
-
-    menuBtn.addEventListener("click", () => {
-
-        if (window.innerWidth <= 768) {
-
-            sidebar.classList.toggle("show");
-
-        } else {
-
-            sidebar.classList.toggle("collapsed");
-
-        }
-
-    });
-
-    /* ==========================================
-       Menu Navigation
-    ========================================== */
-
-    function openPage(pageName) {
-
-        pages.forEach(page => {
-
-            page.classList.remove("active");
-
-        });
-
-        const target = document.getElementById(pageName + "Page");
-
-        if (target) {
-
-            target.classList.add("active");
-
-            target.classList.add("fade-in");
-
-        }
-
-        menuItems.forEach(item => {
-
-            item.classList.remove("active");
-
-            if (item.dataset.page === pageName) {
-
-                item.classList.add("active");
-
-            }
-
-        });
-
-        title.innerText = pageName.charAt(0).toUpperCase() + pageName.slice(1);
-
-        if (window.innerWidth <= 768) {
-
-            sidebar.classList.remove("show");
-
-        }
-
-    }
-
-    menuItems.forEach(item => {
-
-        item.addEventListener("click", function () {
-
-            const page = this.dataset.page;
-
-            if (!page) return;
-
-            openPage(page);
-
-        });
-
-    });
-
-    quickCards.forEach(card => {
-
-        card.addEventListener("click", function () {
-
-            const page = this.dataset.page;
-
-            if (!page) return;
-
-            openPage(page);
-
-        });
-
-    });
-
-    /* ==========================================
-       Counter Animation
-    ========================================== */
-
-    function animateCounter(id, target) {
-
-        const el = document.getElementById(id);
-
-        if (!el) return;
-
-        let count = 0;
-
-        const speed = Math.max(1, Math.ceil(target / 60));
-
-        const timer = setInterval(() => {
-
-            count += speed;
-
-            if (count >= target) {
-
-                count = target;
-
-                clearInterval(timer);
-
-            }
-
-            el.innerText = count;
-
-        }, 20);
-
-    }
-
-    animateCounter("totalGuest", 0);
-    animateCounter("totalPresent", 0);
-    animateCounter("totalAbsent", 0);
-    animateCounter("totalRSVP", 0);
-
-    /* ==========================================
-       Loading Screen
-    ========================================== */
-
-    const loading = document.querySelector(".loading");
-
-    if (loading) {
-
-        window.addEventListener("load", () => {
-
-            setTimeout(() => {
-
-                loading.classList.add("hide");
-
-            }, 500);
-
-        });
-
-    }
-
-    /* ==========================================
-       Toast Notification
-    ========================================== */
-
-    window.showToast = function (titleText, message) {
-
-        let toast = document.querySelector(".toast");
-
-        if (!toast) {
-
-            toast = document.createElement("div");
-
-            toast.className = "toast";
-
-            toast.innerHTML = `
-
-                <h4></h4>
-
-                <p></p>
-
-            `;
-
-            document.body.appendChild(toast);
-
-        }
-
-        toast.querySelector("h4").innerText = titleText;
-        toast.querySelector("p").innerText = message;
-
-        toast.classList.add("show");
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 3000);
-
-    };
-
-    /* ==========================================
-       Dark Mode
-    ========================================== */
-
-    const darkMode = localStorage.getItem("darkmode");
-
-    if (darkMode === "on") {
-
-        document.body.classList.add("dark");
-
-    }
-
-    window.toggleDarkMode = function () {
-
-        document.body.classList.toggle("dark");
-
-        if (document.body.classList.contains("dark")) {
-
-            localStorage.setItem("darkmode", "on");
-
-            showToast("Dark Mode", "Mode gelap diaktifkan");
-
-        } else {
-
-            localStorage.setItem("darkmode", "off");
-
-            showToast("Light Mode", "Mode terang diaktifkan");
-
-        }
-
-    };
-
-    /* ==========================================
-       Ripple Effect
-    ========================================== */
-
-    document.querySelectorAll(".btn,.quick-card,.card").forEach(item => {
-
-        item.addEventListener("click", function (e) {
-
-            const ripple = document.createElement("span");
-
-            ripple.className = "ripple";
-
-            ripple.style.left = e.offsetX + "px";
-
-            ripple.style.top = e.offsetY + "px";
-
-            this.appendChild(ripple);
-
-            setTimeout(() => {
-
-                ripple.remove();
-
-            }, 600);
-
-        });
-
-    });
+    initDashboard();
 
 });
 
-    /* ==========================================
-       SCANNER 
-    ========================================== */
+async function initDashboard(){
 
+    initSidebar();
 
-    item.addEventListener("click", () => {
-         document.querySelectorAll("[data-link]").forEach(item => {
-        window.location.href = item.dataset.link;
+    initQuickAction();
+
+    await loadDashboard();
+
+    await loadGuests();
+
+    hideLoading();
+
+}
+
+/* ==========================================================
+   Loading
+========================================================== */
+
+function hideLoading(){
+
+    const loading = document.getElementById("loading");
+
+    if(!loading) return;
+
+    setTimeout(()=>{
+
+        loading.style.opacity="0";
+
+        setTimeout(()=>{
+
+            loading.style.display="none";
+
+        },300);
+
+    },500);
+
+}
+
+/* ==========================================================
+   Sidebar
+========================================================== */
+
+function initSidebar(){
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const sidebar =
+        document.querySelector(".sidebar");
+
+    if(menuBtn){
+
+        menuBtn.onclick=()=>{
+
+            sidebar.classList.toggle("active");
+
+        };
+
+    }
+
+    const menus =
+        document.querySelectorAll(".menu li");
+
+    menus.forEach(menu=>{
+
+        menu.onclick=()=>{
+
+            if(menu.dataset.link){
+
+                location.href=menu.dataset.link;
+
+                return;
+
+            }
+
+            menus.forEach(m=>m.classList.remove("active"));
+
+            menu.classList.add("active");
+
+            showPage(menu.dataset.page);
+
+        };
 
     });
 
-});
+}
 
+/* ==========================================================
+   Quick Action
+========================================================== */
 
-const API =
-"https://script.google.com/macros/s/AKfycbwfz-rbBxKY-uPOkTvTCl7lLLIemCh-_eqSfP4oXADE18s1CpjfpPqbeTZX6rJk5Pjwag/exec";
+function initQuickAction(){
+
+    document
+    .querySelectorAll(".quick-card")
+    .forEach(card=>{
+
+        card.onclick=()=>{
+
+            if(card.dataset.link){
+
+                location.href=
+                card.dataset.link;
+
+                return;
+
+            }
+
+            if(card.dataset.page){
+
+                showPage(card.dataset.page);
+
+            }
+
+        };
+
+    });
+
+}
+
+/* ==========================================================
+   Show Page
+========================================================== */
+
+function showPage(page){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(p=>{
+
+        p.classList.remove("active");
+
+    });
+
+    const target =
+    document.getElementById(page+"Page");
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+    const title =
+    document.querySelector(".title");
+
+    if(title){
+
+        switch(page){
+
+            case "dashboard":
+
+                title.innerHTML="Dashboard";
+
+            break;
+
+            case "guest":
+
+                title.innerHTML="Data Tamu";
+
+                if(typeof loadGuests==="function"){
+
+                    loadGuests();
+
+                }
+
+            break;
+
+            case "add":
+
+                title.innerHTML="Tambah Tamu";
+
+            break;
+
+            case "search":
+
+                title.innerHTML="Cari Tamu";
+
+            break;
+
+            case "rsvp":
+
+                title.innerHTML="RSVP";
+
+                if(typeof loadRSVP==="function"){
+
+                    loadRSVP();
+
+                }
+
+            break;
+
+            case "comment":
+
+                title.innerHTML="Ucapan";
+
+                if(typeof loadComments==="function"){
+
+                    loadComments();
+
+                }
+
+            break;
+
+            case "export":
+
+                title.innerHTML="Export";
+
+            break;
+
+            case "setting":
+
+                title.innerHTML="Pengaturan";
+
+            break;
+
+        }
+
+    }
+
+}
+
+/* ==========================================================
+   Dashboard
+========================================================== */
+
+async function loadDashboard(){
+
+    try{
+
+        const res =
+        await fetch(
+
+            API_URL+
+            "?action=dashboard"
+
+        );
+
+        const data =
+        await res.json();
+
+        if(!data.status){
+
+            return;
+
+        }
+
+        document.getElementById("totalGuest")
+        .innerHTML=data.totalGuest;
+
+        document.getElementById("totalPresent")
+        .innerHTML=data.totalPresent;
+
+        document.getElementById("totalAbsent")
+        .innerHTML=data.totalAbsent;
+
+        document.getElementById("totalRSVP")
+        .innerHTML=data.totalRSVP;
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+    }
+
+}
+
+/* ==========================================================
+   Refresh Dashboard
+========================================================== */
+
+async function refreshDashboard(){
+
+    await loadDashboard();
+
+}
+
+/* ==========================================================
+   PART 2A
+   LOAD DATA TAMU
+========================================================== */
+
+let guestData = [];
+
+/* ==========================================================
+   LOAD GUESTS
+========================================================== */
 
 async function loadGuests(){
 
-    const res =
-    await fetch(API+"?action=getGuests");
+    try{
 
-    const guests =
-    await res.json();
+        const tbody =
+            document.getElementById("guestTable");
 
-    console.log(guests);
+        if(tbody){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align:center">
+                        Memuat data...
+                    </td>
+                </tr>
+            `;
+
+        }
+
+        const res =
+            await fetch(
+                API_URL + "?action=getGuests"
+            );
+
+        const data =
+            await res.json();
+
+        guestData = data;
+
+        renderGuestTable(data);
+
+    }
+    catch(err){
+
+        console.error(err);
+
+        document.getElementById("guestTable").innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center;color:red">
+                    Gagal mengambil data
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+/* ==========================================================
+   RENDER TABLE
+========================================================== */
+
+function renderGuestTable(data){
+
+    const tbody =
+        document.getElementById("guestTable");
+
+    if(!tbody) return;
+
+    tbody.innerHTML = "";
+
+    if(data.length===0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center">
+                    Belum ada data tamu
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+    data.forEach((guest,index)=>{
+
+        tbody.innerHTML += `
+
+<tr>
+
+<td>
+
+${index+1}
+
+</td>
+
+<td>
+
+${guest.name}
+
+</td>
+
+<td>
+
+${guest.link}
+
+</td>
+
+<td>
+
+${guest.qr}
+
+</td>
+
+<td>
+
+<span class="${
+guest.status==="Sudah Hadir"
+?"status-success"
+:"status-wait"
+}">
+
+${guest.status}
+
+</span>
+
+</td>
+
+<td>
+
+${guest.time || "-"}
+
+</td>
+
+<td>
+
+<button
+class="edit-btn"
+data-id="${guest.id}">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button
+class="delete-btn"
+data-id="${guest.id}">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+<button
+class="reset-btn"
+data-id="${guest.id}">
+
+<i class="fa-solid fa-rotate-left"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
 
 }
 
-loadGuests();
-async function loadDashboard(){
+/* ==========================================================
+   REFRESH
+========================================================== */
 
-  const res = await fetch(API + "?action=dashboard");
-  const data = await res.json();
+const refreshBtn =
+document.getElementById("refreshGuest");
 
-  animateCounter("totalGuest", data.total);
-  animateCounter("totalPresent", data.hadir);
-  animateCounter("totalAbsent", data.belum);
+if(refreshBtn){
+
+    refreshBtn.onclick=()=>{
+
+        loadGuests();
+
+    };
+
+}
+
+/* ==========================================================
+   EDIT GUEST
+========================================================== */
+
+async function editGuest(id){
+
+    try{
+
+        const res = await fetch(
+            API_URL + "?action=getGuestById&id=" + id
+        );
+
+        const data = await res.json();
+
+        if(!data.status){
+
+            alert(data.message);
+
+            return;
+
+        }
+
+        const g = data.guest;
+
+        document.getElementById("editId").value = g.id;
+        document.getElementById("editName").value = g.name;
+        document.getElementById("editLink").value = g.link;
+        document.getElementById("editQR").value = g.qr;
+
+        document
+            .getElementById("editModal")
+            .classList.add("show");
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        alert("Gagal mengambil data.");
+
+    }
 
 }
 
-async function renderGuests(){
+/* ==========================================================
+   CLOSE MODAL
+========================================================== */
 
-  const res = await fetch(API + "?action=getGuests");
-  const data = await res.json();
+document
+.getElementById("btnCloseEdit")
+.onclick = ()=>{
 
-  const table = document.getElementById("guestTable");
+    document
+        .getElementById("editModal")
+        .classList.remove("show");
 
-  table.innerHTML = "";
+};
 
-  data.forEach(g => {
+/* ==========================================================
+   SAVE EDIT
+========================================================== */
 
-    table.innerHTML += `
-      <tr>
-        <td>${g.name}</td>
-        <td>${g.link}</td>
-        <td>${g.status}</td>
-        <td>
-          <button onclick="previewQR('${g.qr}')">QR</button>
-          <button onclick="editGuest(${g.id})">Edit</button>
-          <button onclick="deleteGuest(${g.id})">Delete</button>
-        </td>
-      </tr>
-    `;
+document
+.getElementById("btnSaveEdit")
+.onclick = async ()=>{
 
-  });
+    const body={
 
-}
+        action:"updateGuest",
+
+        id:document.getElementById("editId").value,
+
+        name:document.getElementById("editName").value,
+
+        link:document.getElementById("editLink").value,
+
+        qr:document.getElementById("editQR").value
+
+    };
+
+    const res=await fetch(API_URL,{
+
+        method:"POST",
+
+        body:JSON.stringify(body)
+
+    });
+
+    const result=await res.json();
+
+    alert(result.message);
+
+    document
+        .getElementById("editModal")
+        .classList.remove("show");
+
+    loadGuests();
+
+};
+
+/* ==========================================================
+   DELETE GUEST
+========================================================== */
 
 async function deleteGuest(id){
 
-  await fetch(API, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "deleteGuest",
-      id: id
-    })
-  });
+    if(!confirm("Hapus tamu ini?")) return;
 
-  renderGuests();
-  loadDashboard();
+    const res = await fetch(API_URL,{
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+            action:"deleteGuest",
+
+            id:id
+
+        })
+
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
+
+    loadGuests();
 
 }
 
-function previewQR(qr){
+/* ==========================================================
+   RESET CHECK IN
+========================================================== */
 
-  const url =
-  "https://quickchart.io/qr?size=500&text=" +
-  encodeURIComponent(qr);
+async function resetCheckin(id){
 
-  window.open(url, "_blank");
+    if(!confirm("Reset status check in?"))
+
+        return;
+
+    const res = await fetch(API_URL,{
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+            action:"resetCheckin",
+
+            id:id
+
+        })
+
+    });
+
+    const data = await res.json();
+
+    if(data.status){
+
+        loadGuests();
+
+    }
 
 }
+
+/* ==========================================================
+   SEARCH DATA TAMU
+========================================================== */
+
+const searchGuest = document.getElementById("searchGuest");
+
+if(searchGuest){
+
+    searchGuest.addEventListener("keyup",()=>{
+
+        const keyword = searchGuest.value.toLowerCase();
+
+        const rows = document.querySelectorAll("#guestTable tr");
+
+        rows.forEach(row=>{
+
+            const text = row.innerText.toLowerCase();
+
+            row.style.display =
+                text.includes(keyword)
+                ? ""
+                : "none";
+
+        });
+
+    });
+
+}
+
+/* ==========================================================
+   LOADING SCREEN
+========================================================== */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document
+        .getElementById("loading")
+        .style.display="none";
+
+    },500);
+
+});
+
+/* ==========================================================
+   AUTO LOAD DASHBOARD
+========================================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    loadDashboard();
+
+    loadGuests();
+
+});
 
