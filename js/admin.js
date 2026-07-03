@@ -41,8 +41,6 @@ catch(e){
 
 }
 
-hideLoading();
-
 }
 
 /* ==========================================================
@@ -502,6 +500,7 @@ document.addEventListener("click",(e)=>{
    REFRESH
 ========================================================== */
 
+const refreshBtn = document.getElementById("refreshGuest");
 refreshBtn.onclick = ()=>{
 
     withLoading(async()=>{
