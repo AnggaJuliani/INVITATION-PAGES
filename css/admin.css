@@ -987,23 +987,22 @@ label{
 
 .loading{
 
-    position:fixed;
+    display:none;
 
+    position:fixed;
     inset:0;
 
     background:rgba(255,255,255,.96);
 
-    display:flex;
-
-    align-items:center;
-
     justify-content:center;
-
+    align-items:center;
     flex-direction:column;
 
-    z-index:99999;
+    opacity:0;
 
-    transition:.4s;
+    transition:.3s;
+
+    z-index:99999;
 
 }
 
@@ -1012,6 +1011,14 @@ label{
     opacity:0;
 
     visibility:hidden;
+
+}
+
+.loading.show{
+
+    display:flex;
+
+    opacity:1;
 
 }
 
