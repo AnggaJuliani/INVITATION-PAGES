@@ -516,6 +516,9 @@ refreshBtn.onclick = ()=>{
 async function deleteGuest(id){
 
     const ok = await showConfirm(
+         type:"delete",
+
+    guestName:guest.name,
 
         "Hapus Data Tamu",
         "Data tamu yang dihapus tidak dapat dikembalikan."
@@ -566,7 +569,9 @@ async function deleteGuest(id){
 async function resetCheckin(id){
 
     const ok = await showConfirm(
+type:"reset",
 
+    guestName:guest.name,
         "Reset Check In",
         "Status check in akan dikembalikan menjadi Belum Hadir."
 
