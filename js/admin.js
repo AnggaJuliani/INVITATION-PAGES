@@ -665,27 +665,49 @@ function showToast(text,color="#27ae60"){
 
 }
 
-function showConfirm(title,message){
+function showConfirm(options){
 
     return new Promise(resolve=>{
 
         const modal=document.getElementById("confirmModal");
 
-        modal.querySelector(".confirm-title").innerHTML=title;
+        const title=document.getElementById("confirmTitle");
 
-        modal.querySelector(".confirm-message").innerHTML=message;
+        const subtitle=document.getElementById("confirmSubtitle");
+
+        const guest=document.getElementById("confirmGuest");
+
+        const btn=document.getElementById("btnConfirm");
+
+        if(options.type==="delete"){
+
+            title.innerHTML="🗑️ Hapus Data Tamu";
+
+            subtitle.innerHTML="Data berikut akan dihapus secara permanen.";
+
+            btn.innerHTML="Hapus";
+
+            btn.className="confirm-btn delete";
+
+        }
+
+        else{
+
+            title.innerHTML="🔄 Reset Check In";
+
+            subtitle.innerHTML="Status check in akan dikembalikan menjadi Belum Hadir.";
+
+            btn.innerHTML="Reset";
+
+            btn.className="confirm-btn reset";
+
+        }
+
+        guest.innerHTML=options.guestName;
 
         modal.classList.add("show");
 
-        modal.querySelector(".btn-ok").onclick=()=>{
-
-            modal.classList.remove("show");
-
-            resolve(true);
-
-        };
-
-        modal.querySelector(".btn-cancel").onclick=()=>{
+        document.getElementById("btnCancel").onclick=()=>{
 
             modal.classList.remove("show");
 
@@ -693,7 +715,14 @@ function showConfirm(title,message){
 
         };
 
+        btn.onclick=()=>{
+
+            modal.classList.remove("show");
+
+            resolve(true);
+
+        };
+
     });
 
 }
-
