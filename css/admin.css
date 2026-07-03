@@ -1041,6 +1041,15 @@ label{
 
 }
 
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid #ddd;
+    border-top:6px solid #C58A4A;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
 @keyframes spin{
 
     to{
