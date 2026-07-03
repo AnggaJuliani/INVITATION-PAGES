@@ -554,8 +554,6 @@ async function deleteGuest(id){
 
         else{
 
-            showToast(data.message,"#e74c3c");
-
         }
 
     },"Menghapus Data...");
