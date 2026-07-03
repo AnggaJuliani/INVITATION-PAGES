@@ -24,11 +24,24 @@ async function initDashboard(){
 
     initQuickAction();
 
-    await loadDashboard();
+try{
 
-    await loadGuests();
+    await Promise.all([
 
-    hideLoading();
+        loadDashboard(),
+
+        loadGuests()
+
+    ]);
+
+}
+catch(e){
+
+    console.log(e);
+
+}
+
+hideLoading();
 
 }
 
@@ -210,29 +223,12 @@ function showPage(page){
 
             break;
 
-            case "comment":
-
-                title.innerHTML="Ucapan";
-
-                if(typeof loadComments==="function"){
-
-                    loadComments();
-
-                }
-
-            break;
-
             case "export":
 
                 title.innerHTML="Export";
 
             break;
 
-            case "setting":
-
-                title.innerHTML="Pengaturan";
-
-            break;
 
         }
 
@@ -331,13 +327,23 @@ async function loadGuests(){
             await fetch(
                 API_URL + "?action=getGuests"
             );
+       if(!res.ok){
 
-        const data =
-            await res.json();
+    throw new Error(
+        "HTTP "+res.status
+    );
 
-        guestData = data;
+}
 
-        renderGuestTable(data);
+        const data = await res.json();
+
+if(!Array.isArray(data)){
+    throw new Error("Data guest tidak valid");
+}
+
+guestData = data;
+
+renderGuestTable(data);
 
     }
     catch(err){
@@ -409,15 +415,6 @@ function renderGuestTable(data){
             <td>
 
                 <button
-                    class="edit-btn"
-                    data-id="${guest.id}"
-                    title="Edit">
-
-                    <i class="fa-solid fa-pen"></i>
-
-                </button>
-
-                <button
                     class="delete-btn"
                     data-id="${guest.id}"
                     title="Delete">
@@ -442,21 +439,12 @@ function renderGuestTable(data){
 
     });
 
-    bindGuestButtons();
+    
 
 }
 
 document.addEventListener("click",(e)=>{
 
-    const edit=e.target.closest(".edit-btn");
-
-    if(edit){
-
-        editGuest(edit.dataset.id);
-
-        return;
-
-    }
 
     const del=e.target.closest(".delete-btn");
 
@@ -494,106 +482,6 @@ if(refreshBtn){
 
 }
 
-/* ==========================================================
-   EDIT GUEST
-========================================================== */
-
-async function editGuest(id){
-
-    try{
-
-        const res = await fetch(
-            API_URL + "?action=getGuestById&id=" + id
-        );
-
-        const data = await res.json();
-
-        if(!data.status){
-
-            alert(data.message);
-
-            return;
-
-        }
-
-        const g = data.guest;
-
-        document.getElementById("editId").value = g.id;
-        document.getElementById("editName").value = g.name;
-        document.getElementById("editLink").value = g.link;
-        document.getElementById("editQR").value = g.qr;
-
-        document
-            .getElementById("editModal")
-            .classList.add("show");
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Gagal mengambil data.");
-
-    }
-
-}
-
-/* ==========================================================
-   CLOSE MODAL
-========================================================== */
-
-document
-.getElementById("btnCloseEdit")
-.onclick = ()=>{
-
-    document
-        .getElementById("editModal")
-        .classList.remove("show");
-
-};
-
-/* ==========================================================
-   SAVE EDIT
-========================================================== */
-
-document
-.getElementById("btnSaveEdit")
-.onclick = async ()=>{
-
-    const body={
-
-        action:"updateGuest",
-
-        id:document.getElementById("editId").value,
-
-        name:document.getElementById("editName").value,
-
-        link:document.getElementById("editLink").value,
-
-        qr:document.getElementById("editQR").value
-
-    };
-
-    const res=await fetch(API_URL,{
-
-        method:"POST",
-
-        body:JSON.stringify(body)
-
-    });
-
-    const result=await res.json();
-
-    alert(result.message);
-
-    document
-        .getElementById("editModal")
-        .classList.remove("show");
-
-    loadGuests();
-
-};
 
 /* ==========================================================
    DELETE GUEST
@@ -619,9 +507,18 @@ async function deleteGuest(id){
 
     const data = await res.json();
 
+    if(data.status){
+
+    alert("Berhasil dihapus");
+
+    await loadGuests();
+       await loadDashboard();
+
+}else{
+
     alert(data.message);
 
-    loadGuests();
+}
 
 }
 
@@ -651,11 +548,13 @@ async function resetCheckin(id){
 
     const data = await res.json();
 
-    if(data.status){
+if(data.status){
 
-        loadGuests();
+    await loadGuests();
 
-    }
+    await loadDashboard();
+
+}
 
 }
 
@@ -675,7 +574,7 @@ if(searchGuest){
 
         rows.forEach(row=>{
 
-            const text = row.innerText.toLowerCase();
+            const text=(row.innerText||"").toLowerCase();
 
             row.style.display =
                 text.includes(keyword)
@@ -687,20 +586,4 @@ if(searchGuest){
     });
 
 }
-
-/* ==========================================================
-   LOADING SCREEN
-========================================================== */
-
-window.addEventListener("load",()=>{
-
-    setTimeout(()=>{
-
-        document
-        .getElementById("loading")
-        .style.display="none";
-
-    },500);
-
-});
 
