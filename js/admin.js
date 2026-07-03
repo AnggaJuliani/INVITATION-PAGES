@@ -459,6 +459,29 @@ function renderGuestTable(data){
     <i class="fa-solid fa-rotate-left"></i>
 
 </button>
+
+<button class="btn-copy"
+onclick="copyGuestLink('${guest.link}')">
+
+<i class="fa-solid fa-copy"></i>
+
+</button>
+
+<div class="modal" id="qrModal">
+
+<div class="modal-content">
+
+<h3>QR Code</h3>
+
+<img id="qrPreviewImage">
+
+<button onclick="closeQR()">
+Tutup
+</button>
+
+</div>
+
+</div>
             </td>
 
         </tr>
