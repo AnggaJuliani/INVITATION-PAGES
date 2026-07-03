@@ -656,23 +656,35 @@ Belum ada pencarian.
 <script src="js/admin.js"></script>
 
 
-    <div id="qrToast" class="toast">
+    <div id="qrToast" class="qrtoast">
 
-    <div class="toast-box">
+    <div class="qrtoast-box">
 
-        <h3>QR Code</h3>
+        <button class="qr-close-icon"
+                onclick="closeQRToast()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h3>
+            <i class="fa-solid fa-qrcode"></i>
+            Preview QR Code
+        </h3>
 
         <img id="previewQR">
 
         <p id="previewGuest"></p>
 
-        <button onclick="closeQRToast()">
+        <button class="qr-close-btn"
+                onclick="closeQRToast()">
+
             Tutup
+
         </button>
 
     </div>
 
 </div>
+    
 </body>
 
 </html>
