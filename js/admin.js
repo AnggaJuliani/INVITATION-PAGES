@@ -467,22 +467,23 @@ onclick="copyGuestLink('${guest.link}')">
 
 </button>
 
-<div class="modal" id="qrModal">
+<div id="qrToast" class="toast">
 
-<div class="modal-content">
+    <div class="toast-box">
 
-<h3>QR Code</h3>
+        <h3>QR Code</h3>
 
-<img id="qrPreviewImage">
+        <img id="previewQR">
 
-<button onclick="closeQR()">
-Tutup
-</button>
+        <p id="previewGuest"></p>
 
-</div>
+        <button onclick="closeQRToast()">
+            Tutup
+        </button>
 
-</div>
-            </td>
+    </div>
+
+</div>            </td>
 
         </tr>
         `;
