@@ -422,7 +422,12 @@ function renderGuestTable(data){
 
             <td>${guest.name}</td>
 
-            <td>${guest.link}</td>
+            <td>
+    <a href="https://anggajuliani.github.io/INVITATION-PAGES/?to=${guest.link}"
+       target="_blank">
+       https://anggajuliani.github.io/INVITATION-PAGES/?to=${guest.link}
+    </a>
+</td>
 
             <td>${guest.qr}</td>
 
@@ -744,11 +749,19 @@ function showConfirm(options){
 
 }
 
-function copyGuestLink(url){
+function copyGuestLink(slug){
 
-    navigator.clipboard.writeText(url).then(()=>{
+    const fullLink =
+        "https://anggajuliani.github.io/INVITATION-PAGES/?to=" +
+        slug;
+
+    navigator.clipboard.writeText(fullLink).then(()=>{
 
         showToast("Link berhasil disalin");
+
+    }).catch(()=>{
+
+        showToast("Gagal menyalin link");
 
     });
 
