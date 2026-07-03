@@ -760,11 +760,12 @@ function copyGuestLink(url){
 
 }
 
-function previewQR(url){
+function previewQR(code){
 
-    document.getElementById("qrPreviewImage").src=url;
+    const qr =
+    "https://quickchart.io/qr?size=350&text="
+    + encodeURIComponent(code);
 
-    document.getElementById("qrModal").classList.add("show");
+    img.src = qr;
 
 }
-
