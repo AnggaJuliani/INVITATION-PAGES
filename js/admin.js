@@ -778,3 +778,14 @@ function closeQRToast(){
 }
 
 
+const qrToast = document.getElementById("qrToast");
+
+qrToast.addEventListener("click",(e)=>{
+
+    if(e.target===qrToast){
+
+        closeQRToast();
+
+    }
+
+});
