@@ -157,11 +157,15 @@ function processExcel(rows){
 normalizeName(x.name)==normalizeName(name)
 
 );
-        const duplicate = guestData.some(g=>{
+       const duplicate=
 
-            return normalizeName(g.name)==normalizeName(name);
+already ||
 
-        });
+guestData.some(g=>
+
+normalizeName(g.name)==normalizeName(name)
+
+);
 
         const item={
 
