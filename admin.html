@@ -532,35 +532,77 @@ Memuat data tamu...
 
     <h1>Import Daftar Tamu</h1>
 
-    <div class="import-box">
+    <div class="import-box" id="dropArea">
+
+        <i class="fa-solid fa-file-excel import-icon"></i>
+
+        <h2>Drag & Drop File Excel</h2>
+
+        <p>atau klik area ini untuk memilih file</p>
 
         <input
             type="file"
             id="excelFile"
-            accept=".xlsx,.xls">
+            accept=".xlsx,.xls"
+            hidden>
+
+        <button id="btnChooseExcel" class="choose-btn">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            Pilih File Excel
+
+        </button>
+
+        <div id="selectedFile" class="selected-file">
+
+            Belum ada file dipilih
+
+        </div>
+
+    </div>
+
+    <div class="import-action">
 
         <button
             id="btnPreview"
             class="primary-btn">
 
+            <i class="fa-solid fa-eye"></i>
+
             Preview Excel
 
         </button>
-<div id="importProgress" class="import-progress" style="display:none">
 
-    <div class="progress-bar">
+        <button
+            id="btnResetImport"
+            class="danger-btn">
 
-        <div id="progressFill"></div>
+            <i class="fa-solid fa-trash"></i>
+
+            Reset File
+
+        </button>
 
     </div>
 
-    <div id="progressText">
+    <div
+        id="importProgress"
+        class="import-progress"
+        style="display:none">
 
-        0%
+        <div class="progress-bar">
 
-    </div>
+            <div id="progressFill"></div>
 
-</div>
+        </div>
+
+        <div id="progressText">
+
+            0%
+
+        </div>
+
     </div>
 
     <div id="importSummary"></div>
