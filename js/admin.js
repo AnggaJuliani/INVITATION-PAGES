@@ -997,6 +997,17 @@ data-index="${index}">
 
 }
 
+document.querySelectorAll(".guest-search-item")
+.forEach((item, index) => {
+
+    item.addEventListener("click", () => {
+
+        openGuestDetail(list[index]);
+
+    });
+
+});
+
 document
 .querySelectorAll(".guest-search-item")
 .forEach((item,index)=>{
