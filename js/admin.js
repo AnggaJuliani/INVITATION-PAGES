@@ -1217,7 +1217,61 @@ async function confirmImport(){
 
 }
 
+const menuBtn=document.getElementById("menuBtn");
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("sidebarOverlay");
 
+menuBtn.onclick=()=>{
 
+sidebar.classList.toggle("show");
 
+overlay.classList.toggle("show");
+
+};
+
+overlay.onclick=()=>{
+
+sidebar.classList.remove("show");
+
+overlay.classList.remove("show");
+
+};
+
+let startX=0;
+
+document.addEventListener("touchstart",e=>{
+
+startX=e.touches[0].clientX;
+
+});
+
+document.addEventListener("touchend",e=>{
+
+const endX=e.changedTouches[0].clientX;
+
+if(startX<25 && endX>140){
+
+sidebar.classList.add("show");
+
+overlay.classList.add("show");
+
+}
+
+if(startX>200 && endX<120){
+
+sidebar.classList.remove("show");
+
+overlay.classList.remove("show");
+
+}
+
+});
+
+history.replaceState(null,null,location.href);
+
+window.onpopstate=function(){
+
+history.go(1);
+
+};
 
