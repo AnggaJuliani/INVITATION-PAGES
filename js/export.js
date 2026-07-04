@@ -523,39 +523,27 @@ async function exportQRZip(){
 
     try{
 
-        const res=
+        const res=await fetch(API_URL+"?action=getGuests");
 
-        await fetch(
-
-            API_URL+
-
-            "?action=getGuests"
-
-        );
-
-        const guests=
-
-        await res.json();
+        const guests=await res.json();
 
         if(!guests.length){
 
             hideLoading();
 
-            showToast(
-
-                "Tidak ada data."
-
-            );
+            showToast("Tidak ada data.");
 
             return;
 
         }
 
-        await generateQRZip(
+        hideLoading();
 
-            guests
+        showExportProgress();
 
-        );
+        await generateQRZip(guests);
+
+        hideExportProgress();
 
     }
 
@@ -563,20 +551,15 @@ async function exportQRZip(){
 
         console.log(err);
 
-        showToast(
+        hideLoading();
 
-            "Export gagal",
+        hideExportProgress();
 
-            "#e74c3c"
-
-        );
+        showToast("Export gagal","#e74c3c");
 
     }
 
-    hideLoading();
-
 }
-
 
 async function createGuestCard(guest){
 
@@ -588,26 +571,52 @@ async function createGuestCard(guest){
         canvas.height=1200;
 
         const ctx=canvas.getContext("2d");
+        ctx.imageSmoothingEnabled=true;
+
+ctx.imageSmoothingQuality="high";
 
         // Background
         ctx.fillStyle="#ffffff";
         ctx.fillRect(0,0,1000,1200);
 
         // Border
-        ctx.strokeStyle="#dddddd";
-        ctx.lineWidth=4;
-        ctx.strokeRect(40,40,920,1120);
+        ctx.strokeStyle="#b8894b";
+
+ctx.lineWidth=5;
+
+ctx.strokeRect(
+
+40,
+
+40,
+
+920,
+
+1120
+
+);
 
         // Title
         ctx.fillStyle="#111";
         ctx.font="bold 48px Arial";
         ctx.textAlign="center";
         ctx.fillText(
-            "Wedding Invitation",
-            500,
-            90
-        );
+    "Wedding Invitation",
+    500,
+    90
+);
 
+ctx.beginPath();
+
+ctx.moveTo(180,110);
+
+ctx.lineTo(820,110);
+
+ctx.strokeStyle="#d6c4a3";
+
+ctx.lineWidth=2;
+
+ctx.stroke();
         // ==========================
         // QR IMAGE
         // ==========================
@@ -619,12 +628,18 @@ async function createGuestCard(guest){
         qrImage.onload=()=>{
 
             ctx.drawImage(
-                qrImage,
-                200,
-                150,
-                600,
-                600
-            );
+
+qrImage,
+
+220,
+
+160,
+
+560,
+
+560
+
+);
 
             // Nama
 
@@ -632,23 +647,41 @@ async function createGuestCard(guest){
 
             ctx.font="bold 54px Arial";
 
-            ctx.fillText(
-                guest.name,
-                500,
-                860
-            );
+           let name=guest.name;
+
+if(name.length>30){
+
+    name=name.substring(0,28)+"...";
+
+}
+
+ctx.fillText(
+
+name,
+
+500,
+
+860
+
+);
 
             // Guest Code
 
             ctx.fillStyle="#666";
 
-            ctx.font="38px Arial";
+            ctx.font="bold 42px Arial";
 
-            ctx.fillText(
-                guest.qr,
-                500,
-                930
-            );
+ctx.fillStyle="#444";
+
+ctx.fillText(
+
+guest.qr.toUpperCase(),
+
+500,
+
+930
+
+);
 
             // Footer
 
@@ -676,7 +709,7 @@ async function createGuestCard(guest){
 
         qrImage.src=
 
-        "https://quickchart.io/qr?size=1000&margin=1&text="+
+        "https://quickchart.io/qr?size=500&margin=1&text="+
 
         encodeURIComponent(guest.qr);
 
@@ -687,31 +720,122 @@ async function createGuestCard(guest){
 
 async function generateQRZip(guests){
 
-    let cards=[];
+    const total=guests.length;
 
-    for(const guest of guests){
+    for(let i=0;i<total;i++){
+
+        const guest=guests[i];
+
+        updateExportProgress(
+
+            i+1,
+
+            total,
+
+            guest
+
+        );
 
         const canvas=
-            await createGuestCard(guest);
 
-        cards.push({
+        await createGuestCard(
 
-            guest,
+            guest
 
-            canvas
+        );
 
-        });
+        // nanti Part 3C
+        // canvas langsung masuk ZIP
+
+        await new Promise(r=>
+
+            requestAnimationFrame(r)
+
+        );
 
     }
 
-    console.log(cards);
-
     showToast(
 
-        cards.length+
-
-        " QR berhasil dibuat."
+        "Semua QR selesai dibuat"
 
     );
+    document.title=
+"Wedding Dashboard";
 
 }
+
+function showExportProgress(){
+
+document
+.getElementById("exportProgress")
+.classList.add("show");
+
+}
+
+function hideExportProgress(){
+
+document
+.getElementById("exportProgress")
+.classList.remove("show");
+
+}
+
+function updateExportProgress(
+
+current,
+
+total,
+
+guest
+
+){
+
+const percent=
+
+Math.round(
+
+(current/total)*100
+
+);
+
+document
+.getElementById("progressFill")
+.style.width=
+
+percent+"%";
+
+document
+.getElementById("progressPercent")
+.innerHTML=
+
+percent+"%";
+
+document
+.getElementById("progressGuest")
+.innerHTML=
+
+guest.name;
+
+document
+.getElementById("progressCount")
+.innerHTML=
+
+current+
+
+" / "+
+
+total;
+
+document
+.getElementById("progressText")
+.innerHTML=
+
+"Generating QR Code...";
+
+document.title=
+percent+"% - Export QR";
+
+}
+
+
