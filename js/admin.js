@@ -720,63 +720,76 @@ function showConfirm(options){
     return new Promise(resolve=>{
 
         const modal=document.getElementById("confirmModal");
-
         const title=document.getElementById("confirmTitle");
-
         const subtitle=document.getElementById("confirmSubtitle");
-
         const guest=document.getElementById("confirmGuest");
-
         const btn=document.getElementById("btnConfirm");
 
+        // =========================
+        // DELETE
+        // =========================
         if(options.type==="delete"){
 
             title.innerHTML="🗑️ Hapus Data Tamu";
-
             subtitle.innerHTML="Data berikut akan dihapus secara permanen.";
-
             btn.innerHTML="Hapus";
-
             btn.className="confirm-btn delete";
-
         }
 
-        else{
+        // =========================
+        // RESET
+        // =========================
+        else if(options.type==="reset"){
 
             title.innerHTML="🔄 Reset Check In";
-
             subtitle.innerHTML="Status check in akan dikembalikan menjadi Belum Hadir.";
-
             btn.innerHTML="Reset";
-
             btn.className="confirm-btn reset";
-
         }
 
-        guest.innerHTML=options.guestName;
+        // =========================
+        // IMPORT (INI YANG KAMU BUTUH)
+        // =========================
+        else if(options.type==="import"){
+
+            title.innerHTML="📥 Import Data Excel";
+
+            subtitle.innerHTML=`
+                Kamu akan mengimport <b>${options.total}</b> data.
+                ${options.duplicate ? `<br><span style="color:#e74c3c;">${options.duplicate} data duplikat akan dilewati</span>` : ""}
+            `;
+
+            btn.innerHTML="Import";
+            btn.className="confirm-btn import";
+        }
+
+        // default fallback
+        else {
+            title.innerHTML="Konfirmasi";
+            subtitle.innerHTML="";
+            btn.innerHTML="OK";
+            btn.className="confirm-btn";
+        }
+
+        guest.innerHTML = options.guestName || "-";
 
         modal.classList.add("show");
 
         document.getElementById("btnCancel").onclick=()=>{
 
             modal.classList.remove("show");
-
             resolve(false);
-
         };
 
         btn.onclick=()=>{
 
             modal.classList.remove("show");
-
             resolve(true);
-
         };
 
     });
 
 }
-
 function copyGuestLink(slug){
 
     const fullLink =
@@ -1175,7 +1188,32 @@ if(searchComment){
 
 }
 
+async function confirmImport(){
 
+    if(importRows.length===0){
 
+        showToast(
+            "Tidak ada data yang dapat diimport.",
+            "#e74c3c"
+        );
 
+        return;
+
+    }
+
+    const ok = await showConfirm({
+
+        type:"import",
+
+        total:importRows.length,
+
+        duplicate:duplicateRows.length
+
+    });
+
+    if(!ok) return;
+
+    importGuests();
+
+}
 
