@@ -152,6 +152,11 @@ function processExcel(rows){
 
         if(name==="") return;
 
+       const already=excelRows.some(x=>
+
+normalizeName(x.name)==normalizeName(name)
+
+);
         const duplicate = guestData.some(g=>{
 
             return normalizeName(g.name)==normalizeName(name);
