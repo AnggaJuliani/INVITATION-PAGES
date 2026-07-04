@@ -250,6 +250,11 @@ break;
               case "import":
 
     title.innerHTML = "Import Excel";
+             if(typeof initImport==="function")
+        initImport();
+
+    if(typeof initDropArea==="function")
+        initDropArea();
 
 break;
 
