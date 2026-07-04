@@ -572,7 +572,7 @@ const result = await res.json();
 
         );
 
-        resetImport();
+        resetImport(false);
 
         await loadGuests();
 
@@ -602,7 +602,7 @@ const result = await res.json();
    RESET IMPORT
 ========================================================== */
 
-function resetImport(){
+function resetImport(showMessage = true){
 
     excelRows=[];
 
@@ -620,18 +620,15 @@ function resetImport(){
     document.getElementById("importProgress").style.display="none";
 
     document.getElementById("importPreview").innerHTML=`
-
         <div class="placeholder">
-
             Silakan pilih file Excel.
-
         </div>
-
     `;
 
-    showToast("File berhasil direset");
+    if(showMessage){
+        showToast("File berhasil direset");
+    }
 }
-
 
 function initDropArea(){
 
