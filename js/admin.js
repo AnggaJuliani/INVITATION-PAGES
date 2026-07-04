@@ -235,10 +235,15 @@ function showPage(page){
 
             case "search":
 
-                title.innerHTML="Cari Tamu";
-              renderSearchList(guestData);
+    title.innerHTML = "Cari Tamu";
 
-            break;
+    if(guestData.length){
+
+        renderSearchList(guestData);
+
+    }
+
+break;
 
             case "rsvp":
 
@@ -528,17 +533,21 @@ document.addEventListener("click",(e)=>{
 ========================================================== */
 
 const refreshBtn = document.getElementById("refreshGuest");
-refreshBtn.onclick = ()=>{
 
-    withLoading(async()=>{
+if(refreshBtn){
 
-        await loadGuests();
+    refreshBtn.onclick = ()=>{
 
-        await loadDashboard();
+        withLoading(async()=>{
 
-    },"Memuat Data...");
+            await loadGuests();
+            await loadDashboard();
 
-};
+        },"Memuat Data...");
+
+    };
+
+}
 
 
 /* ==========================================================
@@ -946,7 +955,9 @@ function renderGuestSearch(){
 const keyword=searchInput.value.toLowerCase().trim();
 
 const list = guestData.filter(g=>{
-    return g.name.toLowerCase().includes(keyword);
+    return (g.name || "")
+    .toLowerCase()
+    .includes(keyword);
 });
 
 renderSearchList(list);
@@ -974,7 +985,9 @@ function renderSearchList(list){
 
                 <div>
                     <div><strong>${g.name}</strong></div>
-                    <div class="guest-link">${g.link}</div>
+                    <div class="guest-link">
+https://anggajuliani.github.io/INVITATION-PAGES/?to=${g.link}
+</div>
                 </div>
             </div>
 
@@ -1048,8 +1061,6 @@ if(closeBtn){
     };
 
 }
-
-document.getElementById("guestDetailModal").style.display="none";
 
 };
 
