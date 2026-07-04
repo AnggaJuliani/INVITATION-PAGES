@@ -1072,13 +1072,15 @@ document.getElementById("guestDetailModal").style.display="none";
 
 };
 
+let commentData = [];
 
 async function loadComments(){
 
     const res = await fetch(API_URL + "?action=adminComments");
-    const data = await res.json();
 
-    renderComments(data);
+    commentData = await res.json();
+
+    renderComments(commentData);
 
 }
 
@@ -1127,6 +1129,31 @@ function renderComments(data){
         </div>
 
         `;
+
+    });
+
+}
+
+const searchComment = document.getElementById("searchComment");
+
+if(searchComment){
+
+    searchComment.addEventListener("input",()=>{
+
+        const keyword = searchComment.value
+            .toLowerCase()
+            .trim();
+
+        const result = commentData.filter(item=>{
+
+            return (
+                item.name.toLowerCase().includes(keyword) ||
+                item.message.toLowerCase().includes(keyword)
+            );
+
+        });
+
+        renderComments(result);
 
     });
 
