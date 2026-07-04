@@ -105,24 +105,29 @@ async function withLoading(callback, text="Memproses..."){
 
 function initSidebar(){
 
-    const menuBtn =
-        document.getElementById("menuBtn");
+    const menuBtn=document.getElementById("menuBtn");
 
-    const sidebar =
-        document.querySelector(".sidebar");
+    const sidebar=document.getElementById("sidebar");
 
-    if(menuBtn){
+    const overlay=document.getElementById("sidebarOverlay");
 
-        menuBtn.onclick=()=>{
+    menuBtn.onclick=()=>{
 
-            sidebar.classList.toggle("active");
+        sidebar.classList.toggle("active");
 
-        };
+        overlay.classList.toggle("show");
 
-    }
+    };
 
-    const menus =
-        document.querySelectorAll(".menu li");
+    overlay.onclick=()=>{
+
+        sidebar.classList.remove("active");
+
+        overlay.classList.remove("show");
+
+    };
+
+    const menus=document.querySelectorAll(".menu li");
 
     menus.forEach(menu=>{
 
@@ -142,12 +147,19 @@ function initSidebar(){
 
             showPage(menu.dataset.page);
 
+            if(window.innerWidth<=900){
+
+                sidebar.classList.remove("active");
+
+                overlay.classList.remove("show");
+
+            }
+
         };
 
     });
 
 }
-
 /* ==========================================================
    Quick Action
 ========================================================== */
