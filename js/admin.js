@@ -954,71 +954,45 @@ renderSearchList(list);
 
 function renderSearchList(list){
 
-if(list.length==0){
+    if(list.length === 0){
 
-searchList.innerHTML=`
-<div style="padding:40px;text-align:center;color:#999;">
-Tidak ada tamu ditemukan
-</div>
-`;
+        searchList.innerHTML = `
+            <div style="padding:40px;text-align:center;color:#999;">
+                Tidak ada tamu ditemukan
+            </div>
+        `;
+        return;
+    }
 
-return;
+    searchList.innerHTML = list.map((g,index)=>`
+        <div class="guest-search-item" data-index="${index}">
+            <div class="guest-left">
+                <div class="guest-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
 
-}
+                <div>
+                    <div><strong>${g.name}</strong></div>
+                    <div class="guest-link">${g.link}</div>
+                </div>
+            </div>
 
-searchList.innerHTML = list.map((g,index)=>`
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    `).join("");
 
-<div class="guest-search-item"
-data-index="${index}">
+    document.querySelectorAll(".guest-search-item")
+    .forEach((item,index)=>{
 
-<div class="guest-left">
+        item.addEventListener("click",()=>{
 
-<div class="guest-avatar">
+            openGuestDetail(list[index]);
 
-<i class="fa-solid fa-user"></i>
-
-</div>
-
-<div>
-
-<div><strong>${g.name}</strong></div>
-
-<div class="guest-link">${g.link}</div>
-
-</div>
-
-</div>
-
-<i class="fa-solid fa-chevron-right"></i>
-
-</div>
-
-`).join("");
-
-}
-
-document.querySelectorAll(".guest-search-item")
-.forEach((item, index) => {
-
-    item.addEventListener("click", () => {
-
-        openGuestDetail(list[index]);
+        });
 
     });
 
-});
-
-document
-.querySelectorAll(".guest-search-item")
-.forEach((item,index)=>{
-
-    item.onclick = ()=>{
-
-        openGuestDetail(list[index]);
-
-    };
-
-});
+}
 
 function openGuestDetail(g){
 
