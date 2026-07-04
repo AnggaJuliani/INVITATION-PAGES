@@ -2520,3 +2520,39 @@ font-weight:bold;
 
 }
 
+.import-box{
+
+    border:3px dashed #d9b97c;
+
+    border-radius:20px;
+
+    padding:45px;
+
+    text-align:center;
+
+    background:#fffdf8;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    margin-bottom:25px;
+
+}
+
+.import-box:hover{
+
+    border-color:#b8894b;
+
+    background:#fffaf0;
+
+}
+
+.import-box.drag{
+
+    background:#fff3da;
+
+    transform:scale(1.02);
+
+}
+
