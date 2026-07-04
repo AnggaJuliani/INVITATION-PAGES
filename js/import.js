@@ -601,3 +601,55 @@ function resetImport(){
 
 }
 
+function setProgress(percent,text=""){
+
+    const wrap=document.getElementById("importProgress");
+
+    const fill=document.getElementById("progressFill");
+
+    const txt=document.getElementById("progressText");
+
+    if(!wrap) return;
+
+    wrap.style.display="block";
+
+    fill.style.width=percent+"%";
+
+    txt.innerHTML=text || percent+"%";
+
+}
+
+function initDropArea(){
+
+const box=document.querySelector(".import-box");
+
+const input=document.getElementById("excelFile");
+
+if(!box) return;
+
+box.addEventListener("dragover",e=>{
+
+e.preventDefault();
+
+box.classList.add("drag");
+
+});
+
+box.addEventListener("dragleave",()=>{
+
+box.classList.remove("drag");
+
+});
+
+box.addEventListener("drop",e=>{
+
+e.preventDefault();
+
+box.classList.remove("drag");
+
+input.files=e.dataTransfer.files;
+
+});
+
+}
+
