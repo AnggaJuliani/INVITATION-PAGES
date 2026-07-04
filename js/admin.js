@@ -236,6 +236,7 @@ function showPage(page){
             case "search":
 
                 title.innerHTML="Cari Tamu";
+              renderSearchList(guestData);
 
             break;
 
@@ -1021,7 +1022,7 @@ g.link
 
 );
 
-Swal.fire("Berhasil","Link berhasil disalin","success");
+showToast("Link berhasil disalin");
 
 };
 
