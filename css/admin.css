@@ -1937,3 +1937,81 @@ td button{
 
 }
 
+
+
+/* ===================================
+   ADD GUEST BUTTON
+=================================== */
+
+.add-guest-btn{
+
+    width:100%;
+
+    margin-top:25px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    background:linear-gradient(
+        135deg,
+        #d6a55c,
+        #b8894b
+    );
+
+    box-shadow:
+        0 12px 30px rgba(184,137,75,.30);
+
+    transition:.25s;
+
+}
+
+.add-guest-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 20px 40px rgba(184,137,75,.45);
+
+}
+
+.add-guest-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.add-guest-btn i{
+
+    font-size:18px;
+
+}
+
+.add-guest-btn:disabled{
+
+    opacity:.75;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
