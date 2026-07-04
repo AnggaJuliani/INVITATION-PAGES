@@ -2223,3 +2223,62 @@ border:1px solid #ddd;
 
 
 
+/* ===========================
+   Close Button Guest Modal
+=========================== */
+
+#closeGuestModal{
+
+    position:absolute;
+
+    top:18px;
+    right:18px;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#e53935;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:50%;
+
+    font-size:26px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 18px rgba(229,57,53,.35);
+
+    transition:.25s;
+
+    user-select:none;
+
+    z-index:999;
+
+}
+
+#closeGuestModal:hover{
+
+    background:#c62828;
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 12px 24px rgba(229,57,53,.45);
+
+}
+
+#closeGuestModal:active{
+
+    transform:scale(.95);
+
+}
