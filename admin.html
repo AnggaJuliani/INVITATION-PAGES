@@ -95,6 +95,11 @@
 
         </li>
 
+        <li data-page="import">
+    <i class="fa-solid fa-file-import"></i>
+    <span>Import Excel</span>
+</li>
+
         <li data-page="rsvp">
 
             <i class="fa-solid fa-calendar-check"></i>
@@ -516,6 +521,41 @@ Memuat data tamu...
             <div class="placeholder">
                 Mulai mengetik nama tamu...
             </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <section id="importPage" class="page">
+
+    <h1>Import Daftar Tamu</h1>
+
+    <div class="import-box">
+
+        <input
+            type="file"
+            id="excelFile"
+            accept=".xlsx,.xls">
+
+        <button
+            id="btnPreview"
+            class="primary-btn">
+
+            Preview Excel
+
+        </button>
+
+    </div>
+
+    <div id="importSummary"></div>
+
+    <div id="importPreview">
+
+        <div class="placeholder">
+
+            Silakan pilih file Excel.
 
         </div>
 
