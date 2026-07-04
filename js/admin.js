@@ -1030,6 +1030,3 @@ if(e.target.id=="guestDetailModal")
 document.getElementById("guestDetailModal").style.display="none";
 
 };
-
-
-
