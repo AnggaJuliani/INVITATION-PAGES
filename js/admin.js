@@ -23,7 +23,7 @@ async function initDashboard(){
     initSidebar();
 
     initQuickAction();
-
+initGuestButtons();
    initAddGuest();
 
     try{
@@ -829,7 +829,7 @@ async function addGuest(){
 
     if(!name){
 
-        alert("Masukkan nama tamu.");
+        showToast("Masukkan nama tamu.");
 
         return;
 
@@ -889,7 +889,39 @@ async function addGuest(){
 
 }
 
+/* ==========================================================
+   DATA TAMU BUTTON
+========================================================== */
 
+function initGuestButtons(){
 
+    const addBtn=document.querySelector(".add-btn");
 
+    if(addBtn){
+
+        addBtn.addEventListener("click",()=>{
+
+            // Pindah ke halaman Tambah Tamu
+            showPage("add");
+
+            // Sinkronkan menu sidebar
+            document
+                .querySelectorAll(".menu li")
+                .forEach(li=>li.classList.remove("active"));
+
+            const menu=document.querySelector(
+                '.menu li[data-page="add"]'
+            );
+
+            if(menu){
+
+                menu.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+}
 
