@@ -925,6 +925,109 @@ function initGuestButtons(){
 
 }
 
+const searchInput=document.getElementById("searchGuestInput");
 
+const searchList=document.getElementById("guestSearchList");
 
+searchInput.oninput=renderGuestSearch;
+
+function renderGuestSearch(){
+
+const keyword=searchInput.value.toLowerCase().trim();
+
+const list=guests.filter(g=>{
+
+return g.name.toLowerCase().includes(keyword);
+
+});
+
+renderSearchList(list);
+
+}
+
+function renderSearchList(list){
+
+if(list.length==0){
+
+searchList.innerHTML=`
+<div style="padding:40px;text-align:center;color:#999;">
+Tidak ada tamu ditemukan
+</div>
+`;
+
+return;
+
+}
+
+searchList.innerHTML=list.map(g=>`
+
+<div class="guest-search-item"
+
+onclick='openGuestDetail(${JSON.stringify(g)})'>
+
+<div class="guest-left">
+
+<div class="guest-avatar">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div>
+
+<div><strong>${g.name}</strong></div>
+
+<div class="guest-link">${g.link}</div>
+
+</div>
+
+</div>
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</div>
+
+`).join("");
+
+}
+
+function openGuestDetail(g){
+
+document.getElementById("guestDetailModal").style.display="flex";
+
+document.getElementById("detailGuestName").innerHTML=g.name;
+
+document.getElementById("detailGuestQR").src=g.qr;
+
+document.getElementById("detailGuestLink").value=g.link;
+
+document.getElementById("copyGuestLinkBtn").onclick=()=>{
+
+navigator.clipboard.writeText(g.link);
+
+Swal.fire("Berhasil","Link berhasil disalin","success");
+
+};
+
+document.getElementById("openGuestBtn").onclick=()=>{
+
+window.open(g.link,"_blank");
+
+};
+
+}
+
+document.getElementById("closeGuestModal").onclick=()=>{
+
+document.getElementById("guestDetailModal").style.display="none";
+
+};
+
+window.onclick=e=>{
+
+if(e.target.id=="guestDetailModal")
+
+document.getElementById("guestDetailModal").style.display="none";
+
+};
 
