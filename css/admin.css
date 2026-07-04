@@ -2395,3 +2395,90 @@ border:1px solid #ddd;
 
 }
 
+
+.import-toolbar{
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:20px;
+
+align-items:center;
+
+}
+
+.import-search{
+
+flex:1;
+
+padding:12px;
+
+border-radius:12px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+}
+
+.import-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:#fff;
+
+}
+
+.import-table th{
+
+background:#b8894b;
+
+color:white;
+
+padding:14px;
+
+}
+
+.import-table td{
+
+padding:12px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.badge-success{
+
+background:#2ecc71;
+
+color:#fff;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.badge-danger{
+
+background:#e74c3c;
+
+color:#fff;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
