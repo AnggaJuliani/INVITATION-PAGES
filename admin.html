@@ -657,13 +657,61 @@ Memuat data tamu...
 
 <section id="exportPage" class="page">
 
-    <h1>Export</h1>
+<h1>Export Center</h1>
 
-    <div class="placeholder">
+<div class="export-grid">
 
-        Download Excel atau CSV.
+    <div class="export-card" id="btnOpenSheet">
+
+        <i class="fa-solid fa-table"></i>
+
+        <h3>Google Spreadsheet</h3>
+
+        <p>Database utama</p>
 
     </div>
+
+    <div class="export-card" id="btnGuestExcel">
+
+        <i class="fa-solid fa-file-excel"></i>
+
+        <h3>Guest Excel</h3>
+
+        <p>Download Data Tamu</p>
+
+    </div>
+
+    <div class="export-card" id="btnRSVPExcel">
+
+        <i class="fa-solid fa-file-excel"></i>
+
+        <h3>RSVP Excel</h3>
+
+        <p>Download Data RSVP</p>
+
+    </div>
+
+    <div class="export-card disabled">
+
+        <i class="fa-solid fa-file-pdf"></i>
+
+        <h3>PDF Report</h3>
+
+        <p>Coming Soon</p>
+
+    </div>
+
+    <div class="export-card disabled">
+
+        <i class="fa-solid fa-file-zipper"></i>
+
+        <h3>QR ZIP</h3>
+
+        <p>Coming Soon</p>
+
+    </div>
+
+</div>
 
 </section>
 
@@ -704,10 +752,15 @@ Memuat data tamu...
 </main>
 
 </div>
+<!-- Excel -->
+<script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+
+<!-- Save File -->
+<script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="js/admin.js"></script>
     <script src="js/import.js"></script>
-
+<script src="js/export.js"></script>
 
     <div id="qrToast" class="qrtoast">
 
