@@ -519,8 +519,6 @@ async function importGuests(){
     })
 
 });
-       
-        });
 
         const result=await res.json();
 
