@@ -1073,3 +1073,89 @@ document.getElementById("guestDetailModal").style.display="none";
 };
 
 
+async function loadComments(){
+
+    const res = await fetch(API_URL + "?action=adminComments");
+    const data = await res.json();
+
+    renderComments(data);
+
+}
+
+function renderComments(data){
+
+    const list = document.getElementById("commentList");
+
+    if(!data.length){
+
+        list.innerHTML = `
+        <div class="empty-comment">
+            Belum ada ucapan.
+        </div>`;
+
+        return;
+
+    }
+
+    list.innerHTML = "";
+
+    data.forEach(item=>{
+
+        list.innerHTML += `
+
+        <div class="comment-card">
+
+            <div class="comment-header">
+
+                <span class="comment-name">
+                    ${item.name}
+                </span>
+
+                <span class="comment-date">
+                    ${item.date}
+                </span>
+
+            </div>
+
+            <div class="comment-message">
+                ${item.message}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+let allComments = [];
+
+async function loadComments(){
+
+    const res = await fetch(API_URL + "?action=adminComments");
+
+    allComments = await res.json();
+
+    renderComments(allComments);
+
+}
+
+document
+.getElementById("searchComment")
+.addEventListener("input",function(){
+
+    const key=this.value.toLowerCase();
+
+    const result=allComments.filter(item=>
+
+        item.name.toLowerCase().includes(key) ||
+
+        item.message.toLowerCase().includes(key)
+
+    );
+
+    renderComments(result);
+
+});
+
