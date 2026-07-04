@@ -247,15 +247,15 @@ break;
 
             case "rsvp":
 
-                title.innerHTML="RSVP";
+    title.innerHTML = "RSVP";
 
-                if(typeof loadRSVP==="function"){
+    if(typeof loadComments === "function"){
 
-                    loadRSVP();
+        loadComments();
 
-                }
+    }
 
-            break;
+break;
 
             case "export":
 
