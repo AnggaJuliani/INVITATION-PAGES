@@ -925,20 +925,27 @@ function initGuestButtons(){
 
 }
 
-const searchInput=document.getElementById("searchGuestInput");
+const searchInput =
+document.getElementById("searchGuestInput");
 
-const searchList=document.getElementById("guestSearchList");
+const searchList =
+document.getElementById("guestSearchList");
 
-searchInput.oninput=renderGuestSearch;
+if(searchInput){
+
+    searchInput.addEventListener(
+        "input",
+        renderGuestSearch
+    );
+
+}
 
 function renderGuestSearch(){
 
 const keyword=searchInput.value.toLowerCase().trim();
 
-const list=guests.filter(g=>{
-
-return g.name.toLowerCase().includes(keyword);
-
+const list = guestData.filter(g=>{
+    return g.name.toLowerCase().includes(keyword);
 });
 
 renderSearchList(list);
@@ -959,11 +966,10 @@ return;
 
 }
 
-searchList.innerHTML=list.map(g=>`
+searchList.innerHTML = list.map((g,index)=>`
 
 <div class="guest-search-item"
-
-onclick='openGuestDetail(${JSON.stringify(g)})'>
+data-index="${index}">
 
 <div class="guest-left">
 
@@ -991,33 +997,71 @@ onclick='openGuestDetail(${JSON.stringify(g)})'>
 
 }
 
+document
+.querySelectorAll(".guest-search-item")
+.forEach((item,index)=>{
+
+    item.onclick = ()=>{
+
+        openGuestDetail(list[index]);
+
+    };
+
+});
+
 function openGuestDetail(g){
 
-document.getElementById("guestDetailModal").style.display="flex";
+const modal = document.getElementById("guestDetailModal");
+
+if(!modal) return;
+
+modal.style.display="flex";
 
 document.getElementById("detailGuestName").innerHTML=g.name;
 
-document.getElementById("detailGuestQR").src=g.qr;
+document.getElementById("detailGuestQR").src =
+"https://quickchart.io/qr?size=300&text=" +
+encodeURIComponent(g.qr);
 
-document.getElementById("detailGuestLink").value=g.link;
+document.getElementById("detailGuestLink").value =
+"https://anggajuliani.github.io/INVITATION-PAGES/?to=" +
+g.link;
 
 document.getElementById("copyGuestLinkBtn").onclick=()=>{
 
-navigator.clipboard.writeText(g.link);
+navigator.clipboard.writeText(
+
+"https://anggajuliani.github.io/INVITATION-PAGES/?to=" +
+g.link
+
+);
 
 Swal.fire("Berhasil","Link berhasil disalin","success");
 
 };
 
-document.getElementById("openGuestBtn").onclick=()=>{
+document.getElementById("openGuestBtn").onclick = () => {
 
-window.open(g.link,"_blank");
+    window.open(
+        "https://anggajuliani.github.io/INVITATION-PAGES/?to=" + g.link,
+        "_blank"
+    );
 
 };
+const closeBtn =
+document.getElementById("closeGuestModal");
+
+if(closeBtn){
+
+    closeBtn.onclick=()=>{
+
+        document
+        .getElementById("guestDetailModal")
+        .style.display="none";
+
+    };
 
 }
-
-document.getElementById("closeGuestModal").onclick=()=>{
 
 document.getElementById("guestDetailModal").style.display="none";
 
@@ -1030,3 +1074,6 @@ if(e.target.id=="guestDetailModal")
 document.getElementById("guestDetailModal").style.display="none";
 
 };
+
+
+
