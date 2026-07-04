@@ -25,7 +25,7 @@ async function initDashboard(){
     initQuickAction();
 initGuestButtons();
    initAddGuest();
-   initImportExcel();
+   initImport();
 
     try{
 
