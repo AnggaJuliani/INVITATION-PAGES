@@ -245,6 +245,12 @@ function showPage(page){
 
 break;
 
+              case "import":
+
+    title.innerHTML = "Import Excel";
+
+break;
+
             case "rsvp":
 
     title.innerHTML = "RSVP";
