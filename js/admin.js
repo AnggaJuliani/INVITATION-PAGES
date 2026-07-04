@@ -26,6 +26,7 @@ async function initDashboard(){
 initGuestButtons();
    initAddGuest();
    initImport();
+   initDropArea();
 
     try{
 
