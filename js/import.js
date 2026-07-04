@@ -43,10 +43,7 @@ function previewExcel(){
 
     const file = input.files[0];
 
-    const ext = file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
+if(!/\.(xlsx|xls)$/i.test(file.name)){
 
     if(ext!="xlsx" && ext!="xls"){
 
@@ -152,9 +149,10 @@ function processExcel(rows){
 
         if(name==="") return;
 
-       const already=excelRows.some(x=>
+       const excelNames = new Set();
+       const already = excelNames.has(normalizeName(name));
 
-normalizeName(x.name)==normalizeName(name)
+excelNames.add(normalizeName(name));
 
 );
        const duplicate=
@@ -520,8 +518,13 @@ async function importGuests(){
 
 });
 
-        const result=await res.json();
+       if(!res.ok){
 
+    throw new Error("HTTP " + res.status);
+
+}
+
+const result = await res.json();
         hideLoading();
 
         if(btn){
