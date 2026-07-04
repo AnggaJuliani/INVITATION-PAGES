@@ -545,6 +545,7 @@ async function exportQRZip(){
 
         hideExportProgress();
         resetExportProgress();
+        document.title="Wedding Dashboard";
 
     }
 
@@ -555,7 +556,7 @@ async function exportQRZip(){
         hideLoading();
 
         hideExportProgress();
-
+document.title="Wedding Dashboard";
         showToast("Export gagal","#e74c3c");
 
     }
@@ -721,6 +722,10 @@ guest.qr.toUpperCase(),
 
 async function generateQRZip(guests){
 
+    const zip=new JSZip();
+
+    const folder=zip.folder("QR Code");
+
     const total=guests.length;
 
     for(let i=0;i<total;i++){
@@ -739,14 +744,49 @@ async function generateQRZip(guests){
 
         const canvas=
 
-        await createGuestCard(
+            await createGuestCard(guest);
 
-            guest
+        const blob=
+
+            await new Promise(resolve=>
+
+                canvas.toBlob(
+
+                    resolve,
+
+                    "image/png",
+
+                    1
+
+                )
+
+            );
+
+        const arrayBuffer=
+
+            await blob.arrayBuffer();
+
+        const safeName=
+
+            guest.name
+
+            .replace(/[\\/:*?"<>|]/g,"")
+
+            .trim();
+
+        folder.file(
+
+            guest.qr.toUpperCase()
+
+            +" - "+
+
+            safeName+
+
+            ".png",
+
+            arrayBuffer
 
         );
-
-        // nanti Part 3C
-        // canvas langsung masuk ZIP
 
         await new Promise(r=>
 
@@ -756,16 +796,57 @@ async function generateQRZip(guests){
 
     }
 
-    showToast(
+    document.getElementById(
 
-        "Semua QR selesai dibuat"
+        "progressText"
+
+    ).innerHTML=
+
+    "Mengompresi ZIP...";
+
+    document.getElementById(
+
+        "progressGuest"
+
+    ).innerHTML=
+
+    "Harap tunggu...";
+
+    const content=
+
+        await zip.generateAsync(
+
+            {
+
+                type:"blob",
+
+                compression:"DEFLATE",
+
+                compressionOptions:{
+
+                    level:6
+
+                }
+
+            }
+
+        );
+
+    saveAs(
+
+        content,
+
+        "Wedding_QR_Code.zip"
 
     );
-    document.title=
-"Wedding Dashboard";
+
+    showToast(
+
+        "QR ZIP berhasil dibuat"
+
+    );
 
 }
-
 function showExportProgress(){
 
 document
