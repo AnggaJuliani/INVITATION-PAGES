@@ -44,42 +44,31 @@ function previewExcel(){
     const file = input.files[0];
 
 if(!/\.(xlsx|xls)$/i.test(file.name)){
+    showToast("File harus Excel (.xlsx / .xls)","#e74c3c");
+    return;
+}
 
-    if(ext!="xlsx" && ext!="xls"){
+showLoading("Membaca File Excel...");
 
-        showToast("File harus Excel (.xlsx / .xls)","#e74c3c");
+const reader=new FileReader();
 
-        return;
+reader.onload=function(e){
+
+    try{
+
+        readWorkbook(e.target.result);
+
+    }catch(err){
+
+        hideLoading();
+        console.error(err);
+        showToast("Format Excel tidak valid","#e74c3c");
 
     }
 
-    showLoading("Membaca File Excel...");
+};
 
-    const reader = new FileReader();
-
-    reader.onload=function(e){
-
-        try{
-
-            readWorkbook(e.target.result);
-
-        }
-
-        catch(err){
-
-            hideLoading();
-
-            console.error(err);
-
-            showToast("Format Excel tidak valid","#e74c3c");
-
-        }
-
-    };
-
-    reader.readAsArrayBuffer(file);
-
-}
+reader.readAsArrayBuffer(file);
 
 /* ==========================================================
    READ WORKBOOK
@@ -123,18 +112,16 @@ function readWorkbook(buffer){
 
 function processExcel(rows){
 
-    excelRows=[];
+    excelRows = [];
+    importRows = [];
+    duplicateRows = [];
 
-    importRows=[];
-
-    duplicateRows=[];
+    const excelNames = new Set();
 
     if(rows.length===0){
 
         hideLoading();
-
         showToast("Excel kosong","#e74c3c");
-
         return;
 
     }
@@ -142,30 +129,25 @@ function processExcel(rows){
     rows.forEach((row,index)=>{
 
         if(index===0) return;
-
         if(!row) return;
 
         const name = String(row[0] || "").trim();
 
         if(name==="") return;
 
-       const excelNames = new Set();
-       const already = excelNames.has(normalizeName(name));
+        const key = normalizeName(name);
 
-excelNames.add(normalizeName(name));
+        const already = excelNames.has(key);
 
-);
-       const duplicate=
+        excelNames.add(key);
 
-already ||
+        const duplicate =
+            already ||
+            guestData.some(g =>
+                normalizeName(g.name) === key
+            );
 
-guestData.some(g=>
-
-normalizeName(g.name)==normalizeName(name)
-
-);
-
-        const item={
+        const item = {
 
             no:index,
 
@@ -181,9 +163,7 @@ normalizeName(g.name)==normalizeName(name)
 
             duplicateRows.push(item);
 
-        }
-
-        else{
+        }else{
 
             importRows.push(item);
 
@@ -196,7 +176,6 @@ normalizeName(g.name)==normalizeName(name)
     hideLoading();
 
 }
-
 /* ==========================================================
    NORMALIZE
 ========================================================== */
