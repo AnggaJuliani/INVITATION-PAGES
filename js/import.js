@@ -471,3 +471,133 @@ ${duplicateRows.length} data duplikat akan dilewati.`
 
 }
 
+/* ==========================================================
+   IMPORT DATA KE GOOGLE SHEET
+========================================================== */
+
+async function importGuests(){
+
+    if(importRows.length===0){
+
+        showToast("Tidak ada data untuk diimport","#e74c3c");
+
+        return;
+
+    }
+
+    try{
+
+        showLoading("Mengimport " + importRows.length + " tamu...");
+
+        const btn=document.getElementById("btnImportExcel");
+
+        if(btn){
+
+            btn.disabled=true;
+            btn.innerHTML="Mengimport...";
+        }
+
+        const res=await fetch(API_URL,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                action:"importGuests",
+
+                guests:importRows
+
+            })
+
+        });
+
+        const result=await res.json();
+
+        hideLoading();
+
+        if(btn){
+
+            btn.disabled=false;
+            btn.innerHTML="Import ke Google Sheet";
+        }
+
+        if(!result.status){
+
+            showToast(result.message || "Import gagal","#e74c3c");
+
+            return;
+
+        }
+
+        showToast(
+
+            "✔ Berhasil mengimport " +
+
+            result.total +
+
+            " tamu."
+
+        );
+
+        resetImport();
+
+        await loadGuests();
+
+        await loadDashboard();
+
+    }
+
+    catch(err){
+
+        hideLoading();
+
+        console.error(err);
+
+        showToast(
+
+            "Gagal menghubungi server",
+
+            "#e74c3c"
+
+        );
+
+    }
+
+}
+
+/* ==========================================================
+   RESET IMPORT
+========================================================== */
+
+function resetImport(){
+
+    excelRows=[];
+
+    importRows=[];
+
+    duplicateRows=[];
+
+    document.getElementById("excelFile").value="";
+
+    document.getElementById("importSummary").innerHTML="";
+
+    document.getElementById("importPreview").innerHTML=`
+
+        <div class="placeholder">
+
+            Import berhasil.
+
+            <br><br>
+
+            Silakan pilih file lain.
+
+        </div>
+
+    `;
+
+}
+
