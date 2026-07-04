@@ -699,29 +699,49 @@ if(searchGuest){
 
 }
 
-function showToast(text,color="#27ae60"){
+let toastTimer = null;
 
-    const toast=document.createElement("div");
+function showToast(text, color = "#27ae60"){
 
-    toast.className="toast";
+    let toast = document.getElementById("globalToast");
 
-    toast.style.background=color;
+    if(!toast){
 
-    toast.innerHTML=text;
+        toast = document.createElement("div");
 
-    document.body.appendChild(toast);
+        toast.id = "globalToast";
+
+        toast.className = "toast";
+
+        document.body.appendChild(toast);
+
+    }
+
+    toast.classList.remove("show");
+
+    toast.style.background = color;
+
+    toast.innerHTML = text;
+
+    if(toastTimer){
+
+        clearTimeout(toastTimer);
+
+    }
 
     requestAnimationFrame(()=>{
 
-        toast.classList.add("show");
+        requestAnimationFrame(()=>{
+
+            toast.classList.add("show");
+
+        });
 
     });
 
-    setTimeout(()=>{
+    toastTimer = setTimeout(()=>{
 
         toast.classList.remove("show");
-
-        setTimeout(()=>toast.remove(),300);
 
     },2500);
 
@@ -938,15 +958,17 @@ if(exists){
 
         }else{
 
-            alert(data.message);
-
+            showToast(data.message, "#e74c3c");
         }
 
     }catch(err){
 
         console.error(err);
 
-        alert("Gagal menambahkan tamu.");
+        showToast(
+    "Gagal menambahkan tamu.",
+    "#e74c3c"
+);
 
     }
 
