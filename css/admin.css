@@ -2357,3 +2357,41 @@ border:1px solid #ddd;
 
 }
 
+.import-box{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+#importPreview{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    min-height:300px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+#importSummary{
+
+    margin:20px 0;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
