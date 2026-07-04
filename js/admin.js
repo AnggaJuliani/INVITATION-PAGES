@@ -1086,39 +1086,42 @@ function renderComments(data){
 
     const list = document.getElementById("commentList");
 
-    if(!data.length){
+    if(data.length===0){
 
-        list.innerHTML = `
-        <div class="empty-comment">
+        list.innerHTML=`
+        <div class="placeholder">
             Belum ada ucapan.
-        </div>`;
+        </div>
+        `;
 
         return;
 
     }
 
-    list.innerHTML = "";
+    list.innerHTML="";
 
     data.forEach(item=>{
 
-        list.innerHTML += `
+        list.innerHTML+=`
 
         <div class="comment-card">
 
             <div class="comment-header">
 
-                <span class="comment-name">
-                    ${item.name}
-                </span>
+                <div class="comment-name">
+                    👤 ${item.name}
+                </div>
 
-                <span class="comment-date">
-                    ${item.date}
-                </span>
+                <div class="comment-date">
+                    🕒 ${item.date}
+                </div>
 
             </div>
 
             <div class="comment-message">
+
                 ${item.message}
+
             </div>
 
         </div>
@@ -1128,34 +1131,3 @@ function renderComments(data){
     });
 
 }
-
-let allComments = [];
-
-async function loadComments(){
-
-    const res = await fetch(API_URL + "?action=adminComments");
-
-    allComments = await res.json();
-
-    renderComments(allComments);
-
-}
-
-document
-.getElementById("searchComment")
-.addEventListener("input",function(){
-
-    const key=this.value.toLowerCase();
-
-    const result=allComments.filter(item=>
-
-        item.name.toLowerCase().includes(key) ||
-
-        item.message.toLowerCase().includes(key)
-
-    );
-
-    renderComments(result);
-
-});
-
