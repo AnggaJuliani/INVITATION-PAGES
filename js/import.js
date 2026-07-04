@@ -467,36 +467,38 @@ function initImportButton(){
    CONFIRM IMPORT
 ========================================================== */
 
-function confirmImport(){
+/* ==========================================================
+   CONFIRM IMPORT
+========================================================== */
+
+async function confirmImport(){
 
     if(importRows.length===0){
 
         showToast(
-
             "Tidak ada data yang dapat diimport.",
-
             "#e74c3c"
-
         );
 
         return;
 
     }
 
-    const yes=confirm(
+    const ok = await showConfirm({
 
-`Import ${importRows.length} tamu baru ?
+        type:"import",
 
-${duplicateRows.length} data duplikat akan dilewati.`
+        total:importRows.length,
 
-    );
+        duplicate:duplicateRows.length
 
-    if(!yes) return;
+    });
+
+    if(!ok) return;
 
     importGuests();
 
 }
-
 /* ==========================================================
    IMPORT DATA KE GOOGLE SHEET
 ========================================================== */
