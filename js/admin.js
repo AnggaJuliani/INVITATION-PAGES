@@ -886,6 +886,22 @@ async function addGuest(){
 
     }
 
+
+   const key = normalizeName(name);
+
+const exists = guestData.some(g =>
+    normalizeName(g.name) === key
+);
+
+if(exists){
+
+    showToast(
+        "Nama tamu sudah ada.",
+        "#e74c3c"
+    );
+
+    return;
+}
     const btn=document.getElementById("btnAddGuest");
 
     btn.disabled=true;
