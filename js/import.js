@@ -9,11 +9,51 @@ let duplicateRows = [];
 
 function initImport(){
 
-    const btn = document.getElementById("btnPreview");
+    const btn=document.getElementById("btnPreview");
 
-    if(!btn) return;
+    if(btn){
 
-    btn.addEventListener("click", previewExcel);
+        btn.onclick=previewExcel;
+
+    }
+
+    const choose=document.getElementById("btnChooseExcel");
+
+    const input=document.getElementById("excelFile");
+
+    if(choose && input){
+
+        choose.onclick=()=>input.click();
+
+    }
+
+    input.onchange=showSelectedFile;
+
+}
+
+function showSelectedFile(){
+
+    const input=document.getElementById("excelFile");
+
+    const info=document.getElementById("selectedFile");
+
+    if(!input.files.length){
+
+        info.innerHTML="Belum ada file dipilih";
+
+        return;
+
+    }
+
+    const file=input.files[0];
+
+    info.innerHTML=`
+        <i class="fa-solid fa-file-excel"></i>
+
+        <strong>${file.name}</strong>
+
+        (${(file.size/1024).toFixed(1)} KB)
+    `;
 
 }
 
@@ -570,75 +610,78 @@ function resetImport(){
 
     document.getElementById("excelFile").value="";
 
+    document.getElementById("selectedFile").innerHTML=
+    "Belum ada file dipilih";
+
     document.getElementById("importSummary").innerHTML="";
+
+    document.getElementById("importProgress").style.display="none";
 
     document.getElementById("importPreview").innerHTML=`
 
         <div class="placeholder">
 
-            Import berhasil.
-
-            <br><br>
-
-            Silakan pilih file lain.
+            Silakan pilih file Excel.
 
         </div>
 
     `;
 
+    showToast("File berhasil direset");
 }
 
-function setProgress(percent,text=""){
-
-    const wrap=document.getElementById("importProgress");
-
-    const fill=document.getElementById("progressFill");
-
-    const txt=document.getElementById("progressText");
-
-    if(!wrap) return;
-
-    wrap.style.display="block";
-
-    fill.style.width=percent+"%";
-
-    txt.innerHTML=text || percent+"%";
-
-}
 
 function initDropArea(){
 
-const box=document.querySelector(".import-box");
+    const box=document.getElementById("dropArea");
 
-const input=document.getElementById("excelFile");
+    const input=document.getElementById("excelFile");
 
-if(!box) return;
+    if(!box || !input) return;
 
-box.addEventListener("dragover",e=>{
+    box.onclick=(e)=>{
 
-e.preventDefault();
+        if(e.target.tagName!=="BUTTON"){
 
-box.classList.add("drag");
+            input.click();
 
-});
+        }
 
-box.addEventListener("dragleave",()=>{
+    };
 
-box.classList.remove("drag");
+    box.addEventListener("dragover",(e)=>{
 
-});
+        e.preventDefault();
 
-box.addEventListener("drop",e=>{
+        box.classList.add("drag");
 
-e.preventDefault();
+    });
 
-box.classList.remove("drag");
+    box.addEventListener("dragleave",()=>{
 
-input.files=e.dataTransfer.files;
+        box.classList.remove("drag");
 
-});
+    });
+
+    box.addEventListener("drop",(e)=>{
+
+        e.preventDefault();
+
+        box.classList.remove("drag");
+
+        input.files=e.dataTransfer.files;
+
+        showSelectedFile();
+
+    });
 
 }
 
+const reset=document.getElementById("btnResetImport");
 
+if(reset){
+
+    reset.onclick=resetImport;
+
+}
 
