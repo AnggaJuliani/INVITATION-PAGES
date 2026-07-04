@@ -506,22 +506,20 @@ async function importGuests(){
             btn.innerHTML="Mengimport...";
         }
 
-        const res=await fetch(API_URL,{
+        const res = await fetch(API_URL,{
 
-            method:"POST",
+    method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+    body:JSON.stringify({
 
-            body:JSON.stringify({
+        action:"importGuests",
 
-                action:"importGuests",
+        guests:importRows
 
-                guests:importRows
+    })
 
-            })
-
+});
+       
         });
 
         const result=await res.json();
