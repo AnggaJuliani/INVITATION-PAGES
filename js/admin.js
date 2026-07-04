@@ -25,6 +25,7 @@ async function initDashboard(){
     initQuickAction();
 initGuestButtons();
    initAddGuest();
+   initImportExcel();
 
     try{
 
@@ -339,6 +340,9 @@ async function refreshDashboard(){
 ========================================================== */
 
 let guestData = [];
+let excelData = [];
+let importData = [];
+let duplicateData = [];
 
 /* ==========================================================
    LOAD GUESTS
