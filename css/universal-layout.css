@@ -1,0 +1,1090 @@
+/*****************************************************************
+    UNIVERSAL RESPONSIVE ENGINE
+    PART 1
+    Layout & Viewport
+******************************************************************/
+
+/*==================================================
+ROOT RESPONSIVE
+==================================================*/
+
+:root{
+
+    --app-width:430px;
+    --content-max:1180px;
+
+    --space-xs:clamp(6px,.8vw,10px);
+    --space-sm:clamp(12px,1.5vw,18px);
+    --space-md:clamp(18px,2vw,28px);
+    --space-lg:clamp(28px,3vw,52px);
+    --space-xl:clamp(48px,5vw,90px);
+
+}
+
+/*==================================================
+VIEWPORT FIX
+==================================================*/
+
+html{
+
+    width:100%;
+    min-height:100%;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+
+}
+
+body{
+
+    width:100%;
+    min-height:100dvh;
+    min-height:100svh;
+
+    overflow-x:hidden;
+
+}
+
+/*==================================================
+IMAGE SAFETY
+==================================================*/
+
+img{
+
+    display:block;
+    max-width:100%;
+    height:auto;
+
+}
+
+/*==================================================
+VIDEO / IFRAME
+==================================================*/
+
+video,
+iframe{
+
+    max-width:100%;
+    display:block;
+
+}
+
+/*==================================================
+SECTION
+==================================================*/
+
+section{
+
+    width:100%;
+    position:relative;
+
+}
+
+/*==================================================
+CONTAINER
+==================================================*/
+
+.inv-container{
+
+    width:min(92%,var(--content-max));
+
+    margin-inline:auto;
+
+}
+
+/*==================================================
+PREVENT OVERFLOW
+==================================================*/
+
+*{
+
+    min-width:0;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a{
+
+    overflow-wrap:break-word;
+    word-break:normal;
+
+}
+
+/*==================================================
+GRID FIX
+==================================================*/
+
+.inv-gallery-grid,
+.inv-bank-grid,
+.inv-countdown-grid{
+
+    width:100%;
+
+}
+
+/*==================================================
+PHOTO
+==================================================*/
+
+.inv-photo-frame{
+
+    aspect-ratio:360 / 460;
+
+}
+
+.inv-photo{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+/*==================================================
+MAP
+==================================================*/
+
+.inv-map-box{
+
+    width:100%;
+    overflow:hidden;
+
+}
+
+.inv-map-box iframe{
+
+    width:100%;
+    height:100%;
+
+}
+
+/*==================================================
+COUNTDOWN
+==================================================*/
+
+.inv-count-item{
+
+    min-width:0;
+
+}
+
+.inv-count-item h2{
+
+    font-size:clamp(2rem,5vw,4rem);
+
+}
+
+/*==================================================
+PROFILE
+==================================================*/
+
+.inv-profile-content{
+
+    max-width:100%;
+
+}
+
+.inv-profile-name{
+
+    font-size:clamp(2.3rem,5vw,4rem);
+
+}
+
+/*==================================================
+TEXT
+==================================================*/
+
+.inv-title{
+
+    font-size:clamp(42px,7vw,92px);
+
+}
+
+.inv-section-title{
+
+    font-size:clamp(2rem,4vw,2.8rem);
+
+}
+
+.inv-text{
+
+    font-size:clamp(.95rem,2vw,1.08rem);
+
+}
+
+.inv-desc{
+
+    font-size:clamp(1rem,2vw,1.25rem);
+
+}
+
+/*==================================================
+BUTTON
+==================================================*/
+
+.inv-btn,
+.btn-open{
+
+    max-width:100%;
+
+}
+
+/*==================================================
+INPUT
+==================================================*/
+
+input,
+textarea,
+select{
+
+    max-width:100%;
+
+}
+
+/*==================================================
+SAFE AREA
+==================================================*/
+
+body{
+
+    padding-left:max(env(safe-area-inset-left),0px);
+
+    padding-right:max(env(safe-area-inset-right),0px);
+
+}
+
+/*==================================================
+TABLET
+==================================================*/
+
+@media (max-width:992px){
+
+    .inv-container{
+
+        width:min(94%,900px);
+
+    }
+
+}
+
+/*==================================================
+MOBILE
+==================================================*/
+
+@media (max-width:768px){
+
+    .inv-container{
+
+        width:min(94%,640px);
+
+    }
+
+    .inv-profile{
+
+        gap:40px;
+
+    }
+
+}
+
+/*==================================================
+SMALL MOBILE
+==================================================*/
+
+@media (max-width:480px){
+
+    .inv-container{
+
+        width:min(94%,430px);
+
+    }
+
+    .inv-gallery-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .inv-bank-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .inv-countdown-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+/*==================================================
+VERY SMALL DEVICE
+==================================================*/
+
+@media (max-width:360px){
+
+    .inv-container{
+
+        width:95%;
+
+    }
+
+}
+
+/*==================================================
+LANDSCAPE PHONE
+==================================================*/
+
+@media (orientation:landscape) and (max-height:500px){
+
+    section{
+
+        padding-top:70px;
+        padding-bottom:70px;
+
+    }
+
+}
+
+/*****************************************************************
+    UNIVERSAL RESPONSIVE ENGINE
+    PART 2
+    Layout Consistency Engine
+******************************************************************/
+
+/*==================================================
+SECTION SPACING
+==================================================*/
+
+section{
+
+    padding-top:clamp(90px,10vw,160px);
+    padding-bottom:clamp(90px,10vw,160px);
+
+}
+
+/*==================================================
+CONTAINER WIDTH
+==================================================*/
+
+.inv-container{
+
+    max-width:1180px;
+
+    padding-inline:clamp(14px,2vw,32px);
+
+}
+
+/*==================================================
+TITLE SYSTEM
+==================================================*/
+
+.inv-title{
+
+    line-height:1.15;
+
+    text-wrap:balance;
+
+}
+
+.inv-section-title{
+
+    line-height:1.2;
+
+    text-wrap:balance;
+
+}
+
+.inv-profile-name{
+
+    line-height:1.15;
+
+    text-wrap:balance;
+
+}
+
+/*==================================================
+PARAGRAPH
+==================================================*/
+
+.inv-text,
+.inv-desc,
+.inv-profile-desc,
+.inv-parent,
+.inv-event-card p{
+
+    max-width:70ch;
+
+    margin-inline:auto;
+
+}
+
+/*==================================================
+PROFILE LAYOUT
+==================================================*/
+
+.inv-profile{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:clamp(40px,6vw,80px);
+
+}
+
+.inv-profile-content{
+
+    flex:1 1 420px;
+
+}
+
+.inv-photo-frame{
+
+    flex:0 0 auto;
+
+}
+
+/*==================================================
+PROFILE IMAGE
+==================================================*/
+
+.inv-photo-frame{
+
+    width:clamp(260px,32vw,360px);
+
+    height:auto;
+
+}
+
+.inv-photo{
+
+    aspect-ratio:360/460;
+
+}
+
+/*==================================================
+EVENT CARD
+==================================================*/
+
+.inv-event-card{
+
+    width:min(100%,820px);
+
+    padding:clamp(32px,5vw,70px);
+
+}
+
+/*==================================================
+COUNTDOWN
+==================================================*/
+
+.inv-countdown-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,minmax(150px,1fr));
+
+    gap:clamp(18px,2vw,30px);
+
+}
+
+.inv-count-item{
+
+    padding:clamp(24px,4vw,45px);
+
+}
+
+/*==================================================
+MAP
+==================================================*/
+
+.inv-map-box{
+
+    border-radius:clamp(20px,3vw,30px);
+
+}
+
+/*==================================================
+GALLERY
+==================================================*/
+
+.inv-gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:clamp(18px,2vw,35px);
+
+}
+
+.inv-gallery-item{
+
+    border-radius:clamp(20px,3vw,28px);
+
+}
+
+.inv-gallery-item img{
+
+    aspect-ratio:4/5;
+
+    height:auto;
+
+}
+
+/*==================================================
+BANK GRID
+==================================================*/
+
+.inv-bank-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:clamp(18px,2vw,35px);
+
+}
+
+/*==================================================
+FORM
+==================================================*/
+
+.inv-rsvp form{
+
+    width:min(100%,760px);
+
+}
+
+.inv-input,
+.inv-select,
+.inv-textarea{
+
+    width:100%;
+
+}
+
+/*==================================================
+BUTTON
+==================================================*/
+
+.inv-btn,
+.btn-open{
+
+    min-height:54px;
+
+}
+
+.inv-btn{
+
+    padding-inline:clamp(22px,4vw,38px);
+
+}
+
+/*==================================================
+FOOTER
+==================================================*/
+
+.inv-footer .inv-container{
+
+    width:min(100%,920px);
+
+}
+
+/*==================================================
+TABLET
+==================================================*/
+
+@media (max-width:991px){
+
+    .inv-countdown-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .inv-profile{
+
+        gap:50px;
+
+    }
+
+    .inv-photo-frame{
+
+        width:320px;
+
+    }
+
+}
+
+/*==================================================
+MOBILE
+==================================================*/
+
+@media (max-width:768px){
+
+    .inv-profile{
+
+        flex-direction:column;
+
+    }
+
+    .inv-profile-reverse{
+
+        flex-direction:column;
+
+    }
+
+    .inv-profile-content{
+
+        width:100%;
+
+        max-width:600px;
+
+    }
+
+    .inv-photo-frame{
+
+        width:min(90vw,340px);
+
+    }
+
+    .inv-gallery-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .inv-bank-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/*==================================================
+SMALL PHONE
+==================================================*/
+
+@media (max-width:480px){
+
+    .inv-countdown-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:16px;
+
+    }
+
+    .inv-count-item h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .inv-event-card{
+
+        padding:28px;
+
+    }
+
+    .inv-footer .inv-container{
+
+        padding:40px 24px;
+
+    }
+
+}
+
+/*==================================================
+VERY SMALL PHONE
+==================================================*/
+
+@media (max-width:360px){
+
+    .inv-count-item{
+
+        padding:20px 10px;
+
+    }
+
+    .inv-count-item h2{
+
+        font-size:2rem;
+
+    }
+
+}
+
+/*****************************************************************
+    UNIVERSAL RESPONSIVE ENGINE
+    PART 3
+    Device Optimization
+******************************************************************/
+
+/*==================================================
+VIEWPORT ENGINE
+==================================================*/
+
+html{
+
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+
+}
+
+body{
+
+    width:100%;
+    min-height:100dvh;
+    min-height:100svh;
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    overscroll-behavior-y:none;
+
+}
+
+/*==================================================
+SAFE AREA
+==================================================*/
+
+body{
+
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+
+}
+
+section{
+
+    scroll-margin-top:30px;
+
+}
+
+/*==================================================
+TEXT SCALE ENGINE
+==================================================*/
+
+.inv-title{
+
+    font-size:clamp(42px,7vw,92px);
+
+}
+
+.inv-profile-name{
+
+    font-size:clamp(2.5rem,5vw,4rem);
+
+}
+
+.inv-section-title{
+
+    font-size:clamp(2rem,3vw,2.8rem);
+
+}
+
+.inv-text{
+
+    font-size:clamp(.95rem,1.6vw,1.08rem);
+
+}
+
+.inv-desc{
+
+    font-size:clamp(1rem,2vw,1.25rem);
+
+}
+
+/*==================================================
+BUTTON ENGINE
+==================================================*/
+
+.inv-btn,
+.btn-open{
+
+    min-height:56px;
+
+    white-space:nowrap;
+
+}
+
+/*==================================================
+IMAGE ENGINE
+==================================================*/
+
+img{
+
+    object-fit:cover;
+
+}
+
+.inv-photo{
+
+    width:100%;
+    height:100%;
+
+}
+
+.inv-gallery-item img{
+
+    width:100%;
+
+}
+
+/*==================================================
+PREVENT STRETCH
+==================================================*/
+
+.inv-photo-frame,
+.inv-gallery-item,
+.inv-bank-card,
+.inv-event-card,
+.inv-count-item{
+
+    max-width:100%;
+
+}
+
+/*==================================================
+PERFORMANCE
+==================================================*/
+
+.inv-photo,
+.inv-gallery-item img,
+.inv-profile-content,
+.inv-event-card{
+
+    transform:translateZ(0);
+
+    backface-visibility:hidden;
+
+}
+
+/*==================================================
+REDUCE ANIMATION FOR LOW DEVICE
+==================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+*{
+
+animation:none !important;
+
+transition:none !important;
+
+scroll-behavior:auto !important;
+
+}
+
+}
+
+/*==================================================
+SMALL PHONE
+==================================================*/
+
+@media (max-width:390px){
+
+.inv-title{
+
+line-height:1.15;
+
+}
+
+.inv-profile{
+
+gap:35px;
+
+}
+
+.inv-profile-content{
+
+padding:30px 22px;
+
+}
+
+.inv-photo-frame{
+
+width:min(88vw,300px);
+
+}
+
+.inv-event-card{
+
+padding:24px;
+
+}
+
+.inv-bank-card{
+
+padding:24px;
+
+}
+
+}
+
+/*==================================================
+LANDSCAPE PHONE
+==================================================*/
+
+@media (orientation:landscape) and (max-height:500px){
+
+.cover,
+.inv-hero{
+
+min-height:100svh;
+
+}
+
+section{
+
+padding-top:70px;
+padding-bottom:70px;
+
+}
+
+}
+
+/*==================================================
+TABLET
+==================================================*/
+
+@media (min-width:769px) and (max-width:1199px){
+
+.inv-container{
+
+max-width:960px;
+
+}
+
+}
+
+/*==================================================
+DESKTOP
+==================================================*/
+
+@media (min-width:1200px){
+
+.inv-container{
+
+max-width:1180px;
+
+}
+
+}
+
+/*==================================================
+2K
+==================================================*/
+
+@media (min-width:1800px){
+
+html{
+
+font-size:17px;
+
+}
+
+}
+
+/*==================================================
+4K
+==================================================*/
+
+@media (min-width:2600px){
+
+html{
+
+font-size:18px;
+
+}
+
+}
+
+/*==================================================
+FOLD PHONE
+==================================================*/
+
+@media (max-width:320px){
+
+.inv-title{
+
+font-size:38px;
+
+}
+
+.inv-profile-name{
+
+font-size:2rem;
+
+}
+
+.inv-count-item h2{
+
+font-size:2rem;
+
+}
+
+}
+
+/*==================================================
+NO HORIZONTAL SCROLL
+==================================================*/
+
+html,
+body{
+
+overflow-x:hidden;
+
+}
+
+.inv-gallery-grid,
+.inv-bank-grid,
+.inv-profile,
+.inv-container{
+
+overflow-x:hidden;
+
+}
+
+/*==================================================
+AUTO BALANCE
+==================================================*/
+
+.inv-title,
+.inv-section-title,
+.inv-profile-name{
+
+text-wrap:balance;
+
+}
+
+/*==================================================
+SCROLL FIX
+==================================================*/
+
+html{
+
+scroll-padding-top:20px;
+
+}
+
+/*==================================================
+END ENGINE
+==================================================*/
