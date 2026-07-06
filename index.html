@@ -1287,7 +1287,30 @@ async function loadGuest() {
 
 }        loadGuest();
         
-        const button = document.getElementById("openInvitation");
+        const btn = document.getElementById("openInvitation");
+
+const music = document.getElementById("bgMusic");
+
+const cover = document.querySelector(".cover");
+
+const invitation =
+document.getElementById("invitationContent");
+
+btn.onclick = async ()=>{
+
+    music.volume = 0.7;
+
+    try{
+
+        await music.play();
+
+    }catch(e){}
+
+    cover.style.display="none";
+
+    invitation.style.display="block";
+
+}
 
 
 
@@ -1296,9 +1319,6 @@ async function loadGuest() {
 </body>
 
 </html>
-
-
-
 
 
 
