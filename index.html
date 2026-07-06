@@ -35,8 +35,56 @@
 
     <!-- Cover -->
     <section class="cover">
-    
-<div id="invitationContent">
+            
+        <div class="cover-content">
+
+            <p class="subtitle fade-up">
+                THE WEDDING OF
+            </p>
+
+            <h1 class="title fade-up">
+                Anggara Wisnu Wardhana, S.H
+            </h1>
+
+            <div class="and fade-up">&</div>
+
+            <h1 class="title fade-up">
+                Tsamara Alifia Ramadhani, S.Gz
+            </h1>
+
+            <div class="divider fade-up"></div>
+
+            <p class="date fade-up">
+                Minggu, 1 Januari 2027
+            </p>
+
+            <div class="guest-box fade-up">
+
+                <small>Kepada Yth.</small>
+
+                   <h2 id="coverguestName">
+                    Tamu Undangan
+                    </h2>
+
+            </div>
+
+            <button id="openInvitation" class="btn-open fade-up">
+
+                💌 Buka Undangan
+
+            </button>
+
+            <p class="note fade-up">
+
+                Mohon maaf apabila terdapat kesalahan penulisan nama atau gelar.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <div id="invitationContent">
 
  <audio id="bgMusic" loop>
 
@@ -747,7 +795,7 @@
 
                 <div class="ticket-left">
 
-                    <div class="ticket-name" id="guestName"></div>
+                    <div class="ticket-name" id="ticketguestName"></div>
 
                     <div class="ticket-status">
 
@@ -1135,7 +1183,7 @@ async function loadTicket() {
 
 document.getElementById("ticket").style.display = "block";
 
-document.getElementById("guestName").innerText = data.name;
+document.getElementById("ticketguestName").innerText = data.name;
 
 document.getElementById("guestStatus").innerText = data.checkin_status || "Belum Hadir";
 
@@ -1198,54 +1246,6 @@ document
 
 </a>
 </div>
-        
-        <div class="cover-content">
-
-            <p class="subtitle fade-up">
-                THE WEDDING OF
-            </p>
-
-            <h1 class="title fade-up">
-                Anggara Wisnu Wardhana, S.H
-            </h1>
-
-            <div class="and fade-up">&</div>
-
-            <h1 class="title fade-up">
-                Tsamara Alifia Ramadhani, S.Gz
-            </h1>
-
-            <div class="divider fade-up"></div>
-
-            <p class="date fade-up">
-                Minggu, 1 Januari 2027
-            </p>
-
-            <div class="guest-box fade-up">
-
-                <small>Kepada Yth.</small>
-
-                   <h2 id="guestName">
-                    Tamu Undangan
-                    </h2>
-
-            </div>
-
-            <button id="openInvitation" class="btn-open fade-up">
-
-                💌 Buka Undangan
-
-            </button>
-
-            <p class="note fade-up">
-
-                Mohon maaf apabila terdapat kesalahan penulisan nama atau gelar.
-
-            </p>
-
-        </div>
-
-    </section>
     
     <script src="js/api.js"></script>
     
@@ -1274,7 +1274,7 @@ async function loadGuest() {
 
         if (guest.status) {
 
-            document.getElementById("guestName").innerText =
+            document.getElementById("coverguestName").innerText =
                 guest.name;
 
         }
@@ -1298,17 +1298,17 @@ document.getElementById("invitationContent");
 
 btn.onclick = async ()=>{
 
-    music.volume = 0.7;
+    await music.play();
 
-    try{
+    cover.classList.add("hide");
 
-        await music.play();
+    setTimeout(()=>{
 
-    }catch(e){}
+        invitation.style.display="block";
 
-    cover.style.display="none";
+        invitation.classList.add("show");
 
-    invitation.style.display="block";
+    },800);
 
 }
 
