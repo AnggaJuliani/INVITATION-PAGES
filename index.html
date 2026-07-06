@@ -1075,7 +1075,6 @@
 
     <script>
 
-        const music = document.getElementById("bgMusic");
         
         // =======================================
     // COUNTDOWN
@@ -1235,7 +1234,14 @@ document
     <script src="js/rsvp.js"></script>
     
     <script>
+
+    window.addEventListener("DOMContentLoaded",()=>{
+
+    loadGuest();
+
     loadTicket();
+
+});
     </script>
 
 <a href="#eticket" class="floating-ticket">
@@ -1247,14 +1253,12 @@ document
 </a>
 </div>
     
-    <script src="js/api.js"></script>
     
     <script>
 
 // ======================================
 // GUEST
 // ======================================
-const params = new URLSearchParams(window.location.search);
 
 const guestCode = params.get("to");
 
@@ -1285,7 +1289,7 @@ async function loadGuest() {
 
     }
 
-}        loadGuest();
+}        
         
         const btn = document.getElementById("openInvitation");
 
@@ -1302,13 +1306,15 @@ btn.onclick = async ()=>{
 
     cover.classList.add("hide");
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        invitation.style.display="block";
+    cover.style.display="none";
 
-        invitation.classList.add("show");
+    invitation.style.display="block";
 
-    },800);
+    invitation.classList.add("show");
+
+},800);
 
 }
 
